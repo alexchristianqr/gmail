@@ -17,6 +17,7 @@
               "dayjs",
               "localforage"
             ],
+            "baseHref": "/gmail/",
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
