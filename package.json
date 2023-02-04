@@ -1,11 +1,11 @@
 {
-  "name": "sidemenu",
-  "version": "0.0.1",
+  "name": "gmail",
+  "version": "2.0.0",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
