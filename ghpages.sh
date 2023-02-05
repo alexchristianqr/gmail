@@ -172,7 +172,7 @@ delete_tag() {
 deploy_to_ghpages() {
   set -e
 
-  git tag -a -m "New tag release $NEW_TAG" "$NEW_TAG"
+#  git tag -a -m "New tag release $NEW_TAG" "$NEW_TAG"
   git push origin "$NEW_TAG"
 
   npm run build
