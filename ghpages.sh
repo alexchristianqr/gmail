@@ -164,7 +164,7 @@ delete_tag() {
   LAST_TAG_TO_DELETED=$(git describe --abbrev=0 --tags 2>/dev/null || true)
   echo "$LAST_TAG_TO_DELETED"
   if [[ "$DELETED" == true ]]; then
-    git tag -d "$LAST_TAG_TO_DELETED"
+    git tag -d "v$LAST_TAG_TO_DELETED"
   fi
 }
 
