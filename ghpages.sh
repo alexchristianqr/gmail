@@ -162,9 +162,9 @@ create_tag() {
 # Eliminar último tag
 delete_tag() {
   LAST_TAG_TO_DELETED=$(git describe --abbrev=0 --tags 2>/dev/null || true)
-  echo "$LAST_TAG_TO_DELETED"
+
   if [[ "$DELETED" == true ]]; then
-    git tag -d "v$LAST_TAG_TO_DELETED"
+    git tag -d "$LAST_TAG_TO_DELETED"
   fi
 }
 
@@ -243,6 +243,9 @@ validate_args_action() {
     print_init
 
   elif [[ "$DELETED" == true ]]; then
+
+    # Obtener el ultimo tag
+    get_last_tag
 
     # Eliminar tag
     delete_tag
