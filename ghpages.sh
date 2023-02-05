@@ -253,7 +253,7 @@ validate_args_action() {
     create_tag
 
     # Desplegar en Github Pages
-    #    deploy_to_ghpages
+    deploy_to_ghpages
 
     # Imprimir texto de versionamiento
     print_init
