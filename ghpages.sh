@@ -162,6 +162,7 @@ create_tag() {
 # Eliminar último tag
 delete_tag() {
   LAST_TAG_TO_DELETED=$(git describe --abbrev=0 --tags 2>/dev/null || true)
+  echo "$LAST_TAG_TO_DELETED"
   if [[ "$DELETED" == true ]]; then
     git tag -d "$LAST_TAG_TO_DELETED"
   fi
@@ -232,6 +233,9 @@ validate_args_action() {
     # Eliminar último tag registrado
     delete_tag
 
+    # Obtener el ultimo tag
+    get_last_tag
+
     # Obtener la nueva versión del tag
     set_level
 
@@ -257,10 +261,23 @@ validate_args_action() {
 
     # Imprimir texto de versionamiento
     print_init
+
   else
+
+    # Obtener el ultimo tag
+    get_last_tag
+
+    # Obtener la nueva versión del tag
+    set_level
 
     # Crear tag
     create_tag
+
+    # Desplegar en Github Pages
+    deploy_to_ghpages
+
+    # Imprimir texto de versionamiento
+    print_init
   fi
 }
 
