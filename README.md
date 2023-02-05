@@ -5,36 +5,18 @@ del antiguo proyecto de gmail es Angular v15 + Ionic v6 + Firebase.
 
 ## Steps for deployment
 
-### Create new tag
-
 ```bash
-sh ghpages.sh b -p  # actualizar nivel BUG
+sh ghpages.sh --tag="0.0.0"
 ```
-
 ```bash
-sh ghpages.sh m -p  # actualizar nivel MENOR
+sh ghpages.sh --dir="dist"
 ```
-
 ```bash
-sh ghpages.sh M -p  # actualizar nivel MAYOR
+sh ghpages.sh --branch="main"
 ```
-
-### Delete last tag and create new tag
-
 ```bash
-sh ghpages.sh b -dp  # actualizar nivel BUG
+sh ghpages.sh --exec="build"
 ```
-
 ```bash
-sh ghpages.sh m -dp  # actualizar nivel MENOR
-```
-
-```bash
-sh ghpages.sh M -dp  # actualizar nivel MAYOR
-```
-
-### Help
-
-```bash
-sh ghpages.sh -h
+sh ghpages.sh --repository="alexchristianqr/gmail"
 ```
