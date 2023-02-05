@@ -165,7 +165,6 @@ delete_tag() {
 
   if [[ "$DELETED" == true ]]; then
     git tag -d "$LAST_TAG_TO_DELETED"
-    git push --delete origin "$NEW_TAG"
   fi
 }
 
