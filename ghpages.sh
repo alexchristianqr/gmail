@@ -165,6 +165,7 @@ delete_tag() {
 
   if [[ "$DELETED" == true ]]; then
     git tag -d "$LAST_TAG_TO_DELETED"
+    git push --delete origin "$NEW_TAG"
   fi
 }
 
@@ -172,7 +173,6 @@ delete_tag() {
 deploy_to_ghpages() {
   set -e
 
-#  git tag -a -m "New tag release $NEW_TAG" "$NEW_TAG"
   git push origin "$NEW_TAG"
 
   npm run build
