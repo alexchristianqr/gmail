@@ -6,41 +6,56 @@ set -e
 KEY=''
 VALUE=''
 
-## PARA SETEAR EN LA ITERACION DE ARGUMENTOS
+## VALORES POR DEFECTO
 VALUE_TAG=''
-VALUE_DIRECTORY='www'
+VALUE_DIRECTORY='dist'
 VALUE_BRANCH='main'
 VALUE_EXEC='build'
 VALUE_REPOSITORY='alexchristianqr/gmail'
+VALUE_DELETED_TAG='false'
+VALUE_PUSH_GHPAGES='true'
 
-## PARA USAR EN LAS EJECUCIONES
+## VALORES PARA USAR EN LA EJECUCION
 TAG=''
 DIRECTORY=''
 BRANCH=''
 EXEC=''
 REPOSITORY=''
+DELETED_TAG=''
+PUSH_GHPAGES=''
 
 # MOSTRAR MENSAJE DE ERROR DE ARGUMENTO TAG
 error_arg_tag() {
-  echo "SOLUCION: Debes especificar un tag así: --tag=0.0.0 (obligatorio) NOTA: La estructura de un tag es [NivelMayor.NivelMenor.NivelBugfix]"
+  echo "SOLUCION: Especifica un tag así: --tag=0.0.0 (obligatorio) NOTA: La estructura de un tag es [NivelMayor.NivelMenor.NivelBugfix]"
   exit 1
 }
 
 # MOSTRAR MENSAJE DE ERROR DE ARGUMENTO DIRECTORY
 error_arg_directory() {
-  echo "SOLUCION: Debes especificar un directorio así --dir=$VALUE // --directory=$VALUE (opcional)"
+  echo "SOLUCION: Indica el directorio de compilación así: --dir=$VALUE_DIRECTORY // --directory=$VALUE_DIRECTORY (opcional)"
   exit 1
 }
 
 # MOSTRAR MENSAJE DE ERROR GENERAL
 error_args_general() {
   echo "SOLUCION:"
-  echo "- Debes especificar un tag así: --tag=$VALUE_TAG (obligatorio) NOTA: La estructura de un tag es [NivelMayor.NivelMenor.NivelBugfix]"
-  echo "- Debes especificar un directorio así: --dir=$VALUE_DIRECTORY // --directory=$VALUE_DIRECTORY (opcional)"
-  echo "- Debes especificar un branch así: --branch=$VALUE_BRANCH (opcional)"
-  echo "- Debes especificar un exec así: --exec=$VALUE_EXEC (opcional) NOTA: El parametro exec es el comando de compilación de tu proyecto"
-  echo "- Debes especificar un repositorio así: --repository=$VALUE_REPOSITORY (opcional)"
+  echo "- Especifica un tag así: -t=$VALUE_TAG | --tag=$VALUE_TAG (obligatorio) NOTA: La estructura de un tag es [NivelMayor.NivelMenor.NivelBugfix]"
+  echo "- Rama principal así: -b=$VALUE_BRANCH | --branch=$VALUE_BRANCH (opcional)"
+  echo "- Comando para compilar el proyecto así: --exec=$VALUE_EXEC (opcional) NOTA: El parametro exec es el comando de compilación de tu proyecto"
+  echo "- Indica el directorio de compilación así: -o=$VALUE_DIRECTORY | --out-dir=$VALUE_DIRECTORY | --out-directory=$VALUE_DIRECTORY (opcional)"
+  echo "- Indica el nombre del repositorio así: --repository=$VALUE_REPOSITORY (opcional)"
+  echo "- Elimina tag local y remoto así: -dt=$VALUE_DELETED_TAG | --deleted-lasttag=$VALUE_DELETED_TAG (opcional)"
+  echo "- Indica si es proyecto GitHub Pages así: -gp=$VALUE_PUSH_GHPAGES | --github-pages=$VALUE_PUSH_GHPAGES (opcional)"
   exit 1
+}
+
+# ELIMINAR TAG
+delete_tag() {
+  TAG="$VALUE_TAG"
+
+  set -e
+  git push --delete origin "v$TAG"
+  git tag -d "v$TAG"
 }
 
 # AGREGAR TAG
@@ -48,7 +63,6 @@ add_tag() {
   TAG="$VALUE_TAG"
 
   set -e
-
   git tag -a -m "New tag release v$TAG" "v$TAG"
 }
 
@@ -59,19 +73,40 @@ deploy_to_ghpages() {
   DIRECTORY="$VALUE_DIRECTORY"
   REPOSITORY="$VALUE_REPOSITORY"
   BRANCH="$VALUE_BRANCH"
+  PUSH_GHPAGES="$VALUE_PUSH_GHPAGES"
 
+  set -e
   git push origin "v$TAG"
 
-  npm run "$EXEC"
+  if [[ "$PUSH_GHPAGES" == 'true' ]]; then
+    npm run "$EXEC"
 
-  cd "$DIRECTORY"
+    cd "$DIRECTORY"
 
-  git init
-  git add -A
-  git commit -m "New deployment for release v$TAG"
-  git push -f "git@github.com:$REPOSITORY.git" "$BRANCH:gh-pages"
+    git init
+    git add -A
+    git commit -m "New deployment for release v$TAG"
+    git push -f "git@github.com:$REPOSITORY.git" "$BRANCH:gh-pages"
 
-  cd -
+    cd -
+  else
+    exit 1
+  fi
+}
+
+# VALIDAR VALORES DE LOS ARGUMENTOS OBLIGATORIOS
+validate_values_args() {
+  TAG="$VALUE_TAG"
+  DELETED_TAG="$VALUE_DELETED_TAG"
+
+  # VALIDAR PARAMETROS REQUERIDOS OBLIGATORIAMENTE
+  if [[ "$TAG" == '' ]]; then
+    error_arg_tag
+  fi
+
+  if [[ "$DELETED_TAG" == 'true' ]]; then
+    delete_tag
+  fi
 }
 
 # PROCESAR ARGUMENTOS
@@ -91,9 +126,11 @@ process_args() {
 
     # VALIDAR LLAVE
     if [[ "$KEY" ]]; then
-      if [[ "$KEY" == '-t' ]] || [[ "$KEY" == '--tag' ]]; then
+      if [[ "$KEY" == '-h' ]] || [[ "$KEY" == '--help' ]]; then
+        error_args_general
+      elif [[ "$KEY" == '-t' ]] || [[ "$KEY" == '--tag' ]]; then
         VALUE_TAG="$VALUE"
-      elif [[ "$KEY" == '-d' ]] || [[ "$KEY" == '--dir' ]] || [[ "$KEY" == '--directory' ]]; then
+      elif [[ "$KEY" == '-o' ]] || [[ "$KEY" == '--out-dir' ]] || [[ "$KEY" == '--out-directory' ]]; then
         VALUE_DIRECTORY="$VALUE"
       elif [[ "$KEY" == '-b' ]] || [[ "$KEY" == '--branch' ]]; then
         VALUE_BRANCH="$VALUE"
@@ -101,6 +138,10 @@ process_args() {
         VALUE_EXEC="$VALUE"
       elif [[ "$KEY" == '--repository' ]]; then
         VALUE_REPOSITORY="$VALUE"
+      elif [[ "$KEY" == '-dt' ]] || [[ "$KEY" == '--deleted-lasttag' ]]; then
+        VALUE_DELETED_TAG="$VALUE"
+      elif [[ "$KEY" == '-gp' ]] || [[ "$KEY" == '--github-pages' ]]; then
+        VALUE_PUSH_GHPAGES="$VALUE"
       else
         error_args_general
       fi
@@ -111,10 +152,8 @@ process_args() {
     # echo "CORRECTO: $KEY=$VALUE"
   done
 
-  # VALIDAR PARAMETROS REQUERIDOS OBLIGATORIAMENTE
-  if [[ "$VALUE_TAG" == '' ]]; then
-    error_arg_tag
-  fi
+  # VALIDAR PARAMETROS OBLIGATORIOS
+  validate_values_args
 
   # CREAR TAG
   add_tag
