@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["dayjs", "localforage"],
+            "allowedCommonJsDependencies": ["dayjs", "localforage", "uuidv4"],
             "baseHref": "/gmail/",
             "outputPath": "www",
             "index": "src/index.html",
