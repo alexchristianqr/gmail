@@ -9,7 +9,7 @@
                 <table>
                   <tr>
                     <td>
-                      <img style="height: 1.75rem; width: 1.75rem" src="./assets/imgs/gmail.svg" />
+                      <img style="height: 1.75rem; width: 1.75rem" src="./assets/imgs/gmail.svg" alt="" />
                     </td>
                     <td>
                       <div style="font-size: 1.12rem; font-weight: 500; padding: 0.25rem 0 0 0; margin-left: 0.2rem">
@@ -28,7 +28,7 @@
           <tr>
             <td style="vertical-align: middle">
               <ion-avatar>
-                <img src="./assets/imgs/profile.jpg" />
+                <img src="./assets/imgs/profile.jpg" alt="" />
               </ion-avatar>
             </td>
             <td style="padding: 0.5rem; vertical-align: middle">
@@ -54,9 +54,9 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-        <ion-label>
-          <ion-text>SECONDARY</ion-text>
-        </ion-label>
+<!--        <ion-label>-->
+<!--          <ion-text>SECONDARY</ion-text>-->
+<!--        </ion-label>-->
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSection2; let i = index">
             <ion-item class="activeLink" routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">

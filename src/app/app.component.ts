@@ -42,22 +42,22 @@ export class AppComponent {
       },
     ]
     this.pagesSection2 = [
-      // {
-      //   title: 'Social',
-      //   icon: 'people',
-      //   component: MailsSentPage,
-      //   // db: 'DATABASE_SENT',
-      //   status: false,
-      //   path: 'social',
-      // },
-      // {
-      //   title: 'Promotions',
-      //   icon: 'pricetag',
-      //   component: HomePage,
-      //   // db: 'DATABASE_RECEIVED',
-      //   status: false,
-      //   path: 'promotions',
-      // },
+      {
+        title: 'Social',
+        icon: 'people',
+        component: MailsSentPage,
+        // db: 'DATABASE_SENT',
+        status: false,
+        path: 'social',
+      },
+      {
+        title: 'Promotions',
+        icon: 'pricetag',
+        component: HomePage,
+        // db: 'DATABASE_RECEIVED',
+        status: false,
+        path: 'promotions',
+      },
       // {
       //   title: 'Mail Saved',
       //   icon: 'cloud',
