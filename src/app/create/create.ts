@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { PopoverCreatePage } from './layouts/popover-create'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { StorageService } from '../core/services/storage/storage.service'
 import { HttpServiceProvider } from '../../providers/http-service/http-service'
 import { MyMessage } from '../core/types/MyMessage'
 import { EventService } from '../core/services/events/event.service'
@@ -24,7 +23,6 @@ export class CreatePage implements OnInit {
     private utilsService: UtilsService,
     private eventService: EventService,
     private httpService: HttpServiceProvider,
-    private storageService: StorageService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {

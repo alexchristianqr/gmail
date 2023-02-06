@@ -1,6 +1,5 @@
-import { Component, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { AlertController, PopoverController, ToastController } from '@ionic/angular'
-import { PopoverMailPage } from '../../../inbox/list/layouts/popover-list-inbox'
 
 type MyToast = {
   message?: string
