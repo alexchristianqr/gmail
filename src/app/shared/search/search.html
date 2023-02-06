@@ -5,7 +5,11 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-searchbar animated="true" placeholder="Buscar mensaje" (ionInput)="searchByEvent($event)"></ion-searchbar>
+    <ion-searchbar
+      animated="true"
+      placeholder="Buscar mensaje"
+      (ionInput)="searchByEvent($event)"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -16,7 +20,12 @@
           <table>
             <tr>
               <td style="padding: 0.75rem">
-                <ion-avatar style="opacity: 0.8" [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"> {{item.name.charAt(0).toUpperCase()}} </ion-avatar>
+                <ion-avatar
+                  style="opacity: 0.8"
+                  [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"
+                >
+                  {{item.name.charAt(0).toUpperCase()}}
+                </ion-avatar>
               </td>
               <td style="padding: 0.75rem 0.75rem 0.75rem 0.25rem">
                 <ion-text *ngIf="!item.is_read">

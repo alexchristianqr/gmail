@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { PopoverCreatePage } from './layouts/popover-create'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { HttpServiceProvider } from '../../providers/http-service/http-service'
+import { ApiService } from '../core/services/api/api.service'
 import { MyMessage } from '../core/types/MyMessage'
 import { EventService } from '../core/services/events/event.service'
 import { UtilsService } from '../core/services/utils/utils.service'
@@ -22,7 +22,7 @@ export class CreatePage implements OnInit {
   constructor(
     private utilsService: UtilsService,
     private eventService: EventService,
-    private httpService: HttpServiceProvider,
+    private apiService: ApiService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
@@ -44,8 +44,14 @@ export class CreatePage implements OnInit {
       name: this.formBuilder.control(null, [Validators.required]),
       subject: this.formBuilder.control(null, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
-      from: this.formBuilder.control('alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
-      to: this.formBuilder.control('teacher2022@utp.edu.pe', [Validators.required, Validators.email]),
+      from: this.formBuilder.control('alexchristianqr@utp.edu.pe', [
+        Validators.required,
+        Validators.email,
+      ]),
+      to: this.formBuilder.control('teacher2022@utp.edu.pe', [
+        Validators.required,
+        Validators.email,
+      ]),
       is_read: this.formBuilder.control(false, [Validators.required]),
       created_at: this.formBuilder.control(Date.now(), [Validators.required]),
     })
@@ -74,8 +80,8 @@ export class CreatePage implements OnInit {
 
     // API
     const action = () => {
-      return this.httpService
-        .addItem(item.database, item)
+      return this.apiService
+        .createItem(item.database, item)
         .then(async () => {
           await this.back()
         })
@@ -85,7 +91,6 @@ export class CreatePage implements OnInit {
     }
 
     // Validar shared preferences del usuario
-    console.log(this.MY_SHARED_PREFERENCES)
     if (this.MY_SHARED_PREFERENCES.SETTINGS.CONFIRM_BEFORE_SENDING) {
       await this.utilsService.presentAlert({
         subHeader: '¿Estas seguro de enviar el mensaje?',
@@ -112,7 +117,7 @@ export class CreatePage implements OnInit {
   getUniqueUID() {
     console.log('[CreatePage.getUniqueUID]')
 
-    return this.httpService.getUniqueUID()
+    return this.apiService.getUniqueUID()
   }
 
   /**
@@ -143,6 +148,9 @@ export class CreatePage implements OnInit {
   async presentPopover(event: Event) {
     console.log('[CreatePage.presentPopover]')
 
-    await this.utilsService.presentPopover({ component: PopoverCreatePage, event: event })
+    await this.utilsService.presentPopover({
+      component: PopoverCreatePage,
+      event: event,
+    })
   }
 }

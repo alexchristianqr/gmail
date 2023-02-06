@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core'
-import { SHARED_PREFERENCES } from '../../app/shared-preferences'
+import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { Storage } from '@ionic/storage'
-import { MyPreferences } from '../../app/core/types/MyPreferences'
-import { MyMessage } from '../../app/core/types/MyMessage'
-import uuid from 'uuidv4'
+import { MyPreferences } from '../../types/MyPreferences'
+import { MyMessage } from '../../types/MyMessage'
 
 @Injectable({
   providedIn: 'root',
 })
-export class HttpServiceProvider {
+export class StoragedbService {
   private initDataDB: Array<MyMessage> = [
     {
       uid: '1',
@@ -160,7 +159,7 @@ export class HttpServiceProvider {
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 
   constructor(private storage: Storage) {
-    console.log('[HttpServiceProvider.constructor]')
+    console.log('[StoragedbService.constructor]')
 
     this.storage.create().then(async () => {
       await this.loadSharedPreferences()
@@ -168,31 +167,33 @@ export class HttpServiceProvider {
     })
   }
 
-  async loadDatabaseStorage(label: string) {
-    console.log('[HttpServiceProvider.loadDatabaseStorage]')
+  async loadDatabaseStorage(database: string) {
+    console.log('[StoragedbService.loadDatabaseStorage]')
 
-    return this.getStorage(label).then((data) => {
+    return this.getStorage(database).then((data) => {
       if (!data) {
         if (!SHARED_PREFERENCES.SETTINGS.INITIALIZE_DATABASE) return []
-        return this.setStorage(label, this.initDataDB).then((data) => {
-          console.log(`Cargar BD ${label} por defecto`)
+        return this.setStorage(database, this.initDataDB).then((data) => {
+          console.log(`Cargar BD ${database} por defecto`)
           return data
         })
       }
-      console.log(`Cargar BD ${label} por caché`)
+      console.log(`Cargar BD ${database} por caché`)
       return data
     })
   }
 
   async loadSharedPreferences() {
-    console.log('[HttpServiceProvider.loadSharedPreferences]')
+    console.log('[StoragedbService.loadSharedPreferences]')
 
     return this.getStorage(this.mySharedPreferences).then((data) => {
       if (!data) {
-        return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then((data) => {
-          console.log(`Cargar BD ${this.mySharedPreferences} por defecto`)
-          return data
-        })
+        return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then(
+          (data) => {
+            console.log(`Cargar BD ${this.mySharedPreferences} por defecto`)
+            return data
+          }
+        )
       }
       console.log(`Cargar BD ${this.mySharedPreferences} por caché`)
 
@@ -208,66 +209,18 @@ export class HttpServiceProvider {
     })
   }
 
-  async getStorage(label: string) {
-    console.log('[HttpServiceProvider.getStorage]', { label })
-    return this.storage.get(label)
+  async getStorage(key: string) {
+    console.log('[StoragedbService.getStorage]', { key })
+    return this.storage.get(key)
   }
 
   async setStorage(key: string, value: any) {
-    console.log('[HttpServiceProvider.setStorage]', { key, value })
-    return this.storage.set(key, value)
-  }
-
-  async setRemoveStorage(key: string, value: any) {
-    console.log('[HttpServiceProvider.setRemoveStorage]', { key, value })
-    await this.storage.remove(key)
+    console.log('[StoragedbService.setStorage]', { key, value })
     return this.storage.set(key, value)
   }
 
   async removeStorage(key: string) {
-    console.log('[HttpServiceProvider.removeStorage]', { key })
+    console.log('[StoragedbService.removeStorage]', { key })
     await this.storage.remove(key)
-  }
-
-  async addItem(database: string, item: MyMessage | any) {
-    console.log('[HttpServiceProvider.addItem]', { database, item })
-
-    return this.getStorage(database).then((data: Array<MyMessage>) => {
-      // Agregar un item
-      data.unshift(item)
-
-      // Actualizar almacenamiento
-      this.setStorage(database, data)
-    })
-  }
-
-  async updateItem(database: string, item: MyMessage | any, keyItem: string, valueItem: any) {
-    console.log('[HttpServiceProvider.updateItem]', { database, item, keyItem, valueItem })
-
-    return this.getStorage(database).then((data: Array<MyMessage>) => {
-      // Encontrar un item
-      const dataFounded: any = data.find((value) => value.uid === item.uid)
-      if (!dataFounded) return
-      dataFounded[keyItem] = valueItem // Actualizar campo
-
-      // Actualizar almacenamiento
-      this.setStorage(database, data)
-    })
-  }
-
-  async removeItem(database: any, item: any) {
-    console.log('[HttpServiceProvider.removeItem]')
-
-    return this.getStorage(database).then((data: Array<MyMessage>) => {
-      // Filtrar items
-      const dataFiltered = data.filter((value) => value.uid != item.uid)
-
-      // Actualizar almacenamiento
-      this.setStorage(database, dataFiltered)
-    })
-  }
-
-  async getUniqueUID() {
-    return uuid()
   }
 }

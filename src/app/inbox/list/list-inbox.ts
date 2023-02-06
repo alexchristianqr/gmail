@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { HttpServiceProvider } from '../../../providers/http-service/http-service'
+import { Component, OnDestroy, ViewChild } from '@angular/core'
+import { ApiService } from '../../core/services/api/api.service'
 import { PopoverMailPage } from './layouts/popover-list-inbox'
 import { Router } from '@angular/router'
 import { MyMessage } from '../../core/types/MyMessage'
@@ -20,9 +20,14 @@ export class MailsInboxPage implements OnDestroy {
   myDatabase: string = 'DATABASE_INBOX'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   mySubscribe$: Subscription
-  items: Array<MyMessage> = []
+  items: Array<MyMessage> | any = []
 
-  constructor(private utilsService: UtilsService, private eventService: EventService, private httpService: HttpServiceProvider, private router: Router) {
+  constructor(
+    private utilsService: UtilsService,
+    private eventService: EventService,
+    private apiService: ApiService,
+    private router: Router
+  ) {
     console.log('[MailsInboxPage.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())
@@ -38,11 +43,8 @@ export class MailsInboxPage implements OnDestroy {
   listInbox(): void {
     console.log('[MailsInboxPage.listInbox]')
 
-    this.httpService.loadSharedPreferences().then((data: MyPreferences) => {
-      this.MY_SHARED_PREFERENCES.SETTINGS = data.SETTINGS
-      this.httpService.loadDatabaseStorage(this.myDatabase).then((data) => {
-        this.items = data
-      })
+    this.apiService.getItems(this.myDatabase).then((data) => {
+      this.items = data
     })
   }
 
@@ -84,7 +86,7 @@ export class MailsInboxPage implements OnDestroy {
       buttons: [
         {
           handler: () => {
-            this.httpService.removeStorage(this.myDatabase).then(() => {
+            this.apiService.purgeItems(this.myDatabase).then(() => {
               this.eventService.publish()
               this.presentToast('Base de datos limpiada')
             })

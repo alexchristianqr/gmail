@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { HttpServiceProvider } from '../../../providers/http-service/http-service'
+import { ApiService } from '../../core/services/api/api.service'
 import { PopoverDetailPage } from './layouts/popover-detail'
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router'
@@ -20,7 +20,13 @@ export class DetailPage implements OnInit {
   data: MyParams | any
   item?: MyMessage
 
-  constructor(private utilsService: UtilsService, private eventService: EventService, private httpService: HttpServiceProvider, private storage: Storage, private router: Router) {
+  constructor(
+    private utilsService: UtilsService,
+    private eventService: EventService,
+    private apiService: ApiService,
+    private storage: Storage,
+    private router: Router
+  ) {
     console.log('[DetailPage.constructor]')
 
     this.getState()
@@ -55,7 +61,7 @@ export class DetailPage implements OnInit {
 
     // API
     const action = () => {
-      return this.httpService.removeItem(this.myDatabase, this.item).then(() => {
+      return this.apiService.deleteItem(this.myDatabase, this.item).then(() => {
         this.back()
       })
     }
@@ -89,7 +95,7 @@ export class DetailPage implements OnInit {
   updateMessageReadOrUnread(label: string, value: boolean): void {
     console.log('[DetailPage.updateMessageReadOrUnread]')
 
-    this.httpService.updateItem(this.myDatabase, this.item, 'is_read', value).then(async () => {
+    this.apiService.updateItem(this.myDatabase, this.item, 'is_read', value).then(async () => {
       if (value) return
 
       // Solamente al marcar como no leido volver a INBOX y mostrar toast notificación

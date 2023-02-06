@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core'
+import { Component } from '@angular/core'
 import { MailsInboxPage } from './inbox/list/list-inbox'
 import { Platform } from '@ionic/angular'
 import { MailsSentPage } from './sent/list/list-sent'
@@ -25,9 +25,27 @@ export class AppComponent {
   // @ViewChild(NavController) nav: NavController
 
   // rootPage: any = MailsInboxPage
-  pagesSection1: Array<{ title: string; component: any; icon: string; status: boolean; path: string }>
-  pagesSection2: Array<{ title: string; component: any; icon: string; status: boolean; path: string }>
-  pagesSection3: Array<{ title: string; component: any; icon: string; status: boolean; path: string }>
+  pagesSection1: Array<{
+    title: string
+    component: any
+    icon: string
+    status: boolean
+    path: string
+  }>
+  pagesSection2: Array<{
+    title: string
+    component: any
+    icon: string
+    status: boolean
+    path: string
+  }>
+  pagesSection3: Array<{
+    title: string
+    component: any
+    icon: string
+    status: boolean
+    path: string
+  }>
 
   constructor(public platform: Platform) {
     this.initializeApp()

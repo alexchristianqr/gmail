@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { MyPopover } from '../../../core/types/MyPopover'
-import { HttpServiceProvider } from '../../../../providers/http-service/http-service'
 import { EventService } from '../../../core/services/events/event.service'
 import { UtilsService } from '../../../core/services/utils/utils.service'
+import { ApiService } from '../../../core/services/api/api.service'
 
 @Component({
   selector: 'page-popover-mail',
@@ -13,7 +13,12 @@ export class PopoverMailPage {
   myDatabase: string = 'DATABASE_INBOX'
   items: Array<MyPopover>
 
-  constructor(private utilsService: UtilsService, private eventService: EventService, private httpService: HttpServiceProvider, private router: Router) {
+  constructor(
+    private utilsService: UtilsService,
+    private eventService: EventService,
+    private apiService: ApiService,
+    private router: Router
+  ) {
     console.log('[PopoverMailPage.constructor]')
 
     this.items = [
@@ -45,7 +50,7 @@ export class PopoverMailPage {
       buttons: [
         {
           handler: () => {
-            this.httpService.removeStorage(this.myDatabase).then(() => {
+            this.apiService.purgeItems(this.myDatabase).then(() => {
               this.eventService.publish()
               this.presentToast('Base de datos limpiada')
             })

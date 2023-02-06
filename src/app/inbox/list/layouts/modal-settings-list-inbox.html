@@ -16,16 +16,24 @@
     <ion-item>
       <ion-label>
         <h2>Botón eliminar</h2>
-        <p style="font-size: 0.75rem">Mostrar botón para eliminar o resetar la base de datos principal.</p>
+        <p style="font-size: 0.75rem">
+          Mostrar botón para eliminar o resetar la base de datos principal.
+        </p>
       </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN" (click)="updateMyPreferences()"></ion-checkbox>
+      <ion-checkbox
+        [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN"
+        (click)="updateMyPreferences()"
+      ></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>
         <h2>Botón buscar</h2>
         <p style="font-size: 0.75rem">Mostrar botón de búsqueda en la barra principal.</p>
       </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH" (click)="updateMyPreferences()"></ion-checkbox>
+      <ion-checkbox
+        [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH"
+        (click)="updateMyPreferences()"
+      ></ion-checkbox>
     </ion-item>
     <ion-list-header>
       <h3>General</h3>
@@ -35,7 +43,10 @@
         <h2>Base de datos</h2>
         <p style="font-size: 0.75rem">Inicializar la base con datos de prueba.</p>
       </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INITIALIZE_DATABASE" (click)="updateMyPreferences()"></ion-checkbox>
+      <ion-checkbox
+        [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INITIALIZE_DATABASE"
+        (click)="updateMyPreferences()"
+      ></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>

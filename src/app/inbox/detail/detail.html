@@ -9,10 +9,16 @@
       <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_ARCHIVE">
         <ion-icon slot="icon-only" name="archive"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_REMOVE" (click)="deleteMessage()">
+      <ion-button
+        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_REMOVE"
+        (click)="deleteMessage()"
+      >
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_UN_READ" (click)="updateMessageReadOrUnread('Mensaje marcado como no leído', false)">
+      <ion-button
+        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_UN_READ"
+        (click)="updateMessageReadOrUnread('Mensaje marcado como no leído', false)"
+      >
         <ion-icon slot="icon-only" name="mail"></ion-icon>
       </ion-button>
       <ion-button class="p-r-15 my-icon" (click)="presentPopover($event)">
@@ -32,16 +38,27 @@
         <table>
           <tr>
             <td>
-              <ion-avatar style="opacity: 0.8; width: 3.5rem; height: 3.5rem" [ngClass]="'color-' + item?.name?.charAt(0)?.toUpperCase()">
+              <ion-avatar
+                style="opacity: 0.8; width: 3.5rem; height: 3.5rem"
+                [ngClass]="'color-' + item?.name?.charAt(0)?.toUpperCase()"
+              >
                 {{item?.name?.charAt(0)?.toUpperCase()}}
               </ion-avatar>
             </td>
             <td style="padding-left: 0.75rem; vertical-align: middle; width: 100%">
               <ion-text>
-                <div style="font-size: 1rem; font-weight: 500; margin-bottom: 0.15rem">{{item?.name}}</div>
+                <div style="font-size: 1rem; font-weight: 500; margin-bottom: 0.15rem">
+                  {{item?.name}}
+                </div>
                 <div style="font-size: 0.8rem; margin: 0.15rem 0">De: {{item?.from}}</div>
                 <div style="font-size: 0.8rem; margin: 0.15rem 0">Para: {{item?.to}}</div>
-                <div style="font-size: 0.8rem">Enviado: {{item?.created_at}}&nbsp;.&nbsp;<a style="text-decoration: none" href="#">Ver detalle</a></div>
+                <div style="font-size: 0.8rem">
+                  Enviado: {{item?.created_at}}&nbsp;.&nbsp;<a
+                    style="text-decoration: none"
+                    href="#"
+                    >Ver detalle</a
+                  >
+                </div>
               </ion-text>
               <div style="padding: 0.5rem 0">
                 <ion-item-divider></ion-item-divider>
@@ -51,7 +68,10 @@
         </table>
       </ion-col>
       <ion-col size="12" style="padding-top: 0">
-        <div [innerHTML]="item?.message" style="white-space: pre-line; text-align: justify; text-justify: inter-word"></div>
+        <div
+          [innerHTML]="item?.message"
+          style="white-space: pre-line; text-align: justify; text-justify: inter-word"
+        ></div>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -59,11 +79,19 @@
 <ion-footer>
   <ion-toolbar style="padding: 0 0.5rem">
     <ion-button fill="clear" slot="start" color="danger">
-      <ion-icon slot="icon-only" name="return-up-back-outline" style="margin-right: 0.25rem"></ion-icon>
+      <ion-icon
+        slot="icon-only"
+        name="return-up-back-outline"
+        style="margin-right: 0.25rem"
+      ></ion-icon>
       <ion-text>Responder</ion-text>
     </ion-button>
     <ion-button fill="clear" slot="end" color="danger">
-      <ion-icon slot="icon-only" name="return-up-forward-outline" style="margin-right: 0.25rem"></ion-icon>
+      <ion-icon
+        slot="icon-only"
+        name="return-up-forward-outline"
+        style="margin-right: 0.25rem"
+      ></ion-icon>
       <ion-text>Redirigir</ion-text>
     </ion-button>
   </ion-toolbar>

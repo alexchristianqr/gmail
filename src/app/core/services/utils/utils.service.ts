@@ -33,7 +33,11 @@ type MyPopover = {
   providedIn: 'root',
 })
 export class UtilsService {
-  constructor(private toastController: ToastController, private alertController: AlertController, private popoverCtrl: PopoverController) {}
+  constructor(
+    private toastController: ToastController,
+    private alertController: AlertController,
+    private popoverCtrl: PopoverController
+  ) {}
 
   async presentToast(payload: MyToast) {
     console.log('[UtilsService.presentToast]')

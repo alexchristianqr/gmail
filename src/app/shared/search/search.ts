@@ -1,28 +1,29 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { HttpServiceProvider } from '../../../providers/http-service/http-service'
+import { ApiService } from '../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyMessage } from '../../core/types/MyMessage'
 import { MyParams } from '../../core/types/MyParams'
 import { Subscription } from 'rxjs'
 import { EventService } from '../../core/services/events/event.service'
-import { MyPreferences } from '../../core/types/MyPreferences'
-import { SHARED_PREFERENCES } from '../../shared-preferences'
 
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',
 })
 export class SearchPage implements OnInit, OnDestroy {
-  MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   data: MyParams | any
   mySubscribe$: Subscription
   items: Array<MyMessage> = []
 
-  constructor(private eventService: EventService, private httpService: HttpServiceProvider, private router: Router) {
+  constructor(
+    private eventService: EventService,
+    private apiService: ApiService,
+    private router: Router
+  ) {
     console.log('[SearchPage.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(async () => {
-      const searchText = await this.httpService.getStorage('TEXT_SEARCH')
+      const searchText = await this.apiService.db().then((res) => res.get('TEXT_SEARCH'))
       await this.getItems(searchText)
     })
     this.getState()
@@ -71,14 +72,14 @@ export class SearchPage implements OnInit, OnDestroy {
     console.log('[SearchPage.getItems]')
 
     if (!searchText) return
-    await this.httpService.setStorage('TEXT_SEARCH', searchText)
+    await this.apiService.db().then((res) => res.create('TEXT_SEARCH', searchText))
 
     // Set items
     this.items = []
 
     // API
-    return this.httpService
-      .getStorage(this.data.database)
+    return this.apiService
+      .getItems(this.data.database)
       .then((data: Array<MyMessage>) => {
         if (!data) return
         this.items = data.filter((value: MyMessage) => {

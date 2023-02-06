@@ -40,7 +40,14 @@ import { PopoverDetailPage } from './inbox/detail/layouts/popover-detail'
     ModalSettingsDetail,
     ModalSettingsListInbox,
   ],
-  imports: [FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
