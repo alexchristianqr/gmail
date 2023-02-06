@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage'
 import { MyPreferences } from '../../app/core/types/MyPreferences'
 import { MyMessage } from '../../app/core/types/MyMessage'
 import uuid from 'uuidv4'
-import { ReturnStatement } from '@angular/compiler'
 
 @Injectable({
   providedIn: 'root',
@@ -162,11 +161,6 @@ export class HttpServiceProvider {
 
   constructor(private storage: Storage) {
     console.log('[HttpServiceProvider.constructor]')
-    this.storeInitialize()
-  }
-
-  storeInitialize(): void {
-    console.log('[HttpServiceProvider.storeInitialize]')
 
     this.storage.create().then(async () => {
       await this.loadSharedPreferences()
@@ -233,53 +227,6 @@ export class HttpServiceProvider {
   async removeStorage(key: string) {
     console.log('[HttpServiceProvider.removeStorage]', { key })
     await this.storage.remove(key)
-  }
-
-  create(self: any) {
-    // Get storage
-    let msg = ''
-    self.storage
-      .get(self.params.database)
-      .then((data: any) => {
-        console.log({ data }, 'jejej')
-
-        if (!data) {
-          data = this.initDataDB
-        }
-
-        // data = data == null ? [] : data;
-        data.unshift(self.params)
-        // Set storage
-        self.storage
-          .set(self.params.database, data)
-          .then((data: any) => {
-            switch (self.params.database) {
-              case SHARED_PREFERENCES.SETTINGS.DB.DI:
-                self.event.publish('eventMailsInboxFetch')
-                msg = 'inbox'
-                break
-              case SHARED_PREFERENCES.SETTINGS.DB.DS:
-                self.event.publish('eventMailsSentFetch')
-                msg = 'sent'
-                break
-              default:
-                throw new Error('Not shared preference database')
-            }
-            self.navCtrl.pop()
-            self.notificationService.toast.dismiss()
-            self.notificationService.notifyInfo('Message ' + msg + ' successfully')
-          })
-          .catch((error: any) => {
-            console.error(error)
-            self.notificationService.toast.dismiss()
-            self.notificationService.notifyError('Error, Getting list of database')
-          })
-      })
-      .catch((error: any) => {
-        console.error(error)
-        self.notificationService.toast.dismiss()
-        self.notificationService.notifyError('Error, Message not this process')
-      })
   }
 
   async addItem(database: string, item: MyMessage | any) {
