@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core'
 import { ApiService } from '../../core/services/api/api.service'
-import { PopoverMailPage } from './layouts/popover-list-inbox'
+import { PopoverListInbox } from './layouts/popover-list-inbox'
 import { Router } from '@angular/router'
 import { MyMessage } from '../../core/types/MyMessage'
 import { MyParams } from '../../core/types/MyParams'
@@ -13,9 +13,8 @@ import { UtilsService } from '../../core/services/utils/utils.service'
 @Component({
   selector: 'page-mails-inbox',
   templateUrl: 'list-inbox.html',
-  styleUrls: ['list-inbox.scss'],
 })
-export class MailsInboxPage implements OnDestroy {
+export class ListInbox implements OnDestroy {
   @ViewChild('popover') popover: any
   myDatabase: string = 'DATABASE_INBOX'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
@@ -28,20 +27,20 @@ export class MailsInboxPage implements OnDestroy {
     private apiService: ApiService,
     private router: Router
   ) {
-    console.log('[MailsInboxPage.constructor]')
+    console.log('[ListInbox.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())
     this.listInbox()
   }
 
   ngOnDestroy() {
-    console.log('[MailsInboxPage.ngOnDestroy]')
+    console.log('[ListInbox.ngOnDestroy]')
 
     this.mySubscribe$.unsubscribe()
   }
 
   listInbox(): void {
-    console.log('[MailsInboxPage.listInbox]')
+    console.log('[ListInbox.listInbox]')
 
     this.apiService.getItems(this.myDatabase).then((data) => {
       this.items = data
@@ -49,7 +48,7 @@ export class MailsInboxPage implements OnDestroy {
   }
 
   async doRefresh(event: any) {
-    console.log('[MailsInboxPage.doRefresh]')
+    console.log('[ListInbox.doRefresh]')
 
     setTimeout(() => {
       this.listInbox()
@@ -58,27 +57,27 @@ export class MailsInboxPage implements OnDestroy {
   }
 
   async fnViewDetail(item: MyMessage) {
-    console.log('[MailsInboxPage.fnViewDetail]')
+    console.log('[ListInbox.fnViewDetail]')
 
     const data: MyParams = { item: item, path: 'inbox' }
     await this.router.navigate(['inbox-detail'], { state: data })
   }
 
   async fnViewSearch() {
-    console.log('[MailsInboxPage.fnViewSearch]')
+    console.log('[ListInbox.fnViewSearch]')
 
     const data: MyParams = { database: 'DATABASE_INBOX', path: 'inbox' }
     await this.router.navigate(['search'], { state: data })
   }
 
   async fnViewCreate() {
-    console.log('[MailsInboxPage.fnViewCreate]')
+    console.log('[ListInbox.fnViewCreate]')
 
     await this.router.navigate(['create'])
   }
 
   async presentAlert() {
-    console.log('[MailsInboxPage.presentAlert]')
+    console.log('[ListInbox.presentAlert]')
 
     await this.utilsService.presentAlert({
       subHeader: '¿Seguro que quieres limpiar la base de datos INBOX?',
@@ -100,13 +99,13 @@ export class MailsInboxPage implements OnDestroy {
   }
 
   async presentPopover(event: Event) {
-    console.log('[MailsInboxPage.presentPopover]')
+    console.log('[ListInbox.presentPopover]')
 
-    await this.utilsService.presentPopover({ component: PopoverMailPage, event: event })
+    await this.utilsService.presentPopover({ component: PopoverListInbox, event: event })
   }
 
   async presentToast(message: string) {
-    console.log('[MailsInboxPage.presentToast]')
+    console.log('[ListInbox.presentToast]')
 
     await this.utilsService.presentToast({ message })
   }

@@ -9,7 +9,7 @@ import { ApiService } from '../../../core/services/api/api.service'
   selector: 'page-popover-mail',
   templateUrl: 'popover-list-inbox.html',
 })
-export class PopoverMailPage {
+export class PopoverListInbox {
   myDatabase: string = 'DATABASE_INBOX'
   items: Array<MyPopover>
 
@@ -19,7 +19,7 @@ export class PopoverMailPage {
     private apiService: ApiService,
     private router: Router
   ) {
-    console.log('[PopoverMailPage.constructor]')
+    console.log('[PopoverListInbox.constructor]')
 
     this.items = [
       { title: 'Configuración', path: 'inbox-settings' },
@@ -28,7 +28,7 @@ export class PopoverMailPage {
   }
 
   async open(payload: MyPopover) {
-    console.log('[PopoverMailPage.open]')
+    console.log('[PopoverListInbox.open]')
 
     if (payload.path) {
       await this.router.navigate([payload.path])
@@ -42,7 +42,7 @@ export class PopoverMailPage {
   }
 
   async presentAlert() {
-    console.log('[PopoverMailPage.presentAlert]')
+    console.log('[PopoverListInbox.presentAlert]')
 
     await this.utilsService.presentAlert({
       subHeader: '¿Seguro que quieres limpiar la base de datos INBOX?',
@@ -64,7 +64,7 @@ export class PopoverMailPage {
   }
 
   async presentToast(message: string) {
-    console.log('[PopoverMailPage.presentToast]')
+    console.log('[PopoverListInbox.presentToast]')
 
     await this.utilsService.presentToast({ message })
   }

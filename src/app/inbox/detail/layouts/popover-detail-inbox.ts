@@ -4,19 +4,19 @@ import { MyPopover } from '../../../core/types/MyPopover'
 
 @Component({
   selector: 'page-popover-detail',
-  templateUrl: 'popover-detail.html',
+  templateUrl: 'popover-detail-inbox.html',
 })
-export class PopoverDetailPage {
+export class PopoverDetailInbox {
   items: Array<MyPopover>
 
   constructor(private router: Router) {
-    console.log('[PopoverDetailPage.constructor]')
+    console.log('[PopoverDetailInbox.constructor]')
 
     this.items = [{ title: 'Settings', path: 'inbox-detail-settings' }]
   }
 
   async open(payload: MyPopover) {
-    console.log('[PopoverDetailPage.open]')
+    console.log('[PopoverDetailInbox.open]')
 
     await this.router.navigate([payload.path])
   }

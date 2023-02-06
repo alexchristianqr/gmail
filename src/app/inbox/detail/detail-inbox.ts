@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ApiService } from '../../core/services/api/api.service'
-import { PopoverDetailPage } from './layouts/popover-detail'
+import { PopoverDetailInbox } from './layouts/popover-detail-inbox'
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router'
 import { MyMessage } from '../../core/types/MyMessage'
@@ -12,9 +12,9 @@ import { UtilsService } from '../../core/services/utils/utils.service'
 
 @Component({
   selector: 'page-detail',
-  templateUrl: 'detail.html',
+  templateUrl: 'detail-inbox.html',
 })
-export class DetailPage implements OnInit {
+export class DetailInbox implements OnInit {
   myDatabase: string = 'DATABASE_INBOX'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   data: MyParams | any
@@ -27,27 +27,27 @@ export class DetailPage implements OnInit {
     private storage: Storage,
     private router: Router
   ) {
-    console.log('[DetailPage.constructor]')
+    console.log('[DetailInbox.constructor]')
 
     this.getState()
     this.updateMessageReadOrUnread('Mensaje leido', true)
   }
 
   ngOnInit() {
-    console.log('[DetailPage.ngOnInit]')
+    console.log('[DetailInbox.ngOnInit]')
 
     this.getState()
   }
 
   getState(): void {
-    console.log('[DetailPage.getState]')
+    console.log('[DetailInbox.getState]')
 
     this.data = this.router.getCurrentNavigation()?.extras.state
     this.item = this.data.item
   }
 
   async back() {
-    console.log('[DetailPage.back]')
+    console.log('[DetailInbox.back]')
 
     this.eventService.publish(this.item)
     await this.router.navigate([this.data.path])
@@ -57,7 +57,7 @@ export class DetailPage implements OnInit {
    * Eliminar mensaje
    */
   async deleteMessage() {
-    console.log('[DetailPage.deleteMessage]')
+    console.log('[DetailInbox.deleteMessage]')
 
     // API
     const action = () => {
@@ -93,7 +93,7 @@ export class DetailPage implements OnInit {
    * @param value
    */
   updateMessageReadOrUnread(label: string, value: boolean): void {
-    console.log('[DetailPage.updateMessageReadOrUnread]')
+    console.log('[DetailInbox.updateMessageReadOrUnread]')
 
     this.apiService.updateItem(this.myDatabase, this.item, 'is_read', value).then(async () => {
       if (value) return
@@ -105,13 +105,13 @@ export class DetailPage implements OnInit {
   }
 
   async presentPopover(event: Event) {
-    console.log('[DetailPage.presentPopover]')
+    console.log('[DetailInbox.presentPopover]')
 
-    await this.utilsService.presentPopover({ component: PopoverDetailPage, event: event })
+    await this.utilsService.presentPopover({ component: PopoverDetailInbox, event: event })
   }
 
   async presentToast(message: string) {
-    console.log('[DetailPage.presentToast]')
+    console.log('[DetailInbox.presentToast]')
 
     await this.utilsService.presentToast({ message })
   }

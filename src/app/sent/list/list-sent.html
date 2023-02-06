@@ -1,49 +1,32 @@
 <ion-header>
   <ion-toolbar color="danger">
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>Sent</ion-title>
-    <ion-buttons right>
-      <!--      <button *ngIf="MYSHAREDPREFERENCES.MAIL_SHOW_BUTTON_SYNC" ion-button class="p-r-15 my-icon" (click)="fnFetch()"><ion-icon name="sync"></ion-icon></button>-->
-      <!--      <button *ngIf="MYSHAREDPREFERENCES.MAIL_SHOW_BUTTON_CLEAN" ion-button class="p-r-15 my-icon" (click)="fnClean()"><ion-icon name="trash"></ion-icon></button>-->
-      <!--      <button *ngIf="MYSHAREDPREFERENCES.MAIL_SHOW_BUTTON_SEARCH" ion-button class="p-r-15 my-icon" (click)="fnViewSearch()"><ion-icon name="search"></ion-icon></button>-->
-      <button ion-button class="p-r-15 my-icon" (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>Enviados</ion-title>
+<!--    <ion-buttons slot="end">-->
+<!--      <ion-button-->
+<!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN"-->
+<!--        (click)="presentAlert()"-->
+<!--      >-->
+<!--        <ion-icon slot="icon-only" name="trash"></ion-icon>-->
+<!--      </ion-button>-->
+<!--      <ion-button-->
+<!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH"-->
+<!--        (click)="fnViewSearch()"-->
+<!--      >-->
+<!--        <ion-icon slot="icon-only" name="search"></ion-icon>-->
+<!--      </ion-button>-->
+<!--      <ion-button (click)="presentPopover($event)">-->
+<!--        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>-->
+<!--      </ion-button>-->
+<!--    </ion-buttons>-->
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <!--  <ion-list *ngIf="database.length >= 1">-->
-  <!--    <button ion-item unset *ngFor="let data of database;let i = index" detail-none (click)="fnViewDetail(data,i)">-->
-  <!--      <ion-avatar item-left style="opacity: 0.8">-->
-  <!--        <button ion-fab [ngClass]="'button-profile color-' + data.name.charAt(0).toUpperCase()">-->
-  <!--          <span style="font-size: 1.8em">{{data.name.charAt(0).toUpperCase()}}</span>-->
-  <!--        </button>-->
-  <!--      </ion-avatar>-->
-  <!--      <h2 *ngIf="data.is_read">{{data.name}}</h2>-->
-  <!--      <h2 *ngIf="!data.is_read"><b>{{data.name}}</b></h2>-->
-  <!--      <h3 *ngIf="data.is_read">{{data.subject}}</h3>-->
-  <!--      <h3 *ngIf="!data.is_read"><b>{{data.subject}}</b></h3>-->
-  <!--      <p *ngIf="data.is_read">{{data.message}}</p>-->
-  <!--      <p *ngIf="!data.is_read"><b>{{data.message}}</b></p>-->
-  <!--    </button>-->
-  <!--  </ion-list>-->
-
-  <!--  <ion-list *ngIf="database.length <= 0">-->
-  <!--    <div class="list-empty">-->
-  <!--      <i class="fa fa-exclamation-triangle fa-2x text-danger"></i>-->
-  <!--      <h4 class="text-muted">There is nothing in the mails sent</h4>-->
-  <!--    </div>-->
-  <!--  </ion-list>-->
-
-  <ion-fab right bottom>
-    <button ion-fab color="danger" class="my-icon" (click)="fnViewCreate()">
-      <ion-icon name="create"></ion-icon>
-    </button>
-  </ion-fab>
+  <div>Welcome, clicked your view!</div>
 </ion-content>

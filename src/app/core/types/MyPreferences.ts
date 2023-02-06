@@ -7,7 +7,7 @@ export type MyPreferences = {
     // Create page
     CONFIRM_BEFORE_SENDING: boolean
     CONFIRM_BEFORE_FILING: boolean
-    // Detail page
+    // DetailInbox page
     MAIL_SHOW_BUTTON_UN_READ: boolean
     MAIL_SHOW_BUTTON_REMOVE: boolean
     MAIL_SHOW_BUTTON_ARCHIVE: boolean

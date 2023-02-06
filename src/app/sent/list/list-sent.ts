@@ -4,20 +4,8 @@ import { Component } from '@angular/core'
   selector: 'page-mails-sent',
   templateUrl: 'list-sent.html',
 })
-export class MailsSentPage {
+export class ListSent {
   constructor() {
-    console.log('[MailsSentPage.constructor]')
+    console.log('[ListSent.constructor]')
   }
-
-  async fnViewDetail() {}
-
-  async fnViewSearch() {}
-
-  async fnViewCreate() {}
-
-  fnFetch() {}
-
-  async fnClean() {}
-
-  async presentPopover(myEvent: any) {}
 }

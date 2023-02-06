@@ -57,11 +57,18 @@
             </td>
           </tr>
         </table>
-        <ion-item-divider style="margin: 1rem 0"></ion-item-divider>
-        <ion-label>
-          <ion-text>PRIMARY</ion-text>
-        </ion-label>
+<!--        <ion-item-divider style="margin: 1rem 0"></ion-item-divider>-->
+        <!--        <ion-label style="padding-top: 0; padding-bottom: 0">-->
+        <!--          <ion-text>PRIMARY</ion-text>-->
+        <!--        </ion-label>-->
         <ion-list>
+          <ion-label >
+<!--            <ion-item-divider></ion-item-divider>-->
+            <ion-text>Principal</ion-text>
+            <ion-item-divider></ion-item-divider>
+          </ion-label>
+        </ion-list>
+        <ion-list style="padding-top: 0; padding-bottom: 0;margin-top: 0; margin-bottom: 0">
           <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSection1; let i = index">
             <ion-item
               routerDirection="root"
@@ -79,10 +86,14 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-        <!--        <ion-label>-->
-        <!--          <ion-text>SECONDARY</ion-text>-->
-        <!--        </ion-label>-->
         <ion-list>
+        <ion-label >
+<!--          <ion-item-divider></ion-item-divider>-->
+          <ion-text>Secundario</ion-text>
+          <ion-item-divider></ion-item-divider>
+        </ion-label>
+        </ion-list>
+        <ion-list style="padding-top: 0; padding-bottom: 0;margin-top: 0; margin-bottom: 0">
           <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSection2; let i = index">
             <ion-item
               class="activeLink"

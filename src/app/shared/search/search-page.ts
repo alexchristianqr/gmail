@@ -8,7 +8,7 @@ import { EventService } from '../../core/services/events/event.service'
 
 @Component({
   selector: 'page-search',
-  templateUrl: 'search.html',
+  templateUrl: 'search-page.html',
 })
 export class SearchPage implements OnInit, OnDestroy {
   data: MyParams | any

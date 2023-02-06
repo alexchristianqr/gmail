@@ -9,36 +9,44 @@ import { AppRoutingModule } from './app-routing.module'
 import { IonicStorageModule } from '@ionic/storage-angular'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { DetailPage } from './inbox/detail/detail'
-import { SearchPage } from './shared/search/search'
-import { CreatePage } from './create/create'
-import { MailsSentPage } from './sent/list/list-sent'
+// INBOX
+import { ListInbox } from './inbox/list/list-inbox'
 import { ModalSettingsListInbox } from './inbox/list/layouts/modal-settings-list-inbox'
-import { HomePage } from './shared/home/home'
-import { ModalSettingsDetail } from './inbox/detail/layouts/modal-settings-detail'
-import { PopoverMailPage } from './inbox/list/layouts/popover-list-inbox'
-import { ModalSettingsCreate } from './create/layouts/modal-settings-create'
-import { MailsInboxPage } from './inbox/list/list-inbox'
-import { PopoverCreatePage } from './create/layouts/popover-create'
-import { GeneralPage } from './shared/general/general'
-import { PopoverDetailPage } from './inbox/detail/layouts/popover-detail'
+import { DetailInbox } from './inbox/detail/detail-inbox'
+import { PopoverListInbox } from './inbox/list/layouts/popover-list-inbox'
+import { ModalSettingsDetailInbox } from './inbox/detail/layouts/modal-settings-detail-inbox'
+import { PopoverDetailInbox } from './inbox/detail/layouts/popover-detail-inbox'
+import { CreateInbox } from './inbox/create/create-inbox'
+import { ModalSettingsCreateInbox } from './inbox/create/layouts/modal-settings-create-inbox'
+import { PopoverCreateInbox } from './inbox/create/layouts/popover-create-inbox'
+
+// SENT
+import { ListSent } from './sent/list/list-sent'
+
+// SHARED
+import { SearchPage } from './shared/search/search-page'
+import { HomePage } from './shared/home/home-page'
+import { GeneralPage } from './shared/general/general-page'
 
 @NgModule({
   declarations: [
+    // SHARED
     AppComponent,
-    DetailPage,
-    SearchPage,
-    CreatePage,
-    MailsSentPage,
-    MailsInboxPage,
-    GeneralPage,
     HomePage,
-    PopoverCreatePage,
-    PopoverMailPage,
-    PopoverDetailPage,
-    ModalSettingsCreate,
-    ModalSettingsDetail,
+    SearchPage,
+    GeneralPage,
+    // INBOX
+    DetailInbox,
+    CreateInbox,
+    ListInbox,
+    PopoverCreateInbox,
+    PopoverListInbox,
+    PopoverDetailInbox,
+    ModalSettingsCreateInbox,
+    ModalSettingsDetailInbox,
     ModalSettingsListInbox,
+    // SENT
+    ListSent,
   ],
   imports: [
     FormsModule,

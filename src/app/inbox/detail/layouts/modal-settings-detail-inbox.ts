@@ -7,23 +7,23 @@ import { PreferencesService } from '../../../core/services/api/preferences.servi
 
 @Component({
   selector: 'page-modal-detail',
-  templateUrl: 'modal-settings-detail.html',
+  templateUrl: 'modal-settings-detail-inbox.html',
 })
-export class ModalSettingsDetail {
+export class ModalSettingsDetailInbox {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
 
   constructor(private preferencesService: PreferencesService, private router: Router) {
-    console.log('[ModalSettingsDetail.constructor]')
+    console.log('[ModalSettingsDetailInbox.constructor]')
   }
 
   async back() {
-    console.log('[ModalSettingsDetail.back]')
+    console.log('[ModalSettingsDetailInbox.back]')
 
     await this.router.navigate(['inbox-detail'])
   }
 
   async updateMyPreferences() {
-    console.log('[ModalSettingsDetail.updateMyPreferences]')
+    console.log('[ModalSettingsDetailInbox.updateMyPreferences]')
 
     await this.preferencesService.update(this.MY_SHARED_PREFERENCES)
   }

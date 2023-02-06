@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'page-general',
-  templateUrl: 'general.html',
+  templateUrl: 'general-page.html',
 })
 export class GeneralPage {
   constructor() {

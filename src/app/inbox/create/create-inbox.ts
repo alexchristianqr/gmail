@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { PopoverCreatePage } from './layouts/popover-create'
+import { PopoverCreateInbox } from './layouts/popover-create-inbox'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ApiService } from '../core/services/api/api.service'
-import { MyMessage } from '../core/types/MyMessage'
-import { EventService } from '../core/services/events/event.service'
-import { UtilsService } from '../core/services/utils/utils.service'
-import { MyPreferences } from '../core/types/MyPreferences'
-import { SHARED_PREFERENCES } from '../shared-preferences'
+import { ApiService } from '../../core/services/api/api.service'
+import { MyMessage } from '../../core/types/MyMessage'
+import { EventService } from '../../core/services/events/event.service'
+import { UtilsService } from '../../core/services/utils/utils.service'
+import { MyPreferences } from '../../core/types/MyPreferences'
+import { SHARED_PREFERENCES } from '../../shared-preferences'
 
 @Component({
   selector: 'page-create',
-  templateUrl: 'create.html',
+  templateUrl: 'create-inbox.html',
 })
-export class CreatePage implements OnInit {
+export class CreateInbox implements OnInit {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   formGroup: FormGroup
   submitted: boolean | undefined
@@ -26,17 +26,17 @@ export class CreatePage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    console.log('[CreatePage.constructor]')
+    console.log('[CreateInbox.constructor]')
     this.formGroup = this.formGroupInitialize()
   }
 
   ngOnInit(): void {
-    console.log('[CreatePage.ngOnInit]')
+    console.log('[CreateInbox.ngOnInit]')
     this.formGroup = this.formGroupInitialize()
   }
 
   formGroupInitialize(): FormGroup {
-    console.log('[CreatePage.formGroupInitialize]')
+    console.log('[CreateInbox.formGroupInitialize]')
 
     return this.formBuilder.group({
       uid: this.formBuilder.control(null, [Validators.required]),
@@ -61,7 +61,7 @@ export class CreatePage implements OnInit {
    * Enviar formulario
    */
   async onSubmit() {
-    console.log('[CreatePage.onSubmit]')
+    console.log('[CreateInbox.onSubmit]')
 
     this.submitted = true
 
@@ -115,7 +115,7 @@ export class CreatePage implements OnInit {
    * Obtener UUID
    */
   getUniqueUID() {
-    console.log('[CreatePage.getUniqueUID]')
+    console.log('[CreateInbox.getUniqueUID]')
 
     return this.apiService.getUniqueUID()
   }
@@ -124,14 +124,14 @@ export class CreatePage implements OnInit {
    * Volver a la página anterior
    */
   async back() {
-    console.log('[CreatePage.back]')
+    console.log('[CreateInbox.back]')
 
     this.eventService.publish()
     await this.router.navigate(['inbox'])
   }
 
   async presentAlert() {
-    console.log('[CreatePage.presentAlert]')
+    console.log('[CreateInbox.presentAlert]')
 
     await this.utilsService.presentAlert({
       message: 'No se puede enviar tu mensaje, porque hay campos vacios.',
@@ -146,10 +146,10 @@ export class CreatePage implements OnInit {
   }
 
   async presentPopover(event: Event) {
-    console.log('[CreatePage.presentPopover]')
+    console.log('[CreateInbox.presentPopover]')
 
     await this.utilsService.presentPopover({
-      component: PopoverCreatePage,
+      component: PopoverCreateInbox,
       event: event,
     })
   }

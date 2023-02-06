@@ -7,7 +7,7 @@ export let SHARED_PREFERENCES = {
     // Create page
     CONFIRM_BEFORE_SENDING: false,
     CONFIRM_BEFORE_FILING: true,
-    // Detail page
+    // DetailInbox page
     MAIL_SHOW_BUTTON_UN_READ: true,
     MAIL_SHOW_BUTTON_REMOVE: false,
     MAIL_SHOW_BUTTON_ARCHIVE: false,
