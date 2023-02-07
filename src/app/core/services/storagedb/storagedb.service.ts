@@ -173,7 +173,19 @@ export class StoragedbService {
     return this.getStorage(database).then((data) => {
       if (!data) {
         if (!SHARED_PREFERENCES.SETTINGS.INITIALIZE_DATABASE) return []
-        return this.setStorage(database, this.initDataDB).then((data) => {
+
+        let arrayDatabase: Array<any> = []
+
+        switch (database) {
+          case 'DATABASE_INBOX':
+            arrayDatabase = this.initDataDB
+            break
+          case 'DATABASE_SENT':
+            arrayDatabase = []
+            break
+        }
+
+        return this.setStorage(database, arrayDatabase).then((data) => {
           console.log(`Cargar BD ${database} por defecto`)
           return data
         })

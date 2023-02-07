@@ -8,25 +8,96 @@
       </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Enviados</ion-title>
-<!--    <ion-buttons slot="end">-->
-<!--      <ion-button-->
-<!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN"-->
-<!--        (click)="presentAlert()"-->
-<!--      >-->
-<!--        <ion-icon slot="icon-only" name="trash"></ion-icon>-->
-<!--      </ion-button>-->
-<!--      <ion-button-->
-<!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH"-->
-<!--        (click)="fnViewSearch()"-->
-<!--      >-->
-<!--        <ion-icon slot="icon-only" name="search"></ion-icon>-->
-<!--      </ion-button>-->
-<!--      <ion-button (click)="presentPopover($event)">-->
-<!--        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>-->
-<!--      </ion-button>-->
-<!--    </ion-buttons>-->
+    <!--    <ion-buttons slot="end">-->
+    <!--      <ion-button-->
+    <!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN"-->
+    <!--        (click)="presentAlert()"-->
+    <!--      >-->
+    <!--        <ion-icon slot="icon-only" name="trash"></ion-icon>-->
+    <!--      </ion-button>-->
+    <!--      <ion-button-->
+    <!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH"-->
+    <!--        (click)="fnViewSearch()"-->
+    <!--      >-->
+    <!--        <ion-icon slot="icon-only" name="search"></ion-icon>-->
+    <!--      </ion-button>-->
+    <!--      <ion-button (click)="presentPopover($event)">-->
+    <!--        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>-->
+    <!--      </ion-button>-->
+    <!--    </ion-buttons>-->
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div>Welcome, clicked your view!</div>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshList($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="items.length >= 1">
+    <ion-item-sliding *ngFor="let item of items;let i = index" (click)="viewDetailPage(item)">
+      <ion-item>
+        <ion-label style="margin: 0; padding: 0">
+          <table>
+            <tr>
+              <td style="padding: 0.75rem">
+                <ion-avatar
+                  style="opacity: 0.8"
+                  [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"
+                >
+                  {{item.name.charAt(0).toUpperCase()}}
+                </ion-avatar>
+              </td>
+              <td style="padding: 0.75rem 0.75rem 0.75rem 0.25rem">
+                <ion-text *ngIf="!item.is_read">
+                  <div style="font-size: 1.01rem; font-weight: 700">{{item.name}}</div>
+                  <div style="font-size: 0.975rem; font-weight: 600">{{item.subject}}</div>
+                  <div style="font-size: 0.75rem">{{item.message}}</div>
+                </ion-text>
+                <ion-text *ngIf="item.is_read">
+                  <div style="font-size: 1.01rem">{{item.name}}</div>
+                  <div style="font-size: 0.975rem">{{item.subject}}</div>
+                  <div style="font-size: 0.75rem">{{item.message}}</div>
+                </ion-text>
+              </td>
+            </tr>
+          </table>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="medium">
+          <ion-icon slot="start" name="archive"></ion-icon>
+          Archivar
+        </ion-item-option>
+        <ion-item-option color="dark">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="dark">
+          <ion-icon slot="start" name="trash"></ion-icon>
+          Eliminar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-list *ngIf="items.length <= 0">
+    <ion-grid>
+      <ion-row style="height: 100vh">
+        <ion-col size="12" style="top: -15%; text-align: center">
+          <ion-label>
+            <ion-icon slot="icon-only" name="mail-open-outline" size="large"></ion-icon>
+            <div>No tienes mensajes enviados.</div>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button color="danger" class="my-icon" (click)="viewCreatePage()">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  <!--  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">-->
+  <!--  <ion-infinite-scroll>-->
+  <!--    <ion-infinite-scroll-content></ion-infinite-scroll-content>-->
+  <!--  </ion-infinite-scroll>-->
 </ion-content>

@@ -8,6 +8,7 @@ import { EventService } from '../../core/services/events/event.service'
 import { UtilsService } from '../../core/services/utils/utils.service'
 import { MyPreferences } from '../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../shared-preferences'
+import { MyParams } from '../../core/types/MyParams'
 
 @Component({
   selector: 'page-create',
@@ -18,6 +19,7 @@ export class CreateInbox implements OnInit {
   formGroup: FormGroup
   submitted: boolean | undefined
   loading: boolean = false
+  data: MyParams | any
 
   constructor(
     private utilsService: UtilsService,
@@ -27,12 +29,21 @@ export class CreateInbox implements OnInit {
     private router: Router
   ) {
     console.log('[CreateInbox.constructor]')
+    this.getState()
     this.formGroup = this.formGroupInitialize()
   }
 
   ngOnInit(): void {
     console.log('[CreateInbox.ngOnInit]')
+
+    this.getState()
     this.formGroup = this.formGroupInitialize()
+  }
+
+  getState(): void {
+    console.log('[CreateInbox.getState]')
+
+    this.data = this.router.getCurrentNavigation()?.extras.state
   }
 
   formGroupInitialize(): FormGroup {
@@ -40,7 +51,7 @@ export class CreateInbox implements OnInit {
 
     return this.formBuilder.group({
       uid: this.formBuilder.control(null, [Validators.required]),
-      database: this.formBuilder.control('DATABASE_INBOX', [Validators.required]),
+      database: this.formBuilder.control(this.data.database, [Validators.required]),
       name: this.formBuilder.control(null, [Validators.required]),
       subject: this.formBuilder.control(null, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
@@ -127,7 +138,7 @@ export class CreateInbox implements OnInit {
     console.log('[CreateInbox.back]')
 
     this.eventService.publish()
-    await this.router.navigate(['inbox'])
+    await this.router.navigate([this.data.path])
   }
 
   async presentAlert() {
