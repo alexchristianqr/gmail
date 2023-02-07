@@ -8,7 +8,7 @@ VALUE=''
 
 ## VALORES POR DEFECTO
 VALUE_TAG=''
-VALUE_DIRECTORY='dist'
+VALUE_DIRECTORY='www'
 VALUE_BRANCH='main'
 VALUE_EXEC='build'
 VALUE_REPOSITORY='alexchristianqr/gmail'
@@ -89,6 +89,9 @@ deploy_to_ghpages() {
     git push -f "git@github.com:$REPOSITORY.git" "$BRANCH:gh-pages"
 
     cd -
+
+    rm -rf "$DIRECTORY"
+
   else
     exit 1
   fi
