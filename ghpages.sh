@@ -91,7 +91,6 @@ deploy_to_ghpages() {
     cd -
 
     rm -rf "$DIRECTORY"
-
   else
     exit 1
   fi
