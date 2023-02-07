@@ -167,48 +167,66 @@ export class StoragedbService {
     },
   ]
   private initSharedPreferences: MyPreferences = SHARED_PREFERENCES
-  public myDatabases: string[] = ['DATABASE_INBOX', 'DATABASE_SENT', 'DATABASE_STARRED']
+  private initVersion: { updated_at: number; version: string } = { updated_at: Date.now(), version: '2.1.*' }
+  public myDatabases: string[] = ['VERSION', 'DATABASE_INBOX', 'DATABASE_SENT', 'DATABASE_STARRED']
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 
   constructor(private storage: Storage) {
     console.log('[StoragedbService.constructor]')
 
-    this.storage.create().then(async () => {
-      await this.loadSharedPreferences()
-      for (let database of this.myDatabases) {
-        await this.loadDatabaseStorage(database)
-      }
+    this.storage.create().then(async (res) => {
+      console.log('My Driver DB is: ', res.driver)
+      await this.eachDatabases()
     })
+  }
+
+  async eachDatabases() {
+    await this.loadSharedPreferences()
+    for (let database of this.myDatabases) {
+      await this.loadDatabaseStorage(database)
+    }
   }
 
   async loadDatabaseStorage(database: string) {
     console.log('[StoragedbService.loadDatabaseStorage]')
 
-    return this.getStorage(database).then((data) => {
+    return this.getStorage(database).then(async (data) => {
       if (!data) {
         if (!SHARED_PREFERENCES.SETTINGS.INITIALIZE_DATABASE) return []
 
-        let arrayDatabase: Array<any> = []
+        let valuesDatabase: any = []
 
         switch (database) {
+          case 'VERSION':
+            valuesDatabase = this.initVersion
+            break
           case 'DATABASE_INBOX':
-            arrayDatabase = this.initDataDB
+            valuesDatabase = this.initDataDB
             break
           case 'DATABASE_SENT':
-            arrayDatabase = []
+            valuesDatabase = []
             break
           case 'DATABASE_STARRED':
-            arrayDatabase = []
+            valuesDatabase = []
             break
         }
 
-        return this.setStorage(database, arrayDatabase).then((data) => {
+        return this.setStorage(database, valuesDatabase).then((data) => {
           console.log(`Cargar BD ${database} por defecto`)
           return data
         })
       }
+
       console.log(`Cargar BD ${database} por caché`)
-      return data
+
+      if (database !== 'VERSION') {
+        return data
+      }
+
+      if (data.version !== this.initVersion.version) {
+        await this.storage.clear()
+        await this.eachDatabases()
+      }
     })
   }
 
