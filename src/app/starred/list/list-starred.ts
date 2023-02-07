@@ -10,31 +10,31 @@ import { Router } from '@angular/router'
 import { MyParams } from '../../core/types/MyParams'
 
 @Component({
-  selector: 'page-mails-sent',
-  templateUrl: 'list-sent.html',
+  selector: 'page-list-starred',
+  templateUrl: 'list-starred.html',
 })
-export class ListSent implements OnDestroy {
+export class ListStarred implements OnDestroy {
   @ViewChild('popover') popover: any
-  myDatabase: string = 'DATABASE_SENT'
+  myDatabase: string = 'DATABASE_STARRED'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
   constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
-    console.log('[ListSent.constructor]')
+    console.log('[ListStarred.constructor]')
 
-    this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listSentMessages())
-    this.listSentMessages()
+    this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listStarredMessages())
+    this.listStarredMessages()
   }
 
   ngOnDestroy() {
-    console.log('[ListSent.ngOnDestroy]')
+    console.log('[ListStarred.ngOnDestroy]')
 
     this.mySubscribe$.unsubscribe()
   }
 
-  listSentMessages(): void {
-    console.log('[ListSent.listSentMessages]')
+  listStarredMessages(): void {
+    console.log('[ListStarred.listSentMessages]')
 
     this.apiService.getItems(this.myDatabase).then((data) => {
       this.items = data
@@ -42,23 +42,23 @@ export class ListSent implements OnDestroy {
   }
 
   async refreshList(event: any) {
-    console.log('[ListSent.refreshList]')
+    console.log('[ListStarred.refreshList]')
 
     setTimeout(() => {
-      this.listSentMessages()
+      this.listStarredMessages()
       event.target.complete()
     }, 2000)
   }
 
   async viewDetailPage(item: MyMessage) {
-    console.log('[ListSent.viewDetailPage]')
+    console.log('[ListStarred.viewDetailPage]')
 
-    const data: MyParams = { item: item, path: 'sent' }
+    const data: MyParams = { item: item, path: 'starred' }
     await this.router.navigate(['inbox-detail'], { state: data })
   }
 
   async viewCreatePage() {
-    console.log('[ListSent.viewCreateMessage]')
+    console.log('[ListStarred.viewCreateMessage]')
 
     const data: MyParams = { database: this.myDatabase, path: 'sent' }
     await this.router.navigate(['create'], { state: data })

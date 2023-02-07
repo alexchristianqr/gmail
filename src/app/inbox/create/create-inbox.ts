@@ -21,13 +21,7 @@ export class CreateInbox implements OnInit {
   loading: boolean = false
   data: MyParams | any
 
-  constructor(
-    private utilsService: UtilsService,
-    private eventService: EventService,
-    private apiService: ApiService,
-    private formBuilder: FormBuilder,
-    private router: Router
-  ) {
+  constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
     console.log('[CreateInbox.constructor]')
     this.getState()
     this.formGroup = this.formGroupInitialize()
@@ -55,14 +49,8 @@ export class CreateInbox implements OnInit {
       name: this.formBuilder.control(null, [Validators.required]),
       subject: this.formBuilder.control(null, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
-      from: this.formBuilder.control('alexchristianqr@utp.edu.pe', [
-        Validators.required,
-        Validators.email,
-      ]),
-      to: this.formBuilder.control('teacher2022@utp.edu.pe', [
-        Validators.required,
-        Validators.email,
-      ]),
+      from: this.formBuilder.control('alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
+      to: this.formBuilder.control('teacher2022@utp.edu.pe', [Validators.required, Validators.email]),
       is_read: this.formBuilder.control(false, [Validators.required]),
       created_at: this.formBuilder.control(Date.now(), [Validators.required]),
     })

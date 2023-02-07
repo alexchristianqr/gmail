@@ -9,24 +9,11 @@
                 <table>
                   <tr>
                     <td>
-                      <img
-                        style="height: 1.75rem; width: 1.75rem"
-                        src="./assets/imgs/gmail.svg"
-                        alt=""
-                      />
+                      <img style="height: 1.75rem; width: 1.75rem" src="./assets/imgs/gmail.svg" alt="" />
                     </td>
                     <td>
-                      <div
-                        style="
-                          font-size: 1.12rem;
-                          font-weight: 500;
-                          padding: 0.25rem 0 0 0;
-                          margin-left: 0.2rem;
-                        "
-                      >
-                        Gmail<span style="font-size: 0.7rem; font-weight: 300; margin-left: 0.2rem"
-                          >(clone)</span
-                        >
+                      <div style="font-size: 1.12rem; font-weight: 500; padding: 0.25rem 0 0 0; margin-left: 0.2rem">
+                        Gmail<span style="font-size: 0.7rem; font-weight: 300; margin-left: 0.2rem">(clone)</span>
                       </div>
                     </td>
                   </tr>
@@ -45,9 +32,7 @@
               </ion-avatar>
             </td>
             <td style="padding: 0.5rem; vertical-align: middle">
-              <div style="font-size: 1rem; font-weight: 500; margin: 0">
-                Alex Christian Quispe Roque
-              </div>
+              <div style="font-size: 1rem; font-weight: 500; margin: 0">Alex Christian Quispe Roque</div>
               <div style="font-size: 0.75rem">alexchristianqr@gmail.com</div>
               <div style="font-size: 0.6rem; padding: 0.125rem 0">
                 <a href="#" style="text-decoration: none">Privacy Policy</a>
@@ -57,57 +42,36 @@
             </td>
           </tr>
         </table>
-<!--        <ion-item-divider style="margin: 1rem 0"></ion-item-divider>-->
+        <!--        <ion-item-divider style="margin: 1rem 0"></ion-item-divider>-->
         <!--        <ion-label style="padding-top: 0; padding-bottom: 0">-->
         <!--          <ion-text>PRIMARY</ion-text>-->
         <!--        </ion-label>-->
         <ion-list>
-          <ion-label >
-<!--            <ion-item-divider></ion-item-divider>-->
+          <ion-label>
+            <!--            <ion-item-divider></ion-item-divider>-->
             <ion-text>Principal</ion-text>
             <ion-item-divider></ion-item-divider>
           </ion-label>
         </ion-list>
-        <ion-list style="padding-top: 0; padding-bottom: 0;margin-top: 0; margin-bottom: 0">
+        <ion-list style="padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0">
           <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSection1; let i = index">
-            <ion-item
-              routerDirection="root"
-              [routerLink]="[page.path]"
-              lines="none"
-              detail="false"
-              routerLinkActive="selected"
-            >
-              <ion-icon
-                slot="start"
-                [ios]="page.icon + '-outline'"
-                [md]="page.icon + '-sharp'"
-              ></ion-icon>
+            <ion-item routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
               <ion-label>{{ page.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
         <ion-list>
-        <ion-label >
-<!--          <ion-item-divider></ion-item-divider>-->
-          <ion-text>Secundario</ion-text>
-          <ion-item-divider></ion-item-divider>
-        </ion-label>
+          <ion-label>
+            <!--          <ion-item-divider></ion-item-divider>-->
+            <ion-text>Secundario</ion-text>
+            <ion-item-divider></ion-item-divider>
+          </ion-label>
         </ion-list>
-        <ion-list style="padding-top: 0; padding-bottom: 0;margin-top: 0; margin-bottom: 0">
+        <ion-list style="padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0">
           <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSection2; let i = index">
-            <ion-item
-              class="activeLink"
-              routerDirection="root"
-              [routerLink]="[page.path]"
-              lines="none"
-              detail="false"
-              routerLinkActive="selected"
-            >
-              <ion-icon
-                slot="start"
-                [ios]="page.icon + '-outline'"
-                [md]="page.icon + '-sharp'"
-              ></ion-icon>
+            <ion-item class="activeLink" routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
               <ion-label>{{ page.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -115,18 +79,8 @@
       </ion-content>
       <ion-footer>
         <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSection3; let i = index">
-          <ion-item
-            routerDirection="root"
-            [routerLink]="[page.path]"
-            lines="none"
-            detail="false"
-            routerLinkActive="selected"
-          >
-            <ion-icon
-              slot="start"
-              [ios]="page.icon + '-outline'"
-              [md]="page.icon + '-sharp'"
-            ></ion-icon>
+          <ion-item routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
             <span>{{ page.title }}</span>
           </ion-item>
         </ion-menu-toggle>

@@ -28,14 +28,16 @@ export class ApiService {
   }
 
   async createItem(database: string, item: MyMessage | any) {
-    console.log('[ApiService.addItem]', { database, item })
+    console.log('[ApiService.createItem]', { database, item })
 
     return this.storagedbService.getStorage(database).then((data: Array<MyMessage>) => {
       // Agregar un item
+      console.log({ data })
+      if (!data) return []
       data.push(item)
 
       // Actualizar almacenamiento
-      this.storagedbService.setStorage(database, data)
+      return this.storagedbService.setStorage(database, data)
     })
   }
 
@@ -58,7 +60,7 @@ export class ApiService {
     })
   }
 
-  async deleteItem(database: string, item: any) {
+  async deleteItem(database: string, item: MyMessage | any) {
     console.log('[ApiService.deleteItem]')
 
     return this.storagedbService.getStorage(database).then((data: Array<MyMessage>) => {

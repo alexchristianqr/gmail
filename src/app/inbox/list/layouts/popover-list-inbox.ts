@@ -13,12 +13,7 @@ export class PopoverListInbox {
   myDatabase: string = 'DATABASE_INBOX'
   items: Array<MyPopover>
 
-  constructor(
-    private utilsService: UtilsService,
-    private eventService: EventService,
-    private apiService: ApiService,
-    private router: Router
-  ) {
+  constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[PopoverListInbox.constructor]')
 
     this.items = [

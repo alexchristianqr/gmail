@@ -9,16 +9,10 @@
     </ion-buttons>
     <ion-title>Inbox</ion-title>
     <ion-buttons slot="end">
-      <ion-button
-        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN"
-        (click)="presentAlert()"
-      >
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN" (click)="presentAlert()">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
-      <ion-button
-        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH"
-        (click)="fnViewSearch()"
-      >
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH" (click)="fnViewSearch()">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
       <ion-button (click)="presentPopover($event)">
@@ -38,12 +32,7 @@
           <table>
             <tr>
               <td style="padding: 0.75rem">
-                <ion-avatar
-                  style="opacity: 0.8"
-                  [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"
-                >
-                  {{item.name.charAt(0).toUpperCase()}}
-                </ion-avatar>
+                <ion-avatar style="opacity: 0.8" [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"> {{item.name.charAt(0).toUpperCase()}} </ion-avatar>
               </td>
               <td style="padding: 0.75rem 0.75rem 0.75rem 0.25rem">
                 <ion-text *ngIf="!item.is_read">

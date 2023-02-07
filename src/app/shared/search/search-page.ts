@@ -15,11 +15,7 @@ export class SearchPage implements OnInit, OnDestroy {
   mySubscribe$: Subscription
   items: Array<MyMessage> = []
 
-  constructor(
-    private eventService: EventService,
-    private apiService: ApiService,
-    private router: Router
-  ) {
+  constructor(private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[SearchPage.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(async () => {

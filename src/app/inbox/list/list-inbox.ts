@@ -21,12 +21,7 @@ export class ListInbox implements OnDestroy {
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
-  constructor(
-    private utilsService: UtilsService,
-    private eventService: EventService,
-    private apiService: ApiService,
-    private router: Router
-  ) {
+  constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListInbox.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())
@@ -35,7 +30,6 @@ export class ListInbox implements OnDestroy {
 
   ngOnDestroy() {
     console.log('[ListInbox.ngOnDestroy]')
-
     this.mySubscribe$.unsubscribe()
   }
 

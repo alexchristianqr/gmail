@@ -9,6 +9,11 @@ import { AppRoutingModule } from './app-routing.module'
 import { IonicStorageModule } from '@ionic/storage-angular'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
+// SHARED
+import { SearchPage } from './shared/search/search-page'
+import { HomePage } from './shared/home/home-page'
+import { GeneralPage } from './shared/general/general-page'
+
 // INBOX
 import { ListInbox } from './inbox/list/list-inbox'
 import { ModalSettingsListInbox } from './inbox/list/layouts/modal-settings-list-inbox'
@@ -23,10 +28,8 @@ import { PopoverCreateInbox } from './inbox/create/layouts/popover-create-inbox'
 // SENT
 import { ListSent } from './sent/list/list-sent'
 
-// SHARED
-import { SearchPage } from './shared/search/search-page'
-import { HomePage } from './shared/home/home-page'
-import { GeneralPage } from './shared/general/general-page'
+// STARRED
+import { ListStarred } from './starred/list/list-starred'
 
 @NgModule({
   declarations: [
@@ -47,15 +50,10 @@ import { GeneralPage } from './shared/general/general-page'
     ModalSettingsListInbox,
     // SENT
     ListSent,
+    // STARRED
+    ListStarred,
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    IonicStorageModule.forRoot(),
-  ],
+  imports: [FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

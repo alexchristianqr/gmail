@@ -15,6 +15,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'alexchristianqr@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Alex Christian Quispe Roque',
@@ -27,6 +28,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'maria@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Maria',
@@ -39,6 +41,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'yolanda@utp.edu.pe',
       is_read: true,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Yolanda',
@@ -51,6 +54,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'nando@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Nando',
@@ -63,6 +67,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'jorge@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Jorge',
@@ -75,6 +80,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'teresa@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Teresa',
@@ -87,6 +93,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'beatriz@utp.edu.pe',
       is_read: true,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Beatriz',
@@ -99,6 +106,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'carlos@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Carlos',
@@ -111,6 +119,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'estefany@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Estefany',
@@ -123,6 +132,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'gerardo@utp.edu.pe',
       is_read: false,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Gerardo',
@@ -135,6 +145,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'kathy@utp.edu.pe',
       is_read: true,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Kathy',
@@ -147,6 +158,7 @@ export class StoragedbService {
       database: 'DATABASE_INBOX',
       from: 'melissa@utp.edu.pe',
       is_read: true,
+      is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Melissa',
@@ -155,7 +167,7 @@ export class StoragedbService {
     },
   ]
   private initSharedPreferences: MyPreferences = SHARED_PREFERENCES
-  public myDatabase: string = 'DATABASE_INBOX'
+  public myDatabases: string[] = ['DATABASE_INBOX', 'DATABASE_SENT', 'DATABASE_STARRED']
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 
   constructor(private storage: Storage) {
@@ -163,7 +175,9 @@ export class StoragedbService {
 
     this.storage.create().then(async () => {
       await this.loadSharedPreferences()
-      await this.loadDatabaseStorage(this.myDatabase)
+      for (let database of this.myDatabases) {
+        await this.loadDatabaseStorage(database)
+      }
     })
   }
 
@@ -183,6 +197,9 @@ export class StoragedbService {
           case 'DATABASE_SENT':
             arrayDatabase = []
             break
+          case 'DATABASE_STARRED':
+            arrayDatabase = []
+            break
         }
 
         return this.setStorage(database, arrayDatabase).then((data) => {
@@ -200,12 +217,10 @@ export class StoragedbService {
 
     return this.getStorage(this.mySharedPreferences).then((data) => {
       if (!data) {
-        return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then(
-          (data) => {
-            console.log(`Cargar BD ${this.mySharedPreferences} por defecto`)
-            return data
-          }
-        )
+        return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then((data) => {
+          console.log(`Cargar BD ${this.mySharedPreferences} por defecto`)
+          return data
+        })
       }
       console.log(`Cargar BD ${this.mySharedPreferences} por caché`)
 

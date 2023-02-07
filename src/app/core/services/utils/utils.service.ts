@@ -33,11 +33,7 @@ type MyPopover = {
   providedIn: 'root',
 })
 export class UtilsService {
-  constructor(
-    private toastController: ToastController,
-    private alertController: AlertController,
-    private popoverCtrl: PopoverController
-  ) {}
+  constructor(private toastController: ToastController, private alertController: AlertController, private popoverCtrl: PopoverController) {}
 
   async presentToast(payload: MyToast) {
     console.log('[UtilsService.presentToast]')
@@ -45,7 +41,7 @@ export class UtilsService {
     const usePayload: any = {}
 
     usePayload.message = payload.message
-    usePayload.duration = payload.duration || 1500
+    usePayload.duration = payload.duration || 2500
     usePayload.position = payload.position || 'bottom'
     if (payload.buttons) {
       usePayload.buttons = [
