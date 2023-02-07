@@ -6,7 +6,7 @@ export type MyMessage = {
   message: string
   from: string
   to: string
-  is_read: boolean
-  is_starred: boolean
+  is_read: boolean|undefined
+  is_starred: boolean|undefined
   created_at: Date | string
 }
