@@ -42,38 +42,30 @@
             </td>
           </tr>
         </table>
-        <ion-list>
-          <ion-label>
-            <ion-text>Principal</ion-text>
-            <ion-item-divider></ion-item-divider>
-          </ion-label>
-        </ion-list>
-        <ion-list style="padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0">
-          <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesPrimary; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ page.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-        <ion-list>
-          <ion-label>
-            <ion-text>Secundario</ion-text>
-            <ion-item-divider></ion-item-divider>
-          </ion-label>
-        </ion-list>
-        <ion-list style="padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0">
-          <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSecondary; let i = index">
-            <ion-item class="activeLink" routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ page.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
+        <div class="ion-padding-top">
+          <ion-text>Principal</ion-text>
+          <ion-item-divider></ion-item-divider>
+        </div>
+        <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesPrimary; let i = index">
+          <ion-item routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ page.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <div class="ion-padding-top">
+          <ion-text>Secundario</ion-text>
+          <ion-item-divider></ion-item-divider>
+        </div>
+        <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesSecondary; let i = index">
+          <ion-item class="activeLink" routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ page.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-content>
       <ion-footer>
         <ion-menu-toggle auto-hide="false" *ngFor="let page of pagesTertiary; let i = index">
-          <ion-item routerDirection="root" [routerLink]="[page.path]" lines="none" detail="false" routerLinkActive="selected">
+          <ion-item routerDirection="root" [routerLink]="[page.path]" lines="none" routerLinkActive="selected">
             <ion-icon slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
             <span>{{ page.title }}</span>
           </ion-item>
