@@ -1,14 +1,14 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core'
-import { ApiService } from '../../core/services/api/api.service'
+import { ApiService } from '../../../core/services/api/api.service'
 import { PopoverListInbox } from './layouts/popover-list-inbox'
 import { Router } from '@angular/router'
-import { MyMessage } from '../../core/types/MyMessage'
-import { MyParams } from '../../core/types/MyParams'
-import { MyPreferences } from '../../core/types/MyPreferences'
-import { EventService } from '../../core/services/events/event.service'
+import { MyMessage } from '../../../core/types/MyMessage'
+import { MyParams } from '../../../core/types/MyParams'
+import { MyPreferences } from '../../../core/types/MyPreferences'
+import { EventService } from '../../../core/services/events/event.service'
 import { Subscription } from 'rxjs'
-import { SHARED_PREFERENCES } from '../../shared-preferences'
-import { UtilsService } from '../../core/services/utils/utils.service'
+import { SHARED_PREFERENCES } from '../../../shared-preferences'
+import { UtilsService } from '../../../core/services/utils/utils.service'
 
 @Component({
   selector: 'page-mails-inbox',
@@ -53,22 +53,22 @@ export class ListInbox implements OnDestroy {
   async fnViewDetail(item: MyMessage) {
     console.log('[ListInbox.fnViewDetail]')
 
-    const data: MyParams = { item: item, path: 'app/inbox' }
-    await this.router.navigate(['app/inbox-detail'], { state: data })
+    const data: MyParams = { item: item, path: 'mail/inbox' }
+    await this.router.navigate(['mail/inbox-detail'], { state: data })
   }
 
   async fnViewSearch() {
     console.log('[ListInbox.fnViewSearch]')
 
-    const data: MyParams = { database: 'DATABASE_INBOX', path: 'app/inbox' }
+    const data: MyParams = { database: 'DATABASE_INBOX', path: 'mail/inbox' }
     await this.router.navigate(['search'], { state: data })
   }
 
   async viewCreatePage() {
     console.log('[ListInbox.viewCreatePage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'app/inbox' }
-    await this.router.navigate(['app/create'], { state: data })
+    const data: MyParams = { database: this.myDatabase, path: 'mail/inbox' }
+    await this.router.navigate(['mail/create'], { state: data })
   }
 
   async presentAlert() {

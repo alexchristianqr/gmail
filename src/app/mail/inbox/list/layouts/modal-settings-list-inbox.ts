@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { SHARED_PREFERENCES } from '../../../shared-preferences'
-import { MyPreferences } from '../../../core/types/MyPreferences'
-import { PreferencesService } from '../../../core/services/api/preferences.service'
+import { SHARED_PREFERENCES } from '../../../../shared-preferences'
+import { MyPreferences } from '../../../../core/types/MyPreferences'
+import { PreferencesService } from '../../../../core/services/api/preferences.service'
 
 @Component({
   selector: 'page-modal-mail',

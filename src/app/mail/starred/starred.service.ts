@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
-import { SHARED_PREFERENCES } from '../shared-preferences'
-import { MyPreferences } from '../core/types/MyPreferences'
-import { ApiService } from '../core/services/api/api.service'
+import { SHARED_PREFERENCES } from '../../shared-preferences'
+import { MyPreferences } from '../../core/types/MyPreferences'
+import { ApiService } from '../../core/services/api/api.service'
 
 @Injectable({
   providedIn: 'root',

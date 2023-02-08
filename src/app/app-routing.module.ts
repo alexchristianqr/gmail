@@ -2,25 +2,25 @@ import { NgModule } from '@angular/core'
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
 
 // INBOX
-import { CreateInbox } from './inbox/create/create-inbox'
-import { ModalSettingsCreateInbox } from './inbox/create/layouts/modal-settings-create-inbox'
-import { ListInbox } from './inbox/list/list-inbox'
-import { ModalSettingsListInbox } from './inbox/list/layouts/modal-settings-list-inbox'
-import { DetailInbox } from './inbox/detail/detail-inbox'
-import { ModalSettingsDetailInbox } from './inbox/detail/layouts/modal-settings-detail-inbox'
+import { CreateInbox } from './mail/inbox/create/create-inbox'
+import { ModalSettingsCreateInbox } from './mail/inbox/create/layouts/modal-settings-create-inbox'
+import { ListInbox } from './mail/inbox/list/list-inbox'
+import { ModalSettingsListInbox } from './mail/inbox/list/layouts/modal-settings-list-inbox'
+import { DetailInbox } from './mail/inbox/detail/detail-inbox'
+import { ModalSettingsDetailInbox } from './mail/inbox/detail/layouts/modal-settings-detail-inbox'
 
 // SENT
-import { ListSent } from './sent/list/list-sent'
+import { ListSent } from './mail/sent/list/list-sent'
 
 // STARRED
-import { ListStarred } from './starred/list/list-starred'
+import { ListStarred } from './mail/starred/list/list-starred'
 
 // AUTH
 import { LoginComponent } from './auth/login/login.component'
 
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
-import { HomeComponent } from './shared/home/home.component'
+import { MailComponent } from './mail/mail.component'
 import { LogoutGuard } from './core/guards/logout.guard'
 
 const routes: Routes = [
@@ -42,8 +42,8 @@ const routes: Routes = [
 
   // MAIN
   {
-    path: 'app',
-    component: HomeComponent,
+    path: 'mail',
+    component: MailComponent,
     children: [
       // AUTH
       {

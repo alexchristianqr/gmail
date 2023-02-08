@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { MyPopover } from '../../../core/types/MyPopover'
+import { MyPopover } from '../../../../core/types/MyPopover'
 
 @Component({
   selector: 'page-popover-detail',

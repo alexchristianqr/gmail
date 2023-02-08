@@ -1,13 +1,13 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core'
-import { MyPreferences } from '../../core/types/MyPreferences'
-import { SHARED_PREFERENCES } from '../../shared-preferences'
+import { MyPreferences } from '../../../core/types/MyPreferences'
+import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { Subscription } from 'rxjs'
-import { MyMessage } from '../../core/types/MyMessage'
-import { UtilsService } from '../../core/services/utils/utils.service'
-import { EventService } from '../../core/services/events/event.service'
-import { ApiService } from '../../core/services/api/api.service'
+import { MyMessage } from '../../../core/types/MyMessage'
+import { UtilsService } from '../../../core/services/utils/utils.service'
+import { EventService } from '../../../core/services/events/event.service'
+import { ApiService } from '../../../core/services/api/api.service'
 import { Router } from '@angular/router'
-import { MyParams } from '../../core/types/MyParams'
+import { MyParams } from '../../../core/types/MyParams'
 
 @Component({
   selector: 'page-mails-sent',
@@ -53,8 +53,8 @@ export class ListSent implements OnDestroy {
   async viewDetailPage(item: MyMessage) {
     console.log('[ListSent.viewDetailPage]')
 
-    const data: MyParams = { item: item, path: 'app/sent' }
-    await this.router.navigate(['app/inbox-detail'], { state: data })
+    const data: MyParams = { item: item, path: 'mail/sent' }
+    await this.router.navigate(['mail/inbox-detail'], { state: data })
   }
 
   async viewCreatePage() {

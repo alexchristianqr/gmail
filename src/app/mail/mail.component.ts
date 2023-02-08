@@ -2,10 +2,10 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.scss'],
+  templateUrl: './mail.component.html',
+  styleUrls: ['./mail.component.scss'],
 })
-export class HomeComponent {
+export class MailComponent {
   pagesSection1: Array<{
     title: string
     icon: string
@@ -32,21 +32,21 @@ export class HomeComponent {
         icon: 'mail',
         // db: 'DATABASE_INBOX',
         status: false,
-        path: '/app/inbox',
+        path: '/mail/inbox',
       },
       {
         title: 'Enviados',
         icon: 'mail-open',
         // db: 'DATABASE_SENT',
         status: false,
-        path: '/app/sent',
+        path: '/mail/sent',
       },
       {
         title: 'Destacados',
         icon: 'star',
         // db: 'DATABASE_SENT',
         status: false,
-        path: '/app/starred',
+        path: '/mail/starred',
       },
     ]
     this.pagesSection2 = [
@@ -54,7 +54,7 @@ export class HomeComponent {
         title: 'Settings',
         icon: 'cog',
         status: false,
-        path: '/app/settings',
+        path: '/mail/settings',
       },
       // {
       //   title: 'Enviados',
@@ -73,7 +73,7 @@ export class HomeComponent {
       // {
       //   title: 'Mail Saved',
       //   icon: 'cloud',
-      //   component: HomeComponent,
+      //   component: MailComponent,
       //   // db: 'DATABASE_SAVED',
       //   status: false,
       //   path: 'saved',
@@ -81,7 +81,7 @@ export class HomeComponent {
       // {
       //   title: 'Mail Span',
       //   icon: 'bug',
-      //   component: HomeComponent,
+      //   component: MailComponent,
       //   // db: 'DATABASE_SPAN',
       //   status: false,
       //   path: 'span',
@@ -100,7 +100,7 @@ export class HomeComponent {
         title: 'Logout',
         icon: 'log-out',
         status: false,
-        path: '/app/logout',
+        path: '/mail/logout',
       },
     ]
   }

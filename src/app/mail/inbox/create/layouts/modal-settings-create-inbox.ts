@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import { SHARED_PREFERENCES } from '../../../shared-preferences'
+import { SHARED_PREFERENCES } from '../../../../shared-preferences'
 import { Router } from '@angular/router'
-import { MyPreferences } from '../../../core/types/MyPreferences'
-import { PreferencesService } from '../../../core/services/api/preferences.service'
+import { MyPreferences } from '../../../../core/types/MyPreferences'
+import { PreferencesService } from '../../../../core/services/api/preferences.service'
 
 @Component({
   selector: 'page-modal-create',

@@ -7,33 +7,27 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>Destacados</ion-title>
-    <!--    <ion-buttons slot="end">-->
-    <!--      <ion-button-->
-    <!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN"-->
-    <!--        (click)="presentAlert()"-->
-    <!--      >-->
-    <!--        <ion-icon slot="icon-only" name="trash"></ion-icon>-->
-    <!--      </ion-button>-->
-    <!--      <ion-button-->
-    <!--        *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH"-->
-    <!--        (click)="fnViewSearch()"-->
-    <!--      >-->
-    <!--        <ion-icon slot="icon-only" name="search"></ion-icon>-->
-    <!--      </ion-button>-->
-    <!--      <ion-button (click)="presentPopover($event)">-->
-    <!--        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>-->
-    <!--      </ion-button>-->
-    <!--    </ion-buttons>-->
+    <ion-title>Inbox</ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_CLEAN" (click)="presentAlert()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_SEARCH" (click)="fnViewSearch()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="refreshList($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="items.length >= 1">
-    <ion-item-sliding *ngFor="let item of items;let i = index" (click)="viewDetailPage(item)">
-      <ion-item>
+    <ion-item-sliding *ngFor="let item of items;let i = index" (click)="fnViewDetail(item)">
+      <ion-item lines="full">
         <table>
           <tr>
             <td style="padding: 0 0.75rem 0 0" rowspan="3">
@@ -102,8 +96,8 @@
       <ion-row style="height: 100vh">
         <ion-col size="12" style="top: -15%; text-align: center">
           <ion-label>
-            <ion-icon slot="icon-only" name="star" size="large"></ion-icon>
-            <div>No tienes mensajes destacados.</div>
+            <ion-icon slot="icon-only" name="mail-outline" size="large"></ion-icon>
+            <div>No tienes mensajes en tu bandeja.</div>
           </ion-label>
         </ion-col>
       </ion-row>

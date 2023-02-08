@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
-import { ApiService } from '../../../core/services/api/api.service'
+import { ApiService } from '../../../../core/services/api/api.service'
 import { Router } from '@angular/router'
-import { MyPreferences } from '../../../core/types/MyPreferences'
-import { SHARED_PREFERENCES } from '../../../shared-preferences'
-import { PreferencesService } from '../../../core/services/api/preferences.service'
+import { MyPreferences } from '../../../../core/types/MyPreferences'
+import { SHARED_PREFERENCES } from '../../../../shared-preferences'
+import { PreferencesService } from '../../../../core/services/api/preferences.service'
 
 @Component({
   selector: 'page-modal-detail',

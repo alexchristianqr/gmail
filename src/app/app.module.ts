@@ -10,28 +10,28 @@ import { IonicStorageModule } from '@ionic/storage-angular'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 // INBOX
-import { ListInbox } from './inbox/list/list-inbox'
-import { ModalSettingsListInbox } from './inbox/list/layouts/modal-settings-list-inbox'
-import { DetailInbox } from './inbox/detail/detail-inbox'
-import { PopoverListInbox } from './inbox/list/layouts/popover-list-inbox'
-import { ModalSettingsDetailInbox } from './inbox/detail/layouts/modal-settings-detail-inbox'
-import { PopoverDetailInbox } from './inbox/detail/layouts/popover-detail-inbox'
-import { CreateInbox } from './inbox/create/create-inbox'
-import { ModalSettingsCreateInbox } from './inbox/create/layouts/modal-settings-create-inbox'
-import { PopoverCreateInbox } from './inbox/create/layouts/popover-create-inbox'
+import { ListInbox } from './mail/inbox/list/list-inbox'
+import { ModalSettingsListInbox } from './mail/inbox/list/layouts/modal-settings-list-inbox'
+import { DetailInbox } from './mail/inbox/detail/detail-inbox'
+import { PopoverListInbox } from './mail/inbox/list/layouts/popover-list-inbox'
+import { ModalSettingsDetailInbox } from './mail/inbox/detail/layouts/modal-settings-detail-inbox'
+import { PopoverDetailInbox } from './mail/inbox/detail/layouts/popover-detail-inbox'
+import { CreateInbox } from './mail/inbox/create/create-inbox'
+import { ModalSettingsCreateInbox } from './mail/inbox/create/layouts/modal-settings-create-inbox'
+import { PopoverCreateInbox } from './mail/inbox/create/layouts/popover-create-inbox'
 
 // SENT
-import { ListSent } from './sent/list/list-sent'
+import { ListSent } from './mail/sent/list/list-sent'
 
 // STARRED
-import { ListStarred } from './starred/list/list-starred'
+import { ListStarred } from './mail/starred/list/list-starred'
 
 // AUTH
 import { LoginComponent } from './auth/login/login.component'
 
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
-import { HomeComponent } from './shared/home/home.component'
+import { MailComponent } from './mail/mail.component'
 import { GeneralComponent } from './shared/general/general.component'
 import { LogoutGuard } from './core/guards/logout.guard'
 import { ShowHidePasswordComponent } from './auth/login/layouts/show-hide-password/show-hide-password.component'
@@ -40,7 +40,7 @@ import { ShowHidePasswordComponent } from './auth/login/layouts/show-hide-passwo
   declarations: [
     // SHARED
     AppComponent,
-    HomeComponent,
+    MailComponent,
     SearchComponent,
     GeneralComponent,
     ShowHidePasswordComponent,

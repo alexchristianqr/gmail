@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { MyPopover } from '../../../core/types/MyPopover'
-import { EventService } from '../../../core/services/events/event.service'
-import { UtilsService } from '../../../core/services/utils/utils.service'
-import { ApiService } from '../../../core/services/api/api.service'
+import { MyPopover } from '../../../../core/types/MyPopover'
+import { EventService } from '../../../../core/services/events/event.service'
+import { UtilsService } from '../../../../core/services/utils/utils.service'
+import { ApiService } from '../../../../core/services/api/api.service'
 
 @Component({
   selector: 'page-popover-mail',

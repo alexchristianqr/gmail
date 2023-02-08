@@ -33,7 +33,7 @@
   </ion-refresher>
   <ion-list *ngIf="items.length >= 1">
     <ion-item-sliding *ngFor="let item of items;let i = index" (click)="viewDetailPage(item)">
-      <ion-item>
+      <ion-item lines="full">
         <ion-label style="margin: 0; padding: 0">
           <table>
             <tr>
