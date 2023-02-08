@@ -16,65 +16,81 @@ import { ListSent } from './mail/sent/list/list-sent'
 import { ListStarred } from './mail/starred/list/list-starred'
 
 // AUTH
-import { LoginComponent } from './auth/login/login.component'
+import { HomeComponent } from './auth/home/home.component'
+import { SigninComponent } from './auth/signin/signin.component'
+import { LogoutGuard } from './core/guards/logout.guard'
 
 // SHARED
-import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
-import { LogoutGuard } from './core/guards/logout.guard'
+import { SearchComponent } from './shared/search/search.component'
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 
   // SHARED
   {
+    title: 'Buscar mensajes',
     path: 'search',
     component: SearchComponent,
   },
+
+  // AUTH
   {
-    path: 'login',
-    component: LoginComponent,
+    title: 'App',
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    title: 'Iniciar sesión',
+    path: 'signin',
+    component: SigninComponent,
   },
 
-  // MAIN
+  // MAIL
   {
+    title: 'Mail',
     path: 'mail',
     component: MailComponent,
     children: [
       // AUTH
       {
+        title: 'Cerrar sesión',
         path: 'logout',
-        component: LoginComponent,
+        component: SigninComponent,
         canActivate: [LogoutGuard],
       },
 
       // STARRED
       {
+        title: 'Destacados',
         path: 'starred',
         component: ListStarred,
       },
 
       // SENT
       {
+        title: 'Enviados',
         path: 'sent',
         component: ListSent,
       },
 
       // INBOX
       {
+        title: 'Bandeja de entrada',
         path: 'inbox',
         component: ListInbox,
       },
       {
-        title: 'Configuración',
+        title: 'Configuración General',
         path: 'inbox-settings',
         component: ModalSettingsListInbox,
       },
       {
+        title: 'Detalle',
         path: 'inbox-detail',
         component: DetailInbox,
       },
@@ -84,6 +100,7 @@ const routes: Routes = [
         component: ModalSettingsDetailInbox,
       },
       {
+        title: 'Nuevo mensaje',
         path: 'create',
         component: CreateInbox,
       },

@@ -1,32 +1,25 @@
 import { Component } from '@angular/core'
 
+type Page = {
+  title: string
+  icon: string
+  status: boolean
+  path: string
+}
+
 @Component({
   selector: 'app-mail',
   templateUrl: 'mail.component.html',
   styleUrls: ['mail.component.scss'],
 })
 export class MailComponent {
-  pagesSection1: Array<{
-    title: string
-    icon: string
-    status: boolean
-    path: string
-  }>
-  pagesSection2: Array<{
-    title: string
-    icon: string
-    status: boolean
-    path: string
-  }>
-  pagesSection3: Array<{
-    title: string
-    icon: string
-    status: boolean
-    path: string
-  }>
+  pagesPrimary: Array<Page>
+  pagesSecondary: Array<Page>
+  pagesTertiary: Array<Page>
 
   constructor() {
-    this.pagesSection1 = [
+    console.log('[MailComponent.constructor]')
+    this.pagesPrimary = [
       {
         title: 'Inbox',
         icon: 'mail',
@@ -49,53 +42,15 @@ export class MailComponent {
         path: '/mail/starred',
       },
     ]
-    this.pagesSection2 = [
+    this.pagesSecondary = [
       {
         title: 'Settings',
         icon: 'cog',
         status: false,
         path: '/mail/settings',
       },
-      // {
-      //   title: 'Enviados',
-      //   icon: 'mail-open',
-      //   // db: 'DATABASE_SENT',
-      //   status: false,
-      //   path: 'sent',
-      // },
-      // {
-      //   title: 'Promotions',
-      //   icon: 'pricetag',
-      //   // db: 'DATABASE_RECEIVED',
-      //   status: false,
-      //   path: 'promotion',
-      // },
-      // {
-      //   title: 'Mail Saved',
-      //   icon: 'cloud',
-      //   component: MailComponent,
-      //   // db: 'DATABASE_SAVED',
-      //   status: false,
-      //   path: 'saved',
-      // },
-      // {
-      //   title: 'Mail Span',
-      //   icon: 'bug',
-      //   component: MailComponent,
-      //   // db: 'DATABASE_SPAN',
-      //   status: false,
-      //   path: 'span',
-      // },
     ]
-    this.pagesSection3 = [
-      // {
-      //   title: 'Settings',
-      //   icon: 'cog',
-      //   component: GeneralComponent,
-      //
-      //   status: false,
-      //   path: 'settings',
-      // },
+    this.pagesTertiary = [
       {
         title: 'Logout',
         icon: 'log-out',

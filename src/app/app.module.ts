@@ -27,14 +27,15 @@ import { ListSent } from './mail/sent/list/list-sent'
 import { ListStarred } from './mail/starred/list/list-starred'
 
 // AUTH
-import { LoginComponent } from './auth/login/login.component'
+import { HomeComponent } from './auth/home/home.component'
+import { SigninComponent } from './auth/signin/signin.component'
+import { LogoutGuard } from './core/guards/logout.guard'
 
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
 import { GeneralComponent } from './shared/general/general.component'
-import { LogoutGuard } from './core/guards/logout.guard'
-import { ShowHidePasswordComponent } from './auth/login/layouts/show-hide-password/show-hide-password.component'
+import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ShowHidePasswordComponent } from './auth/login/layouts/show-hide-passwo
     SearchComponent,
     GeneralComponent,
     ShowHidePasswordComponent,
+
     // INBOX
     DetailInbox,
     CreateInbox,
@@ -54,12 +56,16 @@ import { ShowHidePasswordComponent } from './auth/login/layouts/show-hide-passwo
     ModalSettingsCreateInbox,
     ModalSettingsDetailInbox,
     ModalSettingsListInbox,
+
     // SENT
     ListSent,
+
     // STARRED
     ListStarred,
+
     // AUTH
-    LoginComponent,
+    SigninComponent,
+    HomeComponent,
   ],
   imports: [FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LogoutGuard],

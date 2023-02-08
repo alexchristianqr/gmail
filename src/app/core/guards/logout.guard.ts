@@ -6,6 +6,7 @@ export class LogoutGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): UrlTree {
-    return this.router.createUrlTree(['login'])
+    console.log('[LogoutGuard.canActivate]')
+    return this.router.createUrlTree(['signin'])
   }
 }
