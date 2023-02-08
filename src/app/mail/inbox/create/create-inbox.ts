@@ -11,7 +11,7 @@ import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { MyParams } from '../../../core/types/MyParams'
 
 @Component({
-  selector: 'page-create',
+  selector: 'app-create-inbox',
   templateUrl: 'create-inbox.html',
 })
 export class CreateInbox implements OnInit {

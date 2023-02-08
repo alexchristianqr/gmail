@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
 
 @Component({
-  selector: 'page-mails-sent',
+  selector: 'app-list-sent',
   templateUrl: 'list-sent.html',
 })
 export class ListSent implements OnDestroy {

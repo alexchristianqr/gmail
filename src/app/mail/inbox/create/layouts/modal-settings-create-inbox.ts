@@ -5,7 +5,7 @@ import { MyPreferences } from '../../../../core/types/MyPreferences'
 import { PreferencesService } from '../../../../core/services/api/preferences.service'
 
 @Component({
-  selector: 'page-modal-create',
+  selector: 'app-modal-settings-create-inbox',
   templateUrl: 'modal-settings-create-inbox.html',
 })
 export class ModalSettingsCreateInbox {

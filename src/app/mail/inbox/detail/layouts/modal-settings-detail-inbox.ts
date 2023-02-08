@@ -6,7 +6,7 @@ import { SHARED_PREFERENCES } from '../../../../shared-preferences'
 import { PreferencesService } from '../../../../core/services/api/preferences.service'
 
 @Component({
-  selector: 'page-modal-detail',
+  selector: 'app-modal-settings-detail-inbox',
   templateUrl: 'modal-settings-detail-inbox.html',
 })
 export class ModalSettingsDetailInbox {

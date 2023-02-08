@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './mail.component.html',
-  styleUrls: ['./mail.component.scss'],
+  selector: 'app-mail',
+  templateUrl: 'mail.component.html',
+  styleUrls: ['mail.component.scss'],
 })
 export class MailComponent {
   pagesSection1: Array<{

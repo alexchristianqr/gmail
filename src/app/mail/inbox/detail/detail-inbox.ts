@@ -12,7 +12,7 @@ import { UtilsService } from '../../../core/services/utils/utils.service'
 import { StarredService } from '../../starred/starred.service'
 
 @Component({
-  selector: 'page-detail',
+  selector: 'app-detail-inbox',
   templateUrl: 'detail-inbox.html',
 })
 export class DetailInbox implements OnInit {

@@ -11,7 +11,7 @@ import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { UtilsService } from '../../../core/services/utils/utils.service'
 
 @Component({
-  selector: 'page-mails-inbox',
+  selector: 'app-list-inbox',
   templateUrl: 'list-inbox.html',
 })
 export class ListInbox implements OnDestroy {

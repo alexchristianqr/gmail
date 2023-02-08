@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 import { MyPopover } from '../../../../core/types/MyPopover'
 
 @Component({
-  selector: 'page-popover-create',
+  selector: 'app-popover-create-inbox',
   templateUrl: 'popover-create-inbox.html',
 })
 export class PopoverCreateInbox {

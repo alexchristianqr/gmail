@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs'
 import { EventService } from '../../core/services/events/event.service'
 
 @Component({
-  selector: 'page-search',
+  selector: 'app-search',
   templateUrl: 'search.component.html',
 })
 export class SearchComponent implements OnInit, OnDestroy {

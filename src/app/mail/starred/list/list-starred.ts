@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
 
 @Component({
-  selector: 'page-list-starred',
+  selector: 'app-list-starred',
   templateUrl: 'list-starred.html',
 })
 export class ListStarred implements OnDestroy {
