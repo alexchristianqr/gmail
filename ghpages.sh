@@ -26,26 +26,29 @@ PUSH_GHPAGES=''
 
 # MOSTRAR MENSAJE DE ERROR DE ARGUMENTO TAG
 error_arg_tag() {
-  echo "SOLUCION: Especifica un tag así: --tag=0.0.0 (obligatorio) NOTA: La estructura de un tag es [NivelMayor.NivelMenor.NivelBugfix]"
-  exit 1
-}
-
-# MOSTRAR MENSAJE DE ERROR DE ARGUMENTO DIRECTORY
-error_arg_directory() {
-  echo "SOLUCION: Indica el directorio de compilación así: --dir=$VALUE_DIRECTORY // --directory=$VALUE_DIRECTORY (opcional)"
+  echo "[ OBLIGATORIO ]"
+  echo "-t=$VALUE_TAG, --tag=$VALUE_TAG ........................... Estructura de un tag [NivelMayor.NivelMenor.NivelBugfix]"
   exit 1
 }
 
 # MOSTRAR MENSAJE DE ERROR GENERAL
 error_args_general() {
-  echo "SOLUCION:"
-  echo "- Especifica un tag así: -t=$VALUE_TAG | --tag=$VALUE_TAG (obligatorio) NOTA: La estructura de un tag es [NivelMayor.NivelMenor.NivelBugfix]"
-  echo "- Rama principal así: -b=$VALUE_BRANCH | --branch=$VALUE_BRANCH (opcional)"
-  echo "- Comando para compilar el proyecto así: --exec=$VALUE_EXEC (opcional) NOTA: El parametro exec es el comando de compilación de tu proyecto"
-  echo "- Indica el directorio de compilación así: -o=$VALUE_DIRECTORY | --out-dir=$VALUE_DIRECTORY | --out-directory=$VALUE_DIRECTORY (opcional)"
-  echo "- Indica el nombre del repositorio así: --repository=$VALUE_REPOSITORY (opcional)"
-  echo "- Elimina tag local y remoto así: -dt=$VALUE_DELETED_TAG | --deleted-lasttag=$VALUE_DELETED_TAG (opcional)"
-  echo "- Indica si es proyecto GitHub Pages así: -gp=$VALUE_PUSH_GHPAGES | --github-pages=$VALUE_PUSH_GHPAGES (opcional)"
+  echo "[ COMANDOS CLI ]"
+  echo "-t, --tag ........................... structura de un tag [NivelMayor.NivelMenor.NivelBugfix]"
+  echo "-dt, --deleted-lasttag .............. Eliminar último tag registrado"
+  echo "-b, --branch ........................ Rama git"
+  echo "--exec .............................. Comando de compilación"
+  echo "-o, --out-dir ....................... Carpeta de compilación"
+  echo "--repository ........................ Repositorio git"
+  echo "-gp, --github-pages ................. Utilizar github pages"
+  echo
+  echo "[ DOCUMENTACION ]"
+  echo "Repositorio github: https://github.com/alexchristianqr/sh-ghpages"
+  echo
+  echo "[ AUTOR ]"
+  echo "Usuario: Alex Christian"
+  echo "Email: alexchristianqr@gmail.com"
+  echo "Repositorio github: https://github.com/alexchristianqr"
   exit 1
 }
 

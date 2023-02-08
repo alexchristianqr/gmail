@@ -9,11 +9,6 @@ import { AppRoutingModule } from './app-routing.module'
 import { IonicStorageModule } from '@ionic/storage-angular'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-// SHARED
-import { SearchPage } from './shared/search/search-page'
-import { HomePage } from './shared/home/home-page'
-import { GeneralPage } from './shared/general/general-page'
-
 // INBOX
 import { ListInbox } from './inbox/list/list-inbox'
 import { ModalSettingsListInbox } from './inbox/list/layouts/modal-settings-list-inbox'
@@ -31,13 +26,24 @@ import { ListSent } from './sent/list/list-sent'
 // STARRED
 import { ListStarred } from './starred/list/list-starred'
 
+// AUTH
+import { LoginComponent } from './auth/login/login.component'
+
+// SHARED
+import { SearchComponent } from './shared/search/search.component'
+import { HomeComponent } from './shared/home/home.component'
+import { GeneralComponent } from './shared/general/general.component'
+import { LogoutGuard } from './core/guards/logout.guard'
+import { ShowHidePasswordComponent } from './auth/login/layouts/show-hide-password/show-hide-password.component'
+
 @NgModule({
   declarations: [
     // SHARED
     AppComponent,
-    HomePage,
-    SearchPage,
-    GeneralPage,
+    HomeComponent,
+    SearchComponent,
+    GeneralComponent,
+    ShowHidePasswordComponent,
     // INBOX
     DetailInbox,
     CreateInbox,
@@ -52,9 +58,11 @@ import { ListStarred } from './starred/list/list-starred'
     ListSent,
     // STARRED
     ListStarred,
+    // AUTH
+    LoginComponent,
   ],
   imports: [FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LogoutGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -8,15 +8,15 @@ import { EventService } from '../../core/services/events/event.service'
 
 @Component({
   selector: 'page-search',
-  templateUrl: 'search-page.html',
+  templateUrl: 'search.component.html',
 })
-export class SearchPage implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit, OnDestroy {
   data: MyParams | any
   mySubscribe$: Subscription
   items: Array<MyMessage> = []
 
   constructor(private eventService: EventService, private apiService: ApiService, private router: Router) {
-    console.log('[SearchPage.constructor]')
+    console.log('[SearchComponent.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(async () => {
       const searchText = await this.apiService.db().then((res) => res.get('TEXT_SEARCH'))
@@ -26,38 +26,38 @@ export class SearchPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('[SearchPage.ngOnInit]')
+    console.log('[SearchComponent.ngOnInit]')
 
     this.getState()
   }
 
   ngOnDestroy() {
-    console.log('[SearchPage.ngOnDestroy]')
+    console.log('[SearchComponent.ngOnDestroy]')
 
     this.mySubscribe$.unsubscribe()
   }
 
   getState(): void {
-    console.log('[SearchPage.getState]')
+    console.log('[SearchComponent.getState]')
 
     this.data = this.router.getCurrentNavigation()?.extras.state
   }
 
   async back() {
-    console.log('[SearchPage.back]')
+    console.log('[SearchComponent.back]')
 
     await this.router.navigate([this.data.path])
   }
 
   async fnViewDetail(item: MyMessage) {
-    console.log('[SearchPage.back]')
+    console.log('[SearchComponent.back]')
 
     const data: MyParams = { item: item, path: 'search' }
     await this.router.navigate(['inbox-detail'], { state: data })
   }
 
   async searchByEvent(event: any) {
-    console.log('[SearchPage.searchByEvent]')
+    console.log('[SearchComponent.searchByEvent]')
 
     const searchText = event.target.value.toString()
     if (!searchText) return
@@ -65,7 +65,7 @@ export class SearchPage implements OnInit, OnDestroy {
   }
 
   async getItems(searchText: string) {
-    console.log('[SearchPage.getItems]')
+    console.log('[SearchComponent.getItems]')
 
     if (!searchText) return
     await this.apiService.db().then((res) => res.create('TEXT_SEARCH', searchText))

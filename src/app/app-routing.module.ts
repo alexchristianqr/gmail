@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core'
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router'
 
-// SHARED
-import { SearchPage } from './shared/search/search-page'
-
 // INBOX
 import { CreateInbox } from './inbox/create/create-inbox'
 import { ModalSettingsCreateInbox } from './inbox/create/layouts/modal-settings-create-inbox'
@@ -18,58 +15,84 @@ import { ListSent } from './sent/list/list-sent'
 // STARRED
 import { ListStarred } from './starred/list/list-starred'
 
+// AUTH
+import { LoginComponent } from './auth/login/login.component'
+
+// SHARED
+import { SearchComponent } from './shared/search/search.component'
+import { HomeComponent } from './shared/home/home.component'
+import { LogoutGuard } from './core/guards/logout.guard'
+
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'inbox',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
 
   // SHARED
   {
     path: 'search',
-    component: SearchPage,
+    component: SearchComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 
-  // STARRED
+  // MAIN
   {
-    path: 'starred',
-    component: ListStarred,
-  },
+    path: 'app',
+    component: HomeComponent,
+    children: [
+      // AUTH
+      {
+        path: 'logout',
+        component: LoginComponent,
+        canActivate: [LogoutGuard],
+      },
 
-  // SENT
-  {
-    path: 'sent',
-    component: ListSent,
-  },
+      // STARRED
+      {
+        path: 'starred',
+        component: ListStarred,
+      },
 
-  // INBOX
-  {
-    path: 'inbox',
-    component: ListInbox,
-  },
-  {
-    title: 'Configuración',
-    path: 'inbox-settings',
-    component: ModalSettingsListInbox,
-  },
-  {
-    path: 'inbox-detail',
-    component: DetailInbox,
-  },
-  {
-    title: 'Configuración',
-    path: 'inbox-detail-settings',
-    component: ModalSettingsDetailInbox,
-  },
-  {
-    path: 'create',
-    component: CreateInbox,
-  },
-  {
-    title: 'Configuración',
-    path: 'create-settings',
-    component: ModalSettingsCreateInbox,
+      // SENT
+      {
+        path: 'sent',
+        component: ListSent,
+      },
+
+      // INBOX
+      {
+        path: 'inbox',
+        component: ListInbox,
+      },
+      {
+        title: 'Configuración',
+        path: 'inbox-settings',
+        component: ModalSettingsListInbox,
+      },
+      {
+        path: 'inbox-detail',
+        component: DetailInbox,
+      },
+      {
+        title: 'Configuración',
+        path: 'inbox-detail-settings',
+        component: ModalSettingsDetailInbox,
+      },
+      {
+        path: 'create',
+        component: CreateInbox,
+      },
+      {
+        title: 'Configuración',
+        path: 'create-settings',
+        component: ModalSettingsCreateInbox,
+      },
+    ],
   },
 ]
 

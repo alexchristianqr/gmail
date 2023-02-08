@@ -53,8 +53,8 @@ export class ListSent implements OnDestroy {
   async viewDetailPage(item: MyMessage) {
     console.log('[ListSent.viewDetailPage]')
 
-    const data: MyParams = { item: item, path: 'sent' }
-    await this.router.navigate(['inbox-detail'], { state: data })
+    const data: MyParams = { item: item, path: 'app/sent' }
+    await this.router.navigate(['app/inbox-detail'], { state: data })
   }
 
   async viewCreatePage() {

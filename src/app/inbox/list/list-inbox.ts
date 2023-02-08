@@ -53,22 +53,22 @@ export class ListInbox implements OnDestroy {
   async fnViewDetail(item: MyMessage) {
     console.log('[ListInbox.fnViewDetail]')
 
-    const data: MyParams = { item: item, path: 'inbox' }
-    await this.router.navigate(['inbox-detail'], { state: data })
+    const data: MyParams = { item: item, path: 'app/inbox' }
+    await this.router.navigate(['app/inbox-detail'], { state: data })
   }
 
   async fnViewSearch() {
     console.log('[ListInbox.fnViewSearch]')
 
-    const data: MyParams = { database: 'DATABASE_INBOX', path: 'inbox' }
+    const data: MyParams = { database: 'DATABASE_INBOX', path: 'app/inbox' }
     await this.router.navigate(['search'], { state: data })
   }
 
   async viewCreatePage() {
     console.log('[ListInbox.viewCreatePage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'inbox' }
-    await this.router.navigate(['create'], { state: data })
+    const data: MyParams = { database: this.myDatabase, path: 'app/inbox' }
+    await this.router.navigate(['app/create'], { state: data })
   }
 
   async presentAlert() {

@@ -53,14 +53,14 @@ export class ListStarred implements OnDestroy {
   async viewDetailPage(item: MyMessage) {
     console.log('[ListStarred.viewDetailPage]')
 
-    const data: MyParams = { item: item, path: 'starred' }
-    await this.router.navigate(['inbox-detail'], { state: data })
+    const data: MyParams = { item: item, path: 'app/starred' }
+    await this.router.navigate(['app/inbox-detail'], { state: data })
   }
 
   async viewCreatePage() {
     console.log('[ListStarred.viewCreateMessage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'sent' }
-    await this.router.navigate(['create'], { state: data })
+    const data: MyParams = { database: this.myDatabase, path: 'app/sent' }
+    await this.router.navigate(['app/create'], { state: data })
   }
 }
