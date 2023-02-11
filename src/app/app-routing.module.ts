@@ -23,6 +23,7 @@ import { LogoutGuard } from './core/guards/logout.guard'
 // SHARED
 import { MailComponent } from './mail/mail.component'
 import { SearchComponent } from './shared/search/search.component'
+import { GeneralComponent } from './shared/general/general.component'
 
 const routes: Routes = [
   {
@@ -56,6 +57,12 @@ const routes: Routes = [
     path: 'mail',
     component: MailComponent,
     children: [
+      {
+        title: 'Configuración general',
+        path: 'general',
+        component: GeneralComponent,
+      },
+
       // AUTH
       {
         title: 'Cerrar sesión',

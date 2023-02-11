@@ -6,6 +6,9 @@ import { environment } from './environments/environment'
 
 if (environment.production) {
   enableProdMode()
+
+  // HACK: Don't log to console in production environment.
+  if (window) window.console.log = window.console.warn = window.console.info = function () {}
 }
 
 platformBrowserDynamic()
