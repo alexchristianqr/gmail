@@ -192,7 +192,7 @@ export class StoragedbService {
 
     return this.getStorage(database).then(async (data) => {
       if (!data) {
-        if (!SHARED_PREFERENCES.SETTINGS.INITIALIZE_DATABASE) return []
+        if (!SHARED_PREFERENCES.SETTINGS.GENERAL_INITIALIZE_DATABASE) return []
 
         let valuesDatabase: any = []
 

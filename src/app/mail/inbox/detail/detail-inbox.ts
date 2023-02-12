@@ -69,7 +69,7 @@ export class DetailInbox implements OnInit {
     }
 
     // Validar shared preferences del usuario
-    if (this.MY_SHARED_PREFERENCES.SETTINGS.CONFIRM_BEFORE_REMOVING) {
+    if (this.MY_SHARED_PREFERENCES.SETTINGS.INBOX_CONFIRM_BEFORE_REMOVING) {
       await this.utilsService.presentAlert({
         subHeader: '¿Estas seguro de eliminar este mensaje?',
         message: 'Esta acción eliminará tu mensaje de la lista de inbox.',

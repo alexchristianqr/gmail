@@ -90,7 +90,7 @@ export class CreateInbox implements OnInit {
     }
 
     // Validar shared preferences del usuario
-    if (this.MY_SHARED_PREFERENCES.SETTINGS.CONFIRM_BEFORE_SENDING) {
+    if (this.MY_SHARED_PREFERENCES.SETTINGS.INBOX_CONFIRM_BEFORE_SENT) {
       await this.utilsService.presentAlert({
         subHeader: '¿Estas seguro de enviar el mensaje?',
         message: 'Esta acción enviará tu mensaje a la lista de enviados.',

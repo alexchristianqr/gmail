@@ -9,13 +9,13 @@
       <ion-button (click)="starredMessage('Mensaje marcado como destacado')">
         <ion-icon slot="icon-only" [name]="item?.is_starred ? 'star':'star-outline'"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_ARCHIVE">
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_ARCHIVE">
         <ion-icon slot="icon-only" name="archive"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_REMOVE" (click)="deleteMessage()">
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_REMOVE" (click)="deleteMessage()">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
-      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.MAIL_SHOW_BUTTON_UN_READ" (click)="readUnreadMessage(false,'Mensaje marcado como no leído')">
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_UN_READ" (click)="readUnreadMessage(false,'Mensaje marcado como no leído')">
         <ion-icon slot="icon-only" name="mail"></ion-icon>
       </ion-button>
       <ion-button class="p-r-15 my-icon" (click)="presentPopover($event)">
