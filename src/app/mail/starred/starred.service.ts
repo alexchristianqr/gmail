@@ -7,8 +7,8 @@ import { ApiService } from '../../core/services/api/api.service'
   providedIn: 'root',
 })
 export class StarredService {
-  myDatabase: string = 'DATABASE_STARRED'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
+  myDatabase: string = 'DATABASE_STARRED'
 
   constructor(private apiService: ApiService) {
     console.log('[StarredService.constructor]')

@@ -16,8 +16,8 @@ import { UtilsService } from '../../../core/services/utils/utils.service'
 })
 export class ListInbox implements OnDestroy {
   @ViewChild('popover') popover: any
-  myDatabase: string = 'DATABASE_INBOX'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
+  myDatabase: string = 'DATABASE_INBOX'
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
@@ -61,7 +61,7 @@ export class ListInbox implements OnDestroy {
     console.log('[ListInbox.fnViewSearch]')
 
     const data: MyParams = { database: 'DATABASE_INBOX', path: 'mail/inbox' }
-    await this.router.navigate(['search'], { state: data })
+    await this.router.navigate(['mail/search'], { state: data })
   }
 
   async viewCreatePage() {

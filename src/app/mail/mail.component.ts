@@ -47,7 +47,7 @@ export class MailComponent {
         title: 'Settings',
         icon: 'cog',
         status: false,
-        path: '/mail/general',
+        path: '/mail/general/settings',
       },
     ]
     this.pagesTertiary = [

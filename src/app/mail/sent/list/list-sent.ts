@@ -16,8 +16,8 @@ import { PopoverListInbox } from '../../inbox/list/layouts/popover-list-inbox'
 })
 export class ListSent implements OnDestroy {
   @ViewChild('popover') popover: any
-  myDatabase: string = 'DATABASE_SENT'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
+  myDatabase: string = 'DATABASE_SENT'
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
@@ -69,7 +69,7 @@ export class ListSent implements OnDestroy {
     console.log('[ListSent.viewSearch]')
 
     const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
-    await this.router.navigate(['search'], { state: data })
+    await this.router.navigate(['mail/search'], { state: data })
   }
 
   async presentPopover(event: Event) {

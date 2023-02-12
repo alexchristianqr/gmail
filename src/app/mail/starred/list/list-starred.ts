@@ -15,8 +15,8 @@ import { MyParams } from '../../../core/types/MyParams'
 })
 export class ListStarred implements OnDestroy {
   @ViewChild('popover') popover: any
-  myDatabase: string = 'DATABASE_STARRED'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
+  myDatabase: string = 'DATABASE_STARRED'
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 

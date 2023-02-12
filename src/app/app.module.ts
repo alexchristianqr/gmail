@@ -31,10 +31,13 @@ import { HomeComponent } from './auth/home/home.component'
 import { SigninComponent } from './auth/signin/signin.component'
 import { LogoutGuard } from './core/guards/logout.guard'
 
+// GENERAL SETTINGS
+import { SettingsComponent } from './mail/settings/settings.component'
+import { ModalSettingsGeneralInbox } from './mail/settings/layouts/modal-settings-general-inbox'
+
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
-import { GeneralComponent } from './shared/general/general.component'
 import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
 
 @NgModule({
@@ -43,8 +46,11 @@ import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-passw
     AppComponent,
     MailComponent,
     SearchComponent,
-    GeneralComponent,
     ShowHidePasswordComponent,
+
+    // GENERAL SETTINGS
+    SettingsComponent,
+    ModalSettingsGeneralInbox,
 
     // INBOX
     DetailInbox,

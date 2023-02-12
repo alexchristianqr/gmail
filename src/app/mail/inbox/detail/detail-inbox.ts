@@ -16,8 +16,8 @@ import { StarredService } from '../../starred/starred.service'
   templateUrl: 'detail-inbox.html',
 })
 export class DetailInbox implements OnInit {
-  myDatabase: string = 'DATABASE_INBOX'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
+  myDatabase: string = 'DATABASE_INBOX'
   data: MyParams | any
   item: MyMessage | undefined
 

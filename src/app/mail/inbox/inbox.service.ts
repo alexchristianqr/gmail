@@ -6,8 +6,8 @@ import { MyPreferences } from '../../core/types/MyPreferences'
   providedIn: 'root',
 })
 export class InboxService {
-  myDatabase: string = 'DATABASE_INBOX'
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
+  myDatabase: string = 'DATABASE_INBOX'
 
   constructor() {
     console.log('[InboxService.constructor]')
