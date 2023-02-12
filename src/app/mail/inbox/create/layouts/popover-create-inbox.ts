@@ -12,7 +12,7 @@ export class PopoverCreateInbox {
   constructor(private router: Router) {
     console.log('[PopoverCreateInbox.constructor]')
 
-    this.items = [{ title: 'Settings', path: 'create-settings' }]
+    this.items = [{ title: 'Settings', path: 'mail/create-settings' }]
   }
 
   async open(payload: MyPopover) {

@@ -18,7 +18,7 @@ export class ModalSettingsCreateInbox {
   async back() {
     console.log('[ModalSettingsCreateInbox.back]')
 
-    await this.router.navigate(['create'])
+    await this.router.navigate(['mail/create'])
   }
 
   async updateMyPreferences() {

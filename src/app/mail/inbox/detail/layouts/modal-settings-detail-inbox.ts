@@ -19,7 +19,7 @@ export class ModalSettingsDetailInbox {
   async back() {
     console.log('[ModalSettingsDetailInbox.back]')
 
-    await this.router.navigate(['inbox-detail'])
+    await this.router.navigate(['mail/inbox-detail'])
   }
 
   async updateMyPreferences() {

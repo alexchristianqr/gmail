@@ -17,7 +17,7 @@ export class PopoverListInbox {
     console.log('[PopoverListInbox.constructor]')
 
     this.items = [
-      { title: 'Configuración', path: 'inbox-settings' },
+      { title: 'Configuración', path: 'mail/inbox-settings' },
       { title: 'Limpiar base de datos', dispatch: 'presentAlert' },
     ]
   }
