@@ -13,7 +13,7 @@ export type MyPreferences = {
     SENT_SHOW_BUTTON_SEARCH: boolean
     // GENERAL
     GENERAL_SHOW_BUTTON_PURGE: boolean
-    GENERAL_CONFIRM_PURGE_DATABASE: boolean
     GENERAL_INITIALIZE_DATABASE: boolean
+    GENERAL_CONFIRM_PURGE_DATABASE: boolean
   }
 }

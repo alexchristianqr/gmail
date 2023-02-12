@@ -60,7 +60,14 @@ export class ListSent implements OnDestroy {
   async viewCreatePage() {
     console.log('[ListSent.viewCreateMessage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'sent' }
+    const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
     await this.router.navigate(['create'], { state: data })
   }
+  async viewSearch() {
+    console.log('[ListSent.viewSearch]')
+
+    const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
+    await this.router.navigate(['search'], { state: data })
+  }
+
 }

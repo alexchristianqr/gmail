@@ -60,7 +60,7 @@ export class ListStarred implements OnDestroy {
   async viewCreatePage() {
     console.log('[ListStarred.viewCreateMessage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
+    const data: MyParams = { database: this.myDatabase, path: 'mail/starred' }
     await this.router.navigate(['mail/create'], { state: data })
   }
 }
