@@ -8,6 +8,7 @@ import { EventService } from '../../../core/services/events/event.service'
 import { ApiService } from '../../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
+import { PopoverListInbox } from '../../inbox/list/layouts/popover-list-inbox'
 
 @Component({
   selector: 'app-list-sent',
@@ -58,11 +59,12 @@ export class ListSent implements OnDestroy {
   }
 
   async viewCreatePage() {
-    console.log('[ListSent.viewCreateMessage]')
+    console.log('[ListSent.viewCreatePage]')
 
     const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
     await this.router.navigate(['create'], { state: data })
   }
+
   async viewSearch() {
     console.log('[ListSent.viewSearch]')
 
@@ -70,4 +72,9 @@ export class ListSent implements OnDestroy {
     await this.router.navigate(['search'], { state: data })
   }
 
+  async presentPopover(event: Event) {
+    console.log('[ListSent.presentPopover]')
+
+    await this.utilsService.presentPopover({ component: PopoverListInbox, event: event })
+  }
 }
