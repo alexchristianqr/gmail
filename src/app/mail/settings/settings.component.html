@@ -8,6 +8,11 @@
       </ion-menu-toggle>
     </ion-buttons>
     <ion-title>General</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -16,10 +21,10 @@
       <h3>Acciones</h3>
     </ion-list-header>
 
-    <ion-item (click)="viewCustomPage('/mail/general/settings/inbox')">
+    <ion-item [button]="true" [detail]="true" *ngFor="let item of items; let i = index" (click)="viewCustomPage(item)">
       <ion-label>
-        <h2>Inbox</h2>
-        <p>Configuración general para el modulo de Inbox.</p>
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
       </ion-label>
     </ion-item>
 
@@ -33,20 +38,6 @@
         <p>Inicializar la base con datos de prueba.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.GENERAL_INITIALIZE_DATABASE" (click)="updateMyPreferences()"></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Enviar mensaje</h2>
-        <p>Solicitar confirmación antes de enviar.</p>
-      </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_CONFIRM_BEFORE_SENT" (click)="updateMyPreferences()"></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h2>Eliminar mensaje</h2>
-        <p>Solicitar confirmación antes de eliminar mensaje.</p>
-      </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_CONFIRM_BEFORE_REMOVING" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>

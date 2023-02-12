@@ -187,7 +187,7 @@ export class StoragedbService {
     }
   }
 
-  async loadDatabaseStorage(database: string) {
+  public async loadDatabaseStorage(database: string) {
     console.log('[StoragedbService.loadDatabaseStorage]')
 
     return this.getStorage(database).then(async (data) => {

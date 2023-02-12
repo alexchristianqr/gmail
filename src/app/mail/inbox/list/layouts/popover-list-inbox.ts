@@ -16,10 +16,7 @@ export class PopoverListInbox {
   constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[PopoverListInbox.constructor]')
 
-    this.items = [
-      { title: 'Configuración', path: 'mail/inbox-settings' },
-      { title: 'Limpiar base de datos', dispatch: 'presentAlert' },
-    ]
+    this.items = [{ title: 'Configuración', path: 'mail/inbox-settings' }]
   }
 
   async open(payload: MyPopover) {

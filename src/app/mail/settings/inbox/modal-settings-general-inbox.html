@@ -16,13 +16,6 @@
 
     <ion-item>
       <ion-label>
-        <h2>Botón depurar datos</h2>
-        <p>Mostrar botón para depurar la base de datos principal.</p>
-      </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.GENERAL_SHOW_BUTTON_PURGE" (click)="updateMyPreferences()"></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>
         <h2>Botón buscar</h2>
         <p>Mostrar botón de búsqueda en la barra principal.</p>
       </ion-label>
@@ -54,13 +47,6 @@
       <h3>Preguntar antes de</h3>
     </ion-list-header>
 
-    <ion-item>
-      <ion-label>
-        <h2>Base de datos</h2>
-        <p>Inicializar la base con datos de prueba.</p>
-      </ion-label>
-      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.GENERAL_INITIALIZE_DATABASE" (click)="updateMyPreferences()"></ion-checkbox>
-    </ion-item>
     <ion-item>
       <ion-label>
         <h2>Enviar mensaje</h2>

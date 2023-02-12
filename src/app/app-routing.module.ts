@@ -22,7 +22,7 @@ import { LogoutGuard } from './core/guards/logout.guard'
 
 // GENERAL SETTINGS
 import { SettingsComponent } from './mail/settings/settings.component'
-import { ModalSettingsGeneralInbox } from './mail/settings/layouts/modal-settings-general-inbox'
+import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-general-inbox'
 
 // SHARED
 import { MailComponent } from './mail/mail.component'

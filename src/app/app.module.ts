@@ -33,7 +33,8 @@ import { LogoutGuard } from './core/guards/logout.guard'
 
 // GENERAL SETTINGS
 import { SettingsComponent } from './mail/settings/settings.component'
-import { ModalSettingsGeneralInbox } from './mail/settings/layouts/modal-settings-general-inbox'
+import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-general-inbox'
+import { PopoverSettingsGeneral } from './mail/settings/layouts/popover-settings-general'
 
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
@@ -51,6 +52,7 @@ import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-passw
     // GENERAL SETTINGS
     SettingsComponent,
     ModalSettingsGeneralInbox,
+    PopoverSettingsGeneral,
 
     // INBOX
     DetailInbox,

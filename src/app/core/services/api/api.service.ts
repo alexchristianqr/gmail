@@ -15,6 +15,14 @@ export class ApiService {
     console.log('[ApiService.constructor]')
   }
 
+  public get getDatabases() {
+    return this.storagedbService.myDatabases
+  }
+
+  public loadDatabase(database: string) {
+    return this.storagedbService.loadDatabaseStorage(database)
+  }
+
   async getItems(database: string) {
     console.log('[ApiService.getItems]', { database })
 
