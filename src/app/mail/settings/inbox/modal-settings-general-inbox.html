@@ -14,28 +14,28 @@
       <h3>Acciones</h3>
     </ion-list-header>
 
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Botón buscar</h2>
         <p>Mostrar botón de búsqueda en la barra principal.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_SEARCH" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Botón eliminar</h2>
         <p>Mostrar botón eliminar mensaje.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_REMOVE" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Botón archivar</h2>
         <p>Mostrar botón archivar mensaje.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_ARCHIVE" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Botón no leído</h2>
         <p>Mostrar botón mensaje no leído.</p>
@@ -47,14 +47,14 @@
       <h3>Preguntar antes de</h3>
     </ion-list-header>
 
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Enviar mensaje</h2>
         <p>Solicitar confirmación antes de enviar.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_CONFIRM_BEFORE_SENT" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Eliminar mensaje</h2>
         <p>Solicitar confirmación antes de eliminar mensaje.</p>

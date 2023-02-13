@@ -13,21 +13,21 @@
     <ion-list-header>
       <h3>Acciones</h3>
     </ion-list-header>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <span>Botón eliminar</span>
         <p>Mostrar botón eliminar mensaje.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_REMOVE" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <span>Botón archivar</span>
         <p>Mostrar botón archivar mensaje.</p>
       </ion-label>
       <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_ARCHIVE" (click)="updateMyPreferences()"></ion-checkbox>
     </ion-item>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <span>Botón no leído</span>
         <p>Mostrar botón mensaje no leído.</p>
@@ -37,7 +37,7 @@
     <ion-list-header>
       <h3>Preguntar antes de</h3>
     </ion-list-header>
-    <ion-item>
+    <ion-item lines="full">
       <ion-label>
         <h2>Eliminar mensaje</h2>
         <p>Solicitar confirmación antes de eliminar mensaje.</p>
