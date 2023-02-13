@@ -10,16 +10,12 @@ import { EventService } from '../../../core/services/events/event.service'
   templateUrl: 'popover-settings-general.html',
 })
 export class PopoverSettingsGeneral {
-  myDatabase: string = 'DATABASE_INBOX'
   items: Array<MyPopover>
 
   constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[PopoverSettingsGeneral.constructor]')
 
-    this.items = [
-      // { title: 'Configuración', path: 'mail/inbox-settings' },
-      { title: 'Depurar bases de datos', dispatch: 'presentAlert' },
-    ]
+    this.items = [{ title: 'Depurar bases de datos', dispatch: 'presentAlert' }]
   }
 
   async open(payload: MyPopover) {
@@ -52,13 +48,11 @@ export class PopoverSettingsGeneral {
             }
 
             this.eventService.publish()
-            this.presentToast('Base de datos depurada').then((res) => {
-              setTimeout(() => {
-                for (const database of databases) {
-                  if (database === 'VERSION') continue
-                  this.apiService.loadDatabase(database)
-                }
-              }, 750)
+            this.presentToast('Base de datos depurada').then(() => {
+              for (const database of databases) {
+                if (database === 'VERSION') continue
+                this.apiService.loadDatabase(database)
+              }
             })
           },
         },

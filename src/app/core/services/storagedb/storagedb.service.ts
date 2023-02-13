@@ -240,12 +240,13 @@ export class StoragedbService {
           return data
         })
       }
+
       console.log(`Cargar BD ${this.mySharedPreferences} por caché`)
 
       // Iterar y actualizar
       const CREATE_SHARED_PREFERENCES = Object.create(SHARED_PREFERENCES)
-      for (let item in data) {
-        CREATE_SHARED_PREFERENCES.SETTINGS[item] = data[item]
+      for (let item in data.SETTINGS) {
+        CREATE_SHARED_PREFERENCES.SETTINGS[item] = data.SETTINGS[item]
       }
 
       // Actualizar prefencias del usuario
