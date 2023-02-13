@@ -40,6 +40,9 @@ import { PopoverSettingsGeneral } from './mail/settings/layouts/popover-settings
 import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
 import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
+import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
+import { ModalSettingsListSent } from './mail/sent/list/layouts/modal-settings-list-sent'
+import { PopoverListSent } from './mail/sent/list/layouts/popover-list-sent'
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-passw
     SettingsComponent,
     ModalSettingsGeneralInbox,
     PopoverSettingsGeneral,
+    ModalSettingsGeneralSent,
+    ModalSettingsListSent,
+    PopoverListSent,
 
     // INBOX
     DetailInbox,

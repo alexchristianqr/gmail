@@ -9,6 +9,7 @@ import { ApiService } from '../../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
 import { PopoverListInbox } from '../../inbox/list/layouts/popover-list-inbox'
+import { PopoverListSent } from './layouts/popover-list-sent'
 
 @Component({
   selector: 'app-list-sent',
@@ -75,6 +76,6 @@ export class ListSent implements OnDestroy {
   async presentPopover(event: Event) {
     console.log('[ListSent.presentPopover]')
 
-    await this.utilsService.presentPopover({ component: PopoverListInbox, event: event })
+    await this.utilsService.presentPopover({ component: PopoverListSent, event: event })
   }
 }

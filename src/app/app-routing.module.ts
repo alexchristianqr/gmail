@@ -27,6 +27,8 @@ import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-
 // SHARED
 import { MailComponent } from './mail/mail.component'
 import { SearchComponent } from './shared/search/search.component'
+import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
+import { ModalSettingsListSent } from './mail/sent/list/layouts/modal-settings-list-sent'
 
 const routes: Routes = [
   {
@@ -71,6 +73,11 @@ const routes: Routes = [
         path: 'general/settings/inbox',
         component: ModalSettingsGeneralInbox,
       },
+      {
+        title: 'Configuración general',
+        path: 'general/settings/sent',
+        component: ModalSettingsGeneralSent,
+      },
 
       // AUTH
       {
@@ -92,6 +99,11 @@ const routes: Routes = [
         title: 'Enviados',
         path: 'sent',
         component: ListSent,
+      },
+      {
+        title: 'Configuración General',
+        path: 'sent-settings',
+        component: ModalSettingsListSent,
       },
 
       // INBOX
