@@ -12,6 +12,10 @@ export class PreferencesService {
     console.log('[PreferencesService.constructor]')
   }
 
+  /**
+   * Actualizar preferencia del usuario
+   * @param item
+   */
   async update(item: any) {
     console.log('[PreferencesService.update]', { item })
 

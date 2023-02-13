@@ -15,14 +15,10 @@ export class ApiService {
     console.log('[ApiService.constructor]')
   }
 
-  public get getDatabases() {
-    return this.storagedbService.myDatabases
-  }
-
-  public loadDatabase(database: string) {
-    return this.storagedbService.loadDatabaseStorage(database)
-  }
-
+  /**
+   * Obtener listado de items
+   * @param database
+   */
   async getItems(database: string) {
     console.log('[ApiService.getItems]', { database })
 
@@ -35,12 +31,16 @@ export class ApiService {
     })
   }
 
+  /**
+   * Crear item
+   * @param database
+   * @param item
+   */
   async createItem(database: string, item: MyMessage | any) {
     console.log('[ApiService.createItem]', { database, item })
 
     return this.storagedbService.getStorage(database).then((data: Array<MyMessage>) => {
       // Agregar un item
-      console.log({ data })
       if (!data) return []
       data.push(item)
 
@@ -49,13 +49,15 @@ export class ApiService {
     })
   }
 
+  /**
+   * Actualizar item
+   * @param database
+   * @param item
+   * @param keyItem
+   * @param valueItem
+   */
   async updateItem(database: string, item: MyMessage | any, keyItem: string, valueItem: any) {
-    console.log('[ApiService.updateItem]', {
-      database,
-      item,
-      keyItem,
-      valueItem,
-    })
+    console.log('[ApiService.updateItem]', { keyItem, valueItem })
 
     return this.storagedbService.getStorage(database).then((data: Array<MyMessage>) => {
       // Encontrar un item
@@ -68,6 +70,11 @@ export class ApiService {
     })
   }
 
+  /**
+   * Eliminar item
+   * @param database
+   * @param item
+   */
   async deleteItem(database: string, item: MyMessage | any) {
     console.log('[ApiService.deleteItem]')
 
@@ -80,16 +87,26 @@ export class ApiService {
     })
   }
 
+  /**
+   * Borrar items
+   * @param database
+   */
   async purgeItems(database: string) {
     console.log('[ApiService.purgeItems]')
 
     return this.storagedbService.removeStorage(database)
   }
 
+  /**
+   * Identificador único universal UUID
+   */
   async getUniqueUID() {
     return uuid()
   }
 
+  /**
+   * Control de base de dato
+   */
   async db() {
     const create = (key: string, value: any) => {
       console.log('[ApiService.db.create]', { key, value })
@@ -100,5 +117,20 @@ export class ApiService {
       return this.storagedbService.getStorage(key)
     }
     return { create, get }
+  }
+
+  /**
+   * Listar bases de datos
+   */
+  public get getDatabases() {
+    return this.storagedbService.myDatabases
+  }
+
+  /**
+   * Cargar base de datos
+   * @param database
+   */
+  public loadDatabase(database: string) {
+    return this.storagedbService.loadDatabaseStorage(database)
   }
 }

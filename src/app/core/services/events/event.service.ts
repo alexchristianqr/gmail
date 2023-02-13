@@ -12,7 +12,12 @@ export class EventService {
     console.log('[EventService.constructor]')
   }
 
+  /**
+   * Emitir evento
+   * @param value
+   */
   publish(value?: any): void {
+    console.log('refreshSource$ ->', this.refreshSource$)
     console.log('[EventService.publish]')
     this.dataSource.next(value)
   }

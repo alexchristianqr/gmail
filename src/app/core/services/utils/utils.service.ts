@@ -65,7 +65,6 @@ export class UtilsService {
     usePayload.header = payload.header || 'Alerta'
     if (payload.subHeader) usePayload.subHeader = payload.subHeader
     usePayload.message = payload.message || 'Descripción'
-    let buttons = []
     usePayload.buttons = []
     if (payload.buttons[0]) {
       usePayload.buttons.push({
@@ -89,17 +88,13 @@ export class UtilsService {
   async presentPopover(payload: MyPopover) {
     console.log('[UtilsService.presentPopover]')
 
-    try {
-      const usePayload: any = {}
+    const usePayload: any = {}
 
-      usePayload.component = payload.component
-      usePayload.event = payload.event
-      usePayload.dismissOnSelect = payload.dismissOnSelect || true
+    usePayload.component = payload.component
+    usePayload.event = payload.event
+    usePayload.dismissOnSelect = payload.dismissOnSelect || true
 
-      const popover = await this.popoverCtrl.create(usePayload)
-      await popover.present()
-    } catch (error) {
-      console.error(error)
-    }
+    const popover = await this.popoverCtrl.create(usePayload)
+    await popover.present()
   }
 }

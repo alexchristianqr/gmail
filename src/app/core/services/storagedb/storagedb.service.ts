@@ -174,19 +174,30 @@ export class StoragedbService {
   constructor(private storage: Storage) {
     console.log('[StoragedbService.constructor]')
 
+    // Inicializar storage
     this.storage.create().then(async (res) => {
       console.log('My Driver DB is: ', res.driver)
       await this.eachDatabases()
     })
   }
 
+  /**
+   * Iterar bases de datos
+   */
   async eachDatabases() {
+    // Cargar preferencias del usuario
     await this.loadSharedPreferences()
+
+    // Iterar bases de datos
     for (let database of this.myDatabases) {
       await this.loadDatabaseStorage(database)
     }
   }
 
+  /**
+   * Cargar bases de datos
+   * @param database
+   */
   public async loadDatabaseStorage(database: string) {
     console.log('[StoragedbService.loadDatabaseStorage]')
 
@@ -196,6 +207,7 @@ export class StoragedbService {
 
         let valuesDatabase: any = []
 
+        // Seleccionar base de datos
         switch (database) {
           case 'VERSION':
             valuesDatabase = this.initVersion
@@ -211,6 +223,7 @@ export class StoragedbService {
             break
         }
 
+        // Set database
         return this.setStorage(database, valuesDatabase).then((data) => {
           console.log(`Cargar BD ${database} por defecto`)
           return data
@@ -224,12 +237,15 @@ export class StoragedbService {
       }
 
       if (data.version !== this.initVersion.version) {
-        await this.storage.clear()
-        await this.eachDatabases()
+        await this.storage.clear() // Depurar datos
+        await this.eachDatabases() // Iterar bases de datos
       }
     })
   }
 
+  /**
+   * Cargar preferencias del usuario
+   */
   async loadSharedPreferences() {
     console.log('[StoragedbService.loadSharedPreferences]')
 
@@ -255,16 +271,29 @@ export class StoragedbService {
     })
   }
 
+  /**
+   * Obtener storage
+   * @param key
+   */
   async getStorage(key: string) {
     console.log('[StoragedbService.getStorage]', { key })
     return this.storage.get(key)
   }
 
+  /**
+   * Set storage
+   * @param key
+   * @param value
+   */
   async setStorage(key: string, value: any) {
     console.log('[StoragedbService.setStorage]', { key, value })
     return this.storage.set(key, value)
   }
 
+  /**
+   * Eliminar storage
+   * @param key
+   */
   async removeStorage(key: string) {
     console.log('[StoragedbService.removeStorage]', { key })
     await this.storage.remove(key)
