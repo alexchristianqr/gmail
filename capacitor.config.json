@@ -2,5 +2,14 @@
 	"appId": "io.ionic.starter",
 	"appName": "gmail",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": true,
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "androidScaleType": "CENTER_CROP",
+      "splashImmersive": true,
+      "backgroundColor": "#ffffff"
+    }
+  }
 }
