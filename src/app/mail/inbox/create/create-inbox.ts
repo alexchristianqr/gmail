@@ -126,7 +126,7 @@ export class CreateInbox implements OnInit {
     console.log('[CreateInbox.back]')
 
     this.eventService.publish()
-    await this.router.navigate([this.data.path])
+    await this.router.navigate(['mail/sent'])
   }
 
   async presentAlert() {
