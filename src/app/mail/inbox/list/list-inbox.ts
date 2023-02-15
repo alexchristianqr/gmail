@@ -9,7 +9,7 @@ import { EventService } from '../../../core/services/events/event.service'
 import { Subscription } from 'rxjs'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { UtilsService } from '../../../core/services/utils/utils.service'
-import {InboxService} from "../inbox.service";
+import { InboxService } from '../inbox.service'
 
 @Component({
   selector: 'app-list-inbox',
@@ -22,7 +22,7 @@ export class ListInbox implements OnDestroy {
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
-  constructor(private inboxService : InboxService,private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
+  constructor(private inboxService: InboxService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListInbox.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())

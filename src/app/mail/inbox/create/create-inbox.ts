@@ -82,7 +82,7 @@ export class CreateInbox implements OnInit {
       return this.apiService
         .createItem(item.database, item)
         .then(async () => {
-          await this.back()
+          await this.router.navigate(['mail/sent'])
         })
         .catch((error) => {
           console.error(error)
@@ -126,7 +126,7 @@ export class CreateInbox implements OnInit {
     console.log('[CreateInbox.back]')
 
     this.eventService.publish()
-    await this.router.navigate(['mail/sent'])
+    await this.router.navigate([this.data.path])
   }
 
   async presentAlert() {

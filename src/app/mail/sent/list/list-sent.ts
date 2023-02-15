@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
 import { PopoverListInbox } from '../../inbox/list/layouts/popover-list-inbox'
 import { PopoverListSent } from './layouts/popover-list-sent'
-import {SentService} from "../sent.service";
+import { SentService } from '../sent.service'
 
 @Component({
   selector: 'app-list-sent',
@@ -23,7 +23,7 @@ export class ListSent implements OnDestroy {
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
-  constructor(private sentService : SentService,private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
+  constructor(private sentService: SentService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListSent.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listSentMessages())
