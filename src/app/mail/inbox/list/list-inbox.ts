@@ -50,14 +50,14 @@ export class ListInbox implements OnDestroy {
     }, 2000)
   }
 
-  async fnViewDetail(item: MyMessage) {
+  async viewDetail(item: MyMessage) {
     console.log('[ListInbox.fnViewDetail]')
 
     const data: MyParams = { item: item, path: 'mail/inbox' }
     await this.router.navigate(['mail/inbox-detail'], { state: data })
   }
 
-  async fnViewSearch() {
+  async viewSearch() {
     console.log('[ListInbox.fnViewSearch]')
 
     const data: MyParams = { database: 'DATABASE_INBOX', path: 'mail/inbox' }
@@ -67,41 +67,13 @@ export class ListInbox implements OnDestroy {
   async viewCreatePage() {
     console.log('[ListInbox.viewCreatePage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'mail/inbox' }
+    const data: MyParams = { database: 'DATABASE_SENT', path: 'mail/inbox' }
     await this.router.navigate(['mail/create'], { state: data })
-  }
-
-  async presentAlert() {
-    console.log('[ListInbox.presentAlert]')
-
-    await this.utilsService.presentAlert({
-      subHeader: '¿Seguro que quieres limpiar la base de datos INBOX?',
-      message: 'Esta acción eliminará todos los registros.',
-      buttons: [
-        {
-          handler: () => {
-            this.apiService.purgeItems(this.myDatabase).then(() => {
-              this.eventService.publish()
-              this.presentToast('Base de datos limpiada')
-            })
-          },
-        },
-        {
-          handler: () => ({}),
-        },
-      ],
-    })
   }
 
   async presentPopover(event: Event) {
     console.log('[ListInbox.presentPopover]')
 
     await this.utilsService.presentPopover({ component: PopoverListInbox, event: event })
-  }
-
-  async presentToast(message: string) {
-    console.log('[ListInbox.presentToast]')
-
-    await this.utilsService.presentToast({ message })
   }
 }
