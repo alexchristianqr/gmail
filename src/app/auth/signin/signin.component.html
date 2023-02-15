@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <form>
+  <form [formGroup]="formGroup">
     <ion-grid>
       <ion-row>
         <ion-col size-xs="12" size-sm="12" size-md="7" size-lg="4" size-xl="4">
@@ -23,12 +23,12 @@
           <ion-list>
             <ion-item>
               <ion-label color="danger" position="floating">Email</ion-label>
-              <ion-input type="email"></ion-input>
+              <ion-input formControlName="username" type="email"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label color="danger" position="floating">Contraseña</ion-label>
               <app-show-hide-password>
-                <ion-input style="margin-top: 0.675rem !important" type="password"></ion-input>
+                <ion-input formControlName="password" type="password" style="margin-top: 0.675rem !important"></ion-input>
               </app-show-hide-password>
             </ion-item>
           </ion-list>
@@ -43,7 +43,8 @@
       </ion-row>
       <ion-row>
         <ion-col size-xs="12" size-sm="12" size-md="7" size-lg="4" size-xl="4">
-          <ion-button size="large" color="danger" expand="block" routerLink="/mail/inbox">Entrar</ion-button>
+          <ion-button *ngIf="!submitted" size="large" color="danger" expand="block" (click)="onSubmit()">Entrar</ion-button>
+          <ion-button *ngIf="submitted" size="large" color="danger" expand="block" [disabled]="true">Entrando...</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
