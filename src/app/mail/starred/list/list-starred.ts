@@ -9,6 +9,7 @@ import { ApiService } from '../../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
 import { PopoverListStarred } from './layouts/popover-list-starred'
+import { StarredService } from '../starred.service'
 
 @Component({
   selector: 'app-list-starred',
@@ -21,7 +22,7 @@ export class ListStarred implements OnDestroy {
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
-  constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
+  constructor(private starredService: StarredService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListStarred.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listStarredMessages())
@@ -37,7 +38,7 @@ export class ListStarred implements OnDestroy {
   listStarredMessages(): void {
     console.log('[ListStarred.listSentMessages]')
 
-    this.apiService.getItems(this.myDatabase).then((data) => {
+    this.starredService.getItems(this.myDatabase).then((data) => {
       this.items = data
     })
   }

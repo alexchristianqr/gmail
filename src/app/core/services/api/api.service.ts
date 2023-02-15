@@ -25,8 +25,7 @@ export class ApiService {
     return this.storagedbService.loadSharedPreferences().then((data: MyPreferences) => {
       this.MY_SHARED_PREFERENCES.SETTINGS = data.SETTINGS
       return this.storagedbService.loadDatabaseStorage(database).then((data: Array<MyMessage>) => {
-        // return data // Lista de orden ASC
-        return data.sort((a, b) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+        return data // Lista de orden ASC
       })
     })
   }

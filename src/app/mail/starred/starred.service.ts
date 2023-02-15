@@ -8,10 +8,18 @@ import { ApiService } from '../../core/services/api/api.service'
 })
 export class StarredService {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_STARRED'
+  myDatabase: string = 'DATABASE_INBOX'
 
   constructor(private apiService: ApiService) {
     console.log('[StarredService.constructor]')
+  }
+
+  async getItems(database: string) {
+    console.log('[StarredService.getItems]', { database })
+
+    return this.apiService.getItems(this.myDatabase).then((data) => {
+      return data.filter((item) => item.is_starred)
+    })
   }
 
   async createItem(item: any) {

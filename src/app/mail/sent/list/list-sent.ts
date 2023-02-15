@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
 import { PopoverListInbox } from '../../inbox/list/layouts/popover-list-inbox'
 import { PopoverListSent } from './layouts/popover-list-sent'
+import {SentService} from "../sent.service";
 
 @Component({
   selector: 'app-list-sent',
@@ -18,11 +19,11 @@ import { PopoverListSent } from './layouts/popover-list-sent'
 export class ListSent implements OnDestroy {
   @ViewChild('popover') popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_SENT'
+  myDatabase: string = 'DATABASE_INBOX'
   mySubscribe$: Subscription
   items: Array<MyMessage> | any = []
 
-  constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
+  constructor(private sentService : SentService,private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListSent.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listSentMessages())
@@ -38,7 +39,7 @@ export class ListSent implements OnDestroy {
   listSentMessages(): void {
     console.log('[ListSent.listSentMessages]')
 
-    this.apiService.getItems(this.myDatabase).then((data) => {
+    this.sentService.getItems(this.myDatabase).then((data) => {
       this.items = data
     })
   }
