@@ -14,6 +14,7 @@ import { StarredService } from '../../starred/starred.service'
 @Component({
   selector: 'app-detail-inbox',
   templateUrl: 'detail-inbox.html',
+  styleUrls: ['detail-inbox.scss'],
 })
 export class DetailInbox implements OnInit {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
