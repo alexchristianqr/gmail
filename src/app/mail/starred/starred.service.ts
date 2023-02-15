@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { SHARED_PREFERENCES } from '../../shared-preferences'
 import { MyPreferences } from '../../core/types/MyPreferences'
 import { ApiService } from '../../core/services/api/api.service'
+import { MyMessage } from '../../core/types/MyMessage'
 
 @Injectable({
   providedIn: 'root',
@@ -18,14 +19,15 @@ export class StarredService {
     console.log('[StarredService.getItems]', { database })
 
     return this.apiService.getItems(this.myDatabase).then((data) => {
-      return data.filter((item) => item.is_starred)
+      data = data.filter((item) => item.is_starred)
+      return data.sort((a, b) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
     })
   }
 
-  async createItem(item: any) {
+  async createItem(item: any, value: boolean) {
     console.log('[StarredService.createItem]', { item })
 
-    return this.apiService.createItem(this.myDatabase, item)
+    return this.apiService.updateItem(this.myDatabase, item, 'is_starred', value)
   }
 
   async deleteItem(item: any) {
@@ -34,11 +36,21 @@ export class StarredService {
     return this.apiService.deleteItem(this.myDatabase, item)
   }
 
+  async updateItem(database: string, item: MyMessage | any, keyItem: string, valueItem: any) {
+    console.log('[StarredService.updateItem]', { keyItem, valueItem })
+
+    return this.apiService.updateItem(database, item, keyItem, valueItem)
+    // return this.apiService.getItem(database, item).then((data) => {
+    //   item[keyItem] = valueItem
+    //   this.apiService.updateItem(database,item, )
+    // })
+  }
+
   async removeOrCreate(item: any) {
     console.log('[StarredService.removeOrCreate]', { item })
 
-    const create = () => {
-      return this.createItem(item)
+    const create = (value: any) => {
+      return this.createItem(item, value)
     }
     const remove = () => {
       return this.deleteItem(item)

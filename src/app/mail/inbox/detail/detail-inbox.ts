@@ -149,12 +149,21 @@ export class DetailInbox implements OnInit {
 
     // Action API
     this.starredService.removeOrCreate(this.item).then(async (res) => {
-      if (value) {
-        await res.create()
-      } else {
-        await res.remove()
-      }
-      this.updateMessage(key, value, message, disabledRoute, disabledToast)
+      // if (value) {
+      //   await res.create()
+      // } else {
+      //   await res.remove()
+      // }
+
+      // this.updateMessage(key, value, message, disabledRoute, disabledToast)
+      this.starredService.updateItem(this.myDatabase, this.item, key, value).then(async () => {
+        if (!disabledRoute) {
+          await this.back() // Volver a la página anterior
+        }
+        if (!disabledToast) {
+          await this.presentToast(message) // Mostrar toast notificación
+        }
+      })
     })
   }
 

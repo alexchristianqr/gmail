@@ -41,7 +41,7 @@ export class PopoverListInbox {
         {
           handler: () => {
             this.apiService.purgeItems(this.myDatabase).then(() => {
-              this.eventService.publish()
+              this.eventService.publish() // Emitir evento de actualización
               this.presentToast('Base de datos limpiada')
             })
           },

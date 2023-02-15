@@ -17,8 +17,8 @@ export class EventService {
    * @param value
    */
   publish(value?: any): void {
+    console.log('[EventService.publish]', { value })
     console.log('refreshSource$ ->', this.refreshSource$)
-    console.log('[EventService.publish]')
     this.dataSource.next(value)
   }
 }

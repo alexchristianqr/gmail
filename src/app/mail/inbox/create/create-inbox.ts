@@ -9,6 +9,7 @@ import { UtilsService } from '../../../core/services/utils/utils.service'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { MyParams } from '../../../core/types/MyParams'
+import { SentService } from '../../sent/sent.service'
 
 @Component({
   selector: 'app-create-inbox',
@@ -21,7 +22,14 @@ export class CreateInbox implements OnInit {
   loading: boolean = false
   data: MyParams | any
 
-  constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(
+    private sentService: SentService,
+    private utilsService: UtilsService,
+    private eventService: EventService,
+    private apiService: ApiService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
     console.log('[CreateInbox.constructor]')
     this.getState()
     this.formGroup = this.formGroupInitialize()
@@ -79,9 +87,10 @@ export class CreateInbox implements OnInit {
 
     // API
     const action = () => {
-      return this.apiService
-        .createItem(item.database, item)
+      return this.sentService
+        .createItem(item)
         .then(async () => {
+          this.eventService.publish() // Emitir evento de actualización
           await this.router.navigate(['mail/sent'])
         })
         .catch((error) => {
@@ -125,7 +134,6 @@ export class CreateInbox implements OnInit {
   async back() {
     console.log('[CreateInbox.back]')
 
-    this.eventService.publish()
     await this.router.navigate([this.data.path])
   }
 

@@ -28,19 +28,44 @@
         <ion-label style="margin: 0; padding: 0">
           <table>
             <tr>
-              <td style="padding: 0.75rem">
-                <ion-avatar style="opacity: 0.8" [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"> {{item.name.charAt(0).toUpperCase()}} </ion-avatar>
+              <td style="padding: 0 0.75rem 0 0" rowspan="3">
+                <ion-avatar style="opacity: 0.8; width: 2.75rem; height: 2.75rem" [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"> {{item.name.charAt(0).toUpperCase()}} </ion-avatar>
               </td>
-              <td style="padding: 0.75rem 0.75rem 0.75rem 0.25rem">
-                <ion-text *ngIf="!item.is_read">
-                  <div style="font-size: 1.01rem; font-weight: 700">{{item.name}}</div>
-                  <div style="font-size: 0.975rem; font-weight: 600">{{item.subject}}</div>
-                  <div style="font-size: 0.75rem">{{item.message}}</div>
-                </ion-text>
+            </tr>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td style="padding: 0.75rem 0 0 0.25rem">
+                      <div style="display: flex">
+                        <div *ngIf="item.is_starred" style="margin: 0 0.5rem 0 0">
+                          <ion-icon style="margin: 0" size="small" color="warning" slot="icon-only" [name]="item.is_starred ? 'star':''"></ion-icon>
+                        </div>
+                        <ion-text *ngIf="item.is_read">
+                          <div style="font-size: 1rem; margin-top: 0.085rem">{{item.name}}</div>
+                        </ion-text>
+                        <ion-text *ngIf="!item.is_read">
+                          <div style="font-size: 1rem; font-weight: 700; margin-top: 0.085rem">{{item.name}}</div>
+                        </ion-text>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 0.25rem 0.75rem 0.75rem 0.25rem">
                 <ion-text *ngIf="item.is_read">
-                  <div style="font-size: 1.01rem">{{item.name}}</div>
-                  <div style="font-size: 0.975rem">{{item.subject}}</div>
-                  <div style="font-size: 0.75rem">{{item.message}}</div>
+                  <div style="font-size: 0.8rem">{{item.subject}}</div>
+                  <ion-label>
+                    <div style="font-size: 0.7rem">{{item.message}}</div>
+                  </ion-label>
+                </ion-text>
+                <ion-text *ngIf="!item.is_read">
+                  <div style="font-size: 0.8rem; font-weight: 600">{{item.subject}}</div>
+                  <ion-label>
+                    <div style="font-size: 0.7rem">{{item.message}}</div>
+                  </ion-label>
                 </ion-text>
               </td>
             </tr>

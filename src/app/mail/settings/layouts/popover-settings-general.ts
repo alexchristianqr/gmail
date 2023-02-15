@@ -45,7 +45,7 @@ export class PopoverSettingsGeneral {
               this.apiService.purgeItems(database)
             }
 
-            this.eventService.publish()
+            this.eventService.publish() // Emitir evento de actualización
             this.presentToast('Base de datos depurada').then(() => {
               for (const database of databases) {
                 if (database === 'VERSION') continue

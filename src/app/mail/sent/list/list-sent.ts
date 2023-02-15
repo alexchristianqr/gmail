@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { Subscription } from 'rxjs'
@@ -8,7 +8,6 @@ import { EventService } from '../../../core/services/events/event.service'
 import { ApiService } from '../../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
-import { PopoverListInbox } from '../../inbox/list/layouts/popover-list-inbox'
 import { PopoverListSent } from './layouts/popover-list-sent'
 import { SentService } from '../sent.service'
 
@@ -16,7 +15,7 @@ import { SentService } from '../sent.service'
   selector: 'app-list-sent',
   templateUrl: 'list-sent.html',
 })
-export class ListSent implements OnDestroy {
+export class ListSent implements OnDestroy, OnInit {
   @ViewChild('popover') popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   myDatabase: string = 'DATABASE_INBOX'
@@ -27,6 +26,12 @@ export class ListSent implements OnDestroy {
     console.log('[ListSent.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listSentMessages())
+    this.listSentMessages()
+  }
+
+  ngOnInit(): void {
+    console.log('[ListSent.ngOnInit]')
+
     this.listSentMessages()
   }
 
@@ -63,7 +68,7 @@ export class ListSent implements OnDestroy {
   async viewCreatePage() {
     console.log('[ListSent.viewCreatePage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
+    const data: MyParams = { database: 'DATABASE_SENT', path: 'mail/sent' }
     await this.router.navigate(['mail/create'], { state: data })
   }
 
