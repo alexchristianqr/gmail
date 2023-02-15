@@ -23,6 +23,13 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label>
+        <h2>Botón destacar</h2>
+        <p>Mostrar botón destacar mensaje.</p>
+      </ion-label>
+      <ion-checkbox [(ngModel)]="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_STARRED" (click)="updateMyPreferences()"></ion-checkbox>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label>
         <h2>Botón eliminar</h2>
         <p>Mostrar botón eliminar mensaje.</p>
       </ion-label>

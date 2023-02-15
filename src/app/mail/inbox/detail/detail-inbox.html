@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="starredMessage('Mensaje marcado como destacado')">
+      <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_STARRED" (click)="starredMessage('Mensaje marcado como destacado')">
         <ion-icon slot="icon-only" [name]="item?.is_starred ? 'star':'star-outline'"></ion-icon>
       </ion-button>
       <ion-button *ngIf="MY_SHARED_PREFERENCES.SETTINGS.INBOX_SHOW_BUTTON_ARCHIVE">

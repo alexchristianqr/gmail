@@ -125,11 +125,9 @@ export class DetailInbox implements OnInit {
 
     // Control UI
     const key = 'is_read'
-    const disabledRoute: boolean = value
-    const disabledToast: boolean = value
 
     // Action API
-    this.updateMessage(key, value, message, disabledRoute, disabledToast)
+    this.updateMessage(key, value, message, value, value)
   }
 
   /**

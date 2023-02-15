@@ -1,6 +1,7 @@
 export type MyPreferences = {
   SETTINGS: {
     // INBOX
+    INBOX_SHOW_BUTTON_STARRED: boolean
     INBOX_SHOW_BUTTON_SYNC: boolean
     INBOX_SHOW_BUTTON_SEARCH: boolean
     INBOX_SHOW_BUTTON_UN_READ: boolean
