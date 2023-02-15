@@ -40,6 +40,7 @@ import { SettingsComponent } from './mail/settings/settings.component'
 import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-general-inbox'
 import { PopoverSettingsGeneral } from './mail/settings/layouts/popover-settings-general'
 import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
+import { ModalSettingsGeneralStarred } from './mail/settings/starred/modal-settings-general-starred'
 
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
@@ -59,6 +60,7 @@ import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-passw
     ModalSettingsGeneralInbox,
     PopoverSettingsGeneral,
     ModalSettingsGeneralSent,
+    ModalSettingsGeneralStarred,
 
     // INBOX
     DetailInbox,

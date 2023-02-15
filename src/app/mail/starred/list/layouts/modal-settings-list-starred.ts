@@ -5,7 +5,7 @@ import { MyPreferences } from '../../../../core/types/MyPreferences'
 import { PreferencesService } from '../../../../core/services/api/preferences.service'
 
 @Component({
-  selector: 'app-modal-settings-list-sent',
+  selector: 'app-modal-settings-list-starred',
   templateUrl: 'modal-settings-list-starred.html',
 })
 export class ModalSettingsListStarred {

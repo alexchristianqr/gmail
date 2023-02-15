@@ -52,8 +52,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   async fnViewDetail(item: MyMessage) {
     console.log('[SearchComponent.back]')
 
-    const data: MyParams = { item: item, path: 'search' }
-    await this.router.navigate(['inbox-detail'], { state: data })
+    const data: MyParams = { item: item, path: 'mail/search' }
+    await this.router.navigate(['mail/inbox-detail'], { state: data })
   }
 
   async searchByEvent(event: any) {

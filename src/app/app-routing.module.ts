@@ -25,11 +25,12 @@ import { LogoutGuard } from './core/guards/logout.guard'
 // GENERAL SETTINGS
 import { SettingsComponent } from './mail/settings/settings.component'
 import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-general-inbox'
+import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
+import { ModalSettingsGeneralStarred } from './mail/settings/starred/modal-settings-general-starred'
 
 // SHARED
 import { MailComponent } from './mail/mail.component'
 import { SearchComponent } from './shared/search/search.component'
-import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
 
 const routes: Routes = [
   {
@@ -78,6 +79,11 @@ const routes: Routes = [
         title: 'Configuración general',
         path: 'general/settings/sent',
         component: ModalSettingsGeneralSent,
+      },
+      {
+        title: 'Configuración general',
+        path: 'general/settings/starred',
+        component: ModalSettingsGeneralStarred,
       },
 
       // AUTH

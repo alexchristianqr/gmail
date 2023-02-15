@@ -11,7 +11,7 @@
 <ion-content>
   <ion-list *ngIf="items.length > 0">
     <ion-item-sliding *ngFor="let item of items; let i = index" (click)="fnViewDetail(item)">
-      <ion-item>
+      <ion-item lines="full">
         <ion-label style="margin: 0; padding: 0">
           <table>
             <tr>
@@ -64,14 +64,4 @@
       </ion-row>
     </ion-grid>
   </ion-list>
-  <!--  <ion-list *ngIf="items.length <= 0">-->
-  <!--    <ion-grid>-->
-  <!--      <ion-row style="height: 100vw">-->
-  <!--        <ion-col style="top: 75%; bottom: 50%">-->
-  <!--          <ion-icon slot="icon-only" name="sad"></ion-icon>-->
-  <!--          <p>Search value not found</p>-->
-  <!--        </ion-col>-->
-  <!--      </ion-row>-->
-  <!--    </ion-grid>-->
-  <!--  </ion-list>-->
 </ion-content>

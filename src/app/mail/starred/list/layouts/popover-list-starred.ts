@@ -6,7 +6,7 @@ import { UtilsService } from '../../../../core/services/utils/utils.service'
 import { ApiService } from '../../../../core/services/api/api.service'
 
 @Component({
-  selector: 'app-popover-list-sent',
+  selector: 'app-popover-list-starred',
   templateUrl: 'popover-list-starred.html',
 })
 export class PopoverListStarred {
