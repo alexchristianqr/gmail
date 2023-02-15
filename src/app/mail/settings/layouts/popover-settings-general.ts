@@ -10,12 +10,10 @@ import { EventService } from '../../../core/services/events/event.service'
   templateUrl: 'popover-settings-general.html',
 })
 export class PopoverSettingsGeneral {
-  items: Array<MyPopover>
+  items: Array<MyPopover> = [{ title: 'Depurar bases de datos', dispatch: 'presentAlert' }]
 
   constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[PopoverSettingsGeneral.constructor]')
-
-    this.items = [{ title: 'Depurar bases de datos', dispatch: 'presentAlert' }]
   }
 
   async open(payload: MyPopover) {

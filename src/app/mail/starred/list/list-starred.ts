@@ -8,6 +8,7 @@ import { EventService } from '../../../core/services/events/event.service'
 import { ApiService } from '../../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyParams } from '../../../core/types/MyParams'
+import { PopoverListStarred } from './layouts/popover-list-starred'
 
 @Component({
   selector: 'app-list-starred',
@@ -62,5 +63,18 @@ export class ListStarred implements OnDestroy {
 
     const data: MyParams = { database: this.myDatabase, path: 'mail/starred' }
     await this.router.navigate(['mail/create'], { state: data })
+  }
+
+  async viewSearch() {
+    console.log('[ListStarred.viewSearch]')
+
+    const data: MyParams = { database: this.myDatabase, path: 'mail/starred' }
+    await this.router.navigate(['mail/search'], { state: data })
+  }
+
+  async presentPopover(event: Event) {
+    console.log('[ListStarred.presentPopover]')
+
+    await this.utilsService.presentPopover({ component: PopoverListStarred, event: event })
   }
 }

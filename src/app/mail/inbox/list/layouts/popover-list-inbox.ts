@@ -11,12 +11,10 @@ import { ApiService } from '../../../../core/services/api/api.service'
 })
 export class PopoverListInbox {
   myDatabase: string = 'DATABASE_INBOX'
-  items: Array<MyPopover>
+  items: Array<MyPopover> = [{ title: 'Configuración', path: 'mail/inbox-settings' }]
 
   constructor(private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[PopoverListInbox.constructor]')
-
-    this.items = [{ title: 'Configuración', path: 'mail/inbox-settings' }]
   }
 
   async open(payload: MyPopover) {

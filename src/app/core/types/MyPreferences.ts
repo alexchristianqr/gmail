@@ -11,6 +11,8 @@ export type MyPreferences = {
     INBOX_CONFIRM_BEFORE_REMOVING: boolean
     // SENT
     SENT_SHOW_BUTTON_SEARCH: boolean
+    // STARRED
+    STARRED_SHOW_BUTTON_SEARCH: boolean
     // GENERAL
     GENERAL_SHOW_BUTTON_PURGE: boolean
     GENERAL_INITIALIZE_DATABASE: boolean

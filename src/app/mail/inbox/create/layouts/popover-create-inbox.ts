@@ -7,12 +7,10 @@ import { MyPopover } from '../../../../core/types/MyPopover'
   templateUrl: 'popover-create-inbox.html',
 })
 export class PopoverCreateInbox {
-  items: Array<MyPopover>
+  items: Array<MyPopover> = [{ title: 'Settings', path: 'mail/create-settings' }]
 
   constructor(private router: Router) {
     console.log('[PopoverCreateInbox.constructor]')
-
-    this.items = [{ title: 'Settings', path: 'mail/create-settings' }]
   }
 
   async open(payload: MyPopover) {

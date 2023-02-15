@@ -11,9 +11,11 @@ import { ModalSettingsDetailInbox } from './mail/inbox/detail/layouts/modal-sett
 
 // SENT
 import { ListSent } from './mail/sent/list/list-sent'
+import { ModalSettingsListSent } from './mail/sent/list/layouts/modal-settings-list-sent'
 
 // STARRED
 import { ListStarred } from './mail/starred/list/list-starred'
+import { ModalSettingsListStarred } from './mail/starred/list/layouts/modal-settings-list-starred'
 
 // AUTH
 import { HomeComponent } from './auth/home/home.component'
@@ -28,7 +30,6 @@ import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-
 import { MailComponent } from './mail/mail.component'
 import { SearchComponent } from './shared/search/search.component'
 import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
-import { ModalSettingsListSent } from './mail/sent/list/layouts/modal-settings-list-sent'
 
 const routes: Routes = [
   {
@@ -92,6 +93,11 @@ const routes: Routes = [
         title: 'Destacados',
         path: 'starred',
         component: ListStarred,
+      },
+      {
+        title: 'Configuración General',
+        path: 'starred-settings',
+        component: ModalSettingsListStarred,
       },
 
       // SENT

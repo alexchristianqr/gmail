@@ -22,9 +22,13 @@ import { PopoverCreateInbox } from './mail/inbox/create/layouts/popover-create-i
 
 // SENT
 import { ListSent } from './mail/sent/list/list-sent'
+import { ModalSettingsListSent } from './mail/sent/list/layouts/modal-settings-list-sent'
+import { PopoverListSent } from './mail/sent/list/layouts/popover-list-sent'
 
 // STARRED
 import { ListStarred } from './mail/starred/list/list-starred'
+import { ModalSettingsListStarred } from './mail/starred/list/layouts/modal-settings-list-starred'
+import { PopoverListStarred } from './mail/starred/list/layouts/popover-list-starred'
 
 // AUTH
 import { HomeComponent } from './auth/home/home.component'
@@ -35,14 +39,12 @@ import { LogoutGuard } from './core/guards/logout.guard'
 import { SettingsComponent } from './mail/settings/settings.component'
 import { ModalSettingsGeneralInbox } from './mail/settings/inbox/modal-settings-general-inbox'
 import { PopoverSettingsGeneral } from './mail/settings/layouts/popover-settings-general'
+import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
 
 // SHARED
 import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
 import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
-import { ModalSettingsGeneralSent } from './mail/settings/sent/modal-settings-general-sent'
-import { ModalSettingsListSent } from './mail/sent/list/layouts/modal-settings-list-sent'
-import { PopoverListSent } from './mail/sent/list/layouts/popover-list-sent'
 
 @NgModule({
   declarations: [
@@ -57,8 +59,6 @@ import { PopoverListSent } from './mail/sent/list/layouts/popover-list-sent'
     ModalSettingsGeneralInbox,
     PopoverSettingsGeneral,
     ModalSettingsGeneralSent,
-    ModalSettingsListSent,
-    PopoverListSent,
 
     // INBOX
     DetailInbox,
@@ -73,9 +73,13 @@ import { PopoverListSent } from './mail/sent/list/layouts/popover-list-sent'
 
     // SENT
     ListSent,
+    ModalSettingsListSent,
+    PopoverListSent,
 
     // STARRED
     ListStarred,
+    ModalSettingsListStarred,
+    PopoverListStarred,
 
     // AUTH
     SigninComponent,
