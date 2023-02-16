@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 import { PopoverCreateInbox } from './layouts/popover-create-inbox'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ApiService } from '../../../core/services/api/api.service'
-import { MyMessage } from '../../../core/types/MyMessage'
+import { Message } from '../../../core/types/Message'
 import { EventService } from '../../../core/services/events/event.service'
 import { UtilsService } from '../../../core/services/utils/utils.service'
 import { MyPreferences } from '../../../core/types/MyPreferences'
@@ -83,7 +83,7 @@ export class CreateInbox implements OnInit {
 
     // Set data
     this.loading = true
-    const item: MyMessage = this.formGroup.value
+    const item: Message = this.formGroup.value
 
     // API
     const action = () => {

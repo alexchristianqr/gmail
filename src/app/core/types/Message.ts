@@ -1,5 +1,7 @@
-export type MyMessage = {
-  uid: string
+export type Message = {
+  id?: string
+  uid?: string
+  conversation_id?: string
   database: string
   name: string
   subject: string
@@ -9,4 +11,5 @@ export type MyMessage = {
   is_read: boolean | undefined
   is_starred: boolean | undefined
   created_at: Date | string
+  updated_at?: Date | string
 }

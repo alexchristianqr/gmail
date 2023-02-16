@@ -25,47 +25,72 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" style="padding-bottom: 0">
-        <div style="font-size: 1.5rem; font-weight: 500">{{item?.subject}}</div>
-        <div style="padding: 0.5rem 0">
-          <ion-item-divider></ion-item-divider>
-        </div>
-        <table>
-          <tr>
-            <td>
-              <ion-avatar style="opacity: 0.8; width: 3.5rem; height: 3.5rem" [ngClass]="'color-' + item?.name?.charAt(0)?.toUpperCase()"> {{item?.name?.charAt(0)?.toUpperCase()}} </ion-avatar>
-            </td>
-            <td style="padding-left: 0.75rem; vertical-align: middle; width: 100%">
-              <ion-text>
-                <div style="font-size: 1rem; font-weight: 500; margin-bottom: 0.15rem">{{item?.name}}</div>
-                <div style="font-size: 0.8rem; margin: 0.15rem 0">De: {{item?.from}}</div>
-                <div style="font-size: 0.8rem; margin: 0.15rem 0">Para: {{item?.to}}</div>
-                <div style="font-size: 0.8rem">Enviado: {{item?.created_at}}&nbsp;.&nbsp;<a style="text-decoration: none" href="#">Ver detalle</a></div>
-              </ion-text>
-              <div style="padding: 0.5rem 0">
-                <ion-item-divider></ion-item-divider>
+  <ion-accordion-group [multiple]="true" [animated]="true">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div style="font-size: 1.5rem; font-weight: 500; padding: 0.35rem 0">{{item?.subject}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item-divider style="margin: 0"></ion-item-divider>
+    <ion-accordion *ngFor="let message of item?.messages; let i = index" [value]="'toggle-accordion-'+i" toggle-icon-slot="none">
+      <ion-item slot="header" lines="full">
+        <ion-label>
+          <table style="width: 100%">
+            <tr>
+              <td style="width: 10%">
+                <ion-avatar style="opacity: 0.8; width: 2.5rem; height: 2.5rem" [ngClass]="'color-' + message?.name?.charAt(0)?.toUpperCase()">
+                  {{message?.name?.charAt(0)?.toUpperCase()}}
+                </ion-avatar>
+              </td>
+              <td style="padding-left: 0.75rem; vertical-align: middle; width: 80%">
+                <div class="ion-float-start">
+                  <ion-text>
+                    <div style="font-size: 1rem; font-weight: 500; margin-bottom: 0.15rem">{{message?.name}}</div>
+                    <div style="font-size: 0.8rem; margin: 0.15rem 0">De: {{message?.from}}</div>
+                  </ion-text>
+                </div>
+                <div class="ion-float-end">
+                  <ion-text>
+                    <p style="font-size: 0.8rem">13:03 PM</p>
+                  </ion-text>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </ion-label>
+      </ion-item>
+      <div slot="content">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <div class="ion-float-left">
+                <span style="font-size: 0.8rem">Para: {{message?.to}}, </span>
+                <span style="font-size: 0.8rem">Feb 15,2023, 13:03 PM</span>
               </div>
-            </td>
-          </tr>
-        </table>
-      </ion-col>
-      <ion-col size="12" style="padding-top: 0">
-        <div [innerHTML]="item?.message" style="white-space: pre-line; text-align: justify; text-justify: inter-word"></div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            </ion-col>
+            <ion-col size="12">
+              <div [innerHTML]="message?.message" style="white-space: pre-line; text-align: justify; text-justify: inter-word"></div>
+            </ion-col>
+            <ion-col size="12">
+              <div class="ion-float-left">
+                <ion-button fill="clear" slot="end" color="danger">
+                  <ion-icon slot="icon-only" name="return-up-forward-outline"></ion-icon>
+                  <ion-text>&nbsp;Reenviar</ion-text>
+                </ion-button>
+              </div>
+              <div class="ion-float-right">
+                <ion-button fill="clear" slot="start" color="danger">
+                  <ion-icon slot="icon-only" name="return-up-back-outline"></ion-icon>
+                  <ion-text>&nbsp;Responder</ion-text>
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-item-divider style="margin: 0"></ion-item-divider>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>
-<ion-footer>
-  <ion-toolbar>
-    <ion-button fill="clear" slot="start" color="danger">
-      <ion-icon slot="icon-only" name="return-up-back-outline" style="margin-right: 0.25rem"></ion-icon>
-      <ion-text>Responder</ion-text>
-    </ion-button>
-    <ion-button fill="clear" slot="end" color="danger">
-      <ion-icon slot="icon-only" name="return-up-forward-outline" style="margin-right: 0.25rem"></ion-icon>
-      <ion-text>Redirigir</ion-text>
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

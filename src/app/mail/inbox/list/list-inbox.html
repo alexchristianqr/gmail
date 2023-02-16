@@ -24,7 +24,7 @@
   </ion-refresher>
   <ion-list *ngIf="items.length > 0">
     <ion-item-sliding *ngFor="let item of items;let i = index" (click)="viewDetail(item)">
-      <ion-item lines="full">
+      <ion-item [button]="true" lines="full">
         <table>
           <tr>
             <td style="padding: 0 0.75rem 0 0" rowspan="3">

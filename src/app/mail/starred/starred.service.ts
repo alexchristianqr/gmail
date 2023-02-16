@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core'
 import { SHARED_PREFERENCES } from '../../shared-preferences'
 import { MyPreferences } from '../../core/types/MyPreferences'
 import { ApiService } from '../../core/services/api/api.service'
-import { MyMessage } from '../../core/types/MyMessage'
+import { Message } from '../../core/types/Message'
 
 @Injectable({
   providedIn: 'root',
 })
 export class StarredService {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_INBOX'
+  myDatabase: string = 'DB_CONVERSATIONS'
 
   constructor(private apiService: ApiService) {
     console.log('[StarredService.constructor]')
   }
 
-  async getItems(database: string) {
-    console.log('[StarredService.getItems]', { database })
+  async getItems() {
+    console.log('[StarredService.getItems]')
 
     return this.apiService.getItems(this.myDatabase).then((data) => {
       data = data.filter((item) => item.is_starred)
@@ -36,7 +36,7 @@ export class StarredService {
     return this.apiService.deleteItem(this.myDatabase, item)
   }
 
-  async updateItem(database: string, item: MyMessage | any, keyItem: string, valueItem: any) {
+  async updateItem(database: string, item: Message | any, keyItem: string, valueItem: any) {
     console.log('[StarredService.updateItem]', { keyItem, valueItem })
 
     return this.apiService.updateItem(database, item, keyItem, valueItem)

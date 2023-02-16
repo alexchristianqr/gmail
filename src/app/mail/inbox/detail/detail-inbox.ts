@@ -3,26 +3,35 @@ import { ApiService } from '../../../core/services/api/api.service'
 import { PopoverDetailInbox } from './layouts/popover-detail-inbox'
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router'
-import { MyMessage } from '../../../core/types/MyMessage'
+import { Message } from '../../../core/types/Message'
 import { MyParams } from '../../../core/types/MyParams'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { EventService } from '../../../core/services/events/event.service'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { UtilsService } from '../../../core/services/utils/utils.service'
 import { StarredService } from '../../starred/starred.service'
+import { Conversation } from '../../../core/types/Conversation'
+import { InboxService } from '../inbox.service'
+
+interface AccordionGroupChangeEventDetail<T = any> {
+  value: T
+}
 
 @Component({
   selector: 'app-detail-inbox',
   templateUrl: 'detail-inbox.html',
   styleUrls: ['detail-inbox.scss'],
 })
-export class DetailInbox implements OnInit {
+export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_INBOX'
+  // myDatabase: string = 'DATABASE_INBOX'
+  myDatabase: string = 'DB_CONVERSATIONS'
   data: MyParams | any
-  item: MyMessage | undefined
+  item: Conversation | undefined
+  value: any
 
   constructor(
+    private inboxService: InboxService,
     private starredService: StarredService,
     private utilsService: UtilsService,
     private eventService: EventService,
@@ -64,7 +73,7 @@ export class DetailInbox implements OnInit {
 
     // API
     const action = () => {
-      return this.apiService.deleteItem(this.myDatabase, this.item).then(() => {
+      return this.inboxService.deleteItem(this.item).then(() => {
         this.back()
       })
     }
@@ -101,7 +110,7 @@ export class DetailInbox implements OnInit {
   updateMessage(key: string, value: any, message: string, disabledRoute: boolean = true, disabledToast: boolean = true) {
     console.log('[DetailInbox.updateMessage]')
 
-    this.apiService.updateItem(this.myDatabase, this.item, key, value).then(async () => {
+    this.inboxService.updateItem( this.item, key, value).then(async () => {
       if (!disabledRoute) {
         await this.back() // Volver a la página anterior
       }

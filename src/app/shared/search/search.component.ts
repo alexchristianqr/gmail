@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ApiService } from '../../core/services/api/api.service'
 import { Router } from '@angular/router'
-import { MyMessage } from '../../core/types/MyMessage'
+import { Message } from '../../core/types/Message'
 import { MyParams } from '../../core/types/MyParams'
 import { Subscription } from 'rxjs'
 import { EventService } from '../../core/services/events/event.service'
@@ -13,7 +13,7 @@ import { EventService } from '../../core/services/events/event.service'
 export class SearchComponent implements OnInit, OnDestroy {
   data: MyParams | any
   mySubscribe$: Subscription
-  items: Array<MyMessage> = []
+  items: Array<Message> = []
 
   constructor(private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[SearchComponent.constructor]')
@@ -49,7 +49,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     await this.router.navigate([this.data.path])
   }
 
-  async fnViewDetail(item: MyMessage) {
+  async fnViewDetail(item: Message) {
     console.log('[SearchComponent.back]')
 
     const data: MyParams = { item: item, path: 'mail/search' }
@@ -76,9 +76,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     // API
     return this.apiService
       .getItems(this.data.database)
-      .then((data: Array<MyMessage>) => {
+      .then((data: Array<Message>) => {
         if (!data) return
-        this.items = data.filter((value: MyMessage) => {
+        this.items = data.filter((value: Message) => {
           return (
             value.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
             value.subject.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||

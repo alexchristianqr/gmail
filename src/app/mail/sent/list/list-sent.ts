@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { Subscription } from 'rxjs'
-import { MyMessage } from '../../../core/types/MyMessage'
+import { Message } from '../../../core/types/Message'
 import { UtilsService } from '../../../core/services/utils/utils.service'
 import { EventService } from '../../../core/services/events/event.service'
 import { ApiService } from '../../../core/services/api/api.service'
@@ -18,9 +18,8 @@ import { SentService } from '../sent.service'
 export class ListSent implements OnDestroy, OnInit {
   @ViewChild('popover') popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_INBOX'
   mySubscribe$: Subscription
-  items: Array<MyMessage> | any = []
+  items: Array<Message> | any = []
 
   constructor(private sentService: SentService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListSent.constructor]')
@@ -44,7 +43,7 @@ export class ListSent implements OnDestroy, OnInit {
   listSentMessages(): void {
     console.log('[ListSent.listSentMessages]')
 
-    this.sentService.getItems(this.myDatabase).then((data) => {
+    this.sentService.getItems().then((data) => {
       this.items = data
     })
   }
@@ -58,7 +57,7 @@ export class ListSent implements OnDestroy, OnInit {
     }, 2000)
   }
 
-  async viewDetailPage(item: MyMessage) {
+  async viewDetailPage(item: Message) {
     console.log('[ListSent.viewDetailPage]')
 
     const data: MyParams = { item: item, path: 'mail/sent' }
@@ -68,14 +67,14 @@ export class ListSent implements OnDestroy, OnInit {
   async viewCreatePage() {
     console.log('[ListSent.viewCreatePage]')
 
-    const data: MyParams = { database: 'DATABASE_SENT', path: 'mail/sent' }
+    const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/sent' }
     await this.router.navigate(['mail/create'], { state: data })
   }
 
   async viewSearch() {
     console.log('[ListSent.viewSearch]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'mail/sent' }
+    const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/sent' }
     await this.router.navigate(['mail/search'], { state: data })
   }
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy, ViewChild } from '@angular/core'
 import { ApiService } from '../../../core/services/api/api.service'
 import { PopoverListInbox } from './layouts/popover-list-inbox'
 import { Router } from '@angular/router'
-import { MyMessage } from '../../../core/types/MyMessage'
+import { Message } from '../../../core/types/Message'
 import { MyParams } from '../../../core/types/MyParams'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { EventService } from '../../../core/services/events/event.service'
@@ -18,9 +18,8 @@ import { InboxService } from '../inbox.service'
 export class ListInbox implements OnDestroy {
   @ViewChild('popover') popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_INBOX'
   mySubscribe$: Subscription
-  items: Array<MyMessage> | any = []
+  items: Array<Message> | any = []
 
   constructor(private inboxService: InboxService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListInbox.constructor]')
@@ -38,7 +37,7 @@ export class ListInbox implements OnDestroy {
   listInbox(): void {
     console.log('[ListInbox.listInbox]')
 
-    this.inboxService.getItems(this.myDatabase).then((data) => {
+    this.inboxService.getItems().then((data) => {
       this.items = data
     })
   }
@@ -52,7 +51,7 @@ export class ListInbox implements OnDestroy {
     }, 2000)
   }
 
-  async viewDetail(item: MyMessage) {
+  async viewDetail(item: Message) {
     console.log('[ListInbox.fnViewDetail]')
 
     const data: MyParams = { item: item, path: 'mail/inbox' }

@@ -2,7 +2,7 @@ import { Component, OnDestroy, ViewChild } from '@angular/core'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { Subscription } from 'rxjs'
-import { MyMessage } from '../../../core/types/MyMessage'
+import { Message } from '../../../core/types/Message'
 import { UtilsService } from '../../../core/services/utils/utils.service'
 import { EventService } from '../../../core/services/events/event.service'
 import { ApiService } from '../../../core/services/api/api.service'
@@ -18,9 +18,8 @@ import { StarredService } from '../starred.service'
 export class ListStarred implements OnDestroy {
   @ViewChild('popover') popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DATABASE_STARRED'
   mySubscribe$: Subscription
-  items: Array<MyMessage> | any = []
+  items: Array<Message> | any = []
 
   constructor(private starredService: StarredService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListStarred.constructor]')
@@ -38,7 +37,7 @@ export class ListStarred implements OnDestroy {
   listStarredMessages(): void {
     console.log('[ListStarred.listSentMessages]')
 
-    this.starredService.getItems(this.myDatabase).then((data) => {
+    this.starredService.getItems().then((data) => {
       this.items = data
     })
   }
@@ -52,7 +51,7 @@ export class ListStarred implements OnDestroy {
     }, 2000)
   }
 
-  async viewDetailPage(item: MyMessage) {
+  async viewDetailPage(item: Message) {
     console.log('[ListStarred.viewDetailPage]')
 
     const data: MyParams = { item: item, path: 'mail/starred' }
@@ -62,14 +61,14 @@ export class ListStarred implements OnDestroy {
   async viewCreatePage() {
     console.log('[ListStarred.viewCreateMessage]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'mail/starred' }
+    const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/starred' }
     await this.router.navigate(['mail/create'], { state: data })
   }
 
   async viewSearch() {
     console.log('[ListStarred.viewSearch]')
 
-    const data: MyParams = { database: this.myDatabase, path: 'mail/starred' }
+    const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/starred' }
     await this.router.navigate(['mail/search'], { state: data })
   }
 
