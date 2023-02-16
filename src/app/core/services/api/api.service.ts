@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { Message } from '../../types/Message'
 import uuid from 'uuidv4'
 import { StoragedbService } from '../storagedb/storagedb.service'
 import { MyPreferences } from '../../types/MyPreferences'
@@ -24,7 +23,7 @@ export class ApiService {
 
     return this.storagedbService.loadSharedPreferences().then((data: MyPreferences) => {
       this.MY_SHARED_PREFERENCES.SETTINGS = data.SETTINGS
-      return this.storagedbService.loadDatabaseStorage(database).then((data: Array<Message>) => {
+      return this.storagedbService.loadDatabaseStorage(database).then((data: Array<any>) => {
         return data // Lista de orden ASC
       })
     })
@@ -35,10 +34,10 @@ export class ApiService {
    * @param database
    * @param item
    */
-  async createItem(database: string, item: Message | any) {
+  async createItem(database: string, item: any) {
     console.log('[ApiService.createItem]', { database, item })
 
-    return this.storagedbService.getStorage(database).then((data: Array<Message>) => {
+    return this.storagedbService.getStorage(database).then((data: Array<any>) => {
       // Agregar un item
       if (!data) return []
       data.push(item)
@@ -55,10 +54,10 @@ export class ApiService {
    * @param keyItem
    * @param valueItem
    */
-  async updateItem(database: string, item: Message | any, keyItem: string, valueItem: any) {
+  async updateItem(database: string, item: any, keyItem: string, valueItem: any) {
     console.log('[ApiService.updateItem]', { keyItem, valueItem })
 
-    return this.storagedbService.getStorage(database).then((data: Array<Message>) => {
+    return this.storagedbService.getStorage(database).then((data: Array<any>) => {
       // Encontrar un item
       const dataFounded: any = data.find((value) => value.id === item.id)
       if (!dataFounded) return
@@ -74,10 +73,10 @@ export class ApiService {
    * @param database
    * @param item
    */
-  async deleteItem(database: string, item: Message | any) {
+  async deleteItem(database: string, item: any) {
     console.log('[ApiService.deleteItem]')
 
-    return this.storagedbService.getStorage(database).then((data: Array<Message>) => {
+    return this.storagedbService.getStorage(database).then((data: Array<any>) => {
       // Filtrar items
       const dataFiltered = data.filter((value) => value.id != item.id)
 

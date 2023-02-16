@@ -4,7 +4,7 @@ export type Conversation = {
   id: string
   name: string
   message?: string
-  messages: Message[]
+  messages: Array<Message>
   subject: string
   is_read: boolean | undefined
   is_starred: boolean | undefined
