@@ -110,7 +110,7 @@ export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
   updateMessage(key: string, value: any, message: string, disabledRoute: boolean = true, disabledToast: boolean = true) {
     console.log('[DetailInbox.updateMessage]')
 
-    this.inboxService.updateItem( this.item, key, value).then(async () => {
+    this.inboxService.updateItem(this.item, key, value).then(async () => {
       if (!disabledRoute) {
         await this.back() // Volver a la página anterior
       }
