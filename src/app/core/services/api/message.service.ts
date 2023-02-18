@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core'
 import { ApiService } from './api.service'
 import { Message } from '../../types/Message'
+import { ParticipantService } from './participant.service'
 
 type MessagePayload = {
   id?: string | any
-  conversation_id?: string | any
+  conversation_id?: string
 }
 
 @Injectable({
@@ -13,7 +14,7 @@ type MessagePayload = {
 export class MessageService {
   database: string = 'DB_MESSAGES'
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private participantService: ParticipantService) {}
 
   async message(payload: MessagePayload) {
     console.log('[MessageService.message]', { payload })
@@ -35,8 +36,16 @@ export class MessageService {
     console.log('[MessageService.messages]', { payload })
 
     return this.apiService.getItems(this.database).then((res: Array<Message>) => {
-      if (!payload) return res
-      return res.filter((value: Message) => {
+      return res.filter(async (value: Message) => {
+        // Set
+        value.participant = await this.participantService.participant({ id: value.participant_id })
+        value.fromEmail.participant = await this.participantService.participant({ id: value.fromEmail.participant_id })
+        value.toEmail.participant = await this.participantService.participant({ id: value.toEmail.participant_id })
+
+        // Obtener todos los registros
+        if (!payload) return true
+
+        // Filtrar
         if (payload.hasOwnProperty('id')) {
           return value.id === payload.id
         } else if (payload.hasOwnProperty('conversation_id')) {
@@ -51,6 +60,7 @@ export class MessageService {
   async createMessage(item: Message) {
     console.log('[MessageService.create]', { item })
 
+    item.participant = await this.participantService.participant({ id: item.participant_id })
     return this.apiService.createItem(this.database, item)
   }
 

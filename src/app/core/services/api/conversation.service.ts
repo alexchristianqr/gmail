@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core'
 import { ApiService } from './api.service'
 import { Conversation } from '../../types/Conversation'
+import { ParticipantService } from './participant.service'
 
 type ConversationPayload = {
   id?: string | any
-  subject?: string | any
+  subject?: string
 }
 
 @Injectable({
@@ -12,7 +13,7 @@ type ConversationPayload = {
 })
 export class ConversationService {
   database: string = 'DB_CONVERSATIONS'
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private participantService: ParticipantService) {}
 
   async conversation(payload: ConversationPayload) {
     console.log('[ConversationService.conversation]', { payload })
@@ -30,20 +31,18 @@ export class ConversationService {
     })
   }
 
-  async existsConversation(item: any): Promise<boolean> {
-    console.log('[ConversationService.existsConversation]', { item })
-
-    return this.apiService.getItems(this.database).then((res: Array<Conversation>) => {
-      return res.some((value) => value.id === item.conversation_id)
-    })
-  }
-
   async convesations(payload?: ConversationPayload) {
     console.log('[ConversationService.convesations]', { payload })
 
     return this.apiService.getItems(this.database).then((res: Array<Conversation>) => {
-      if (!payload) return res
-      return res.filter((value: Conversation) => {
+      return res.filter(async (value: Conversation) => {
+        // Set
+        value.participant = await this.participantService.participant({ id: value.participant_id })
+
+        // Obtener todos los registros
+        if (!payload) return true
+
+        // Filtrar
         if (payload.hasOwnProperty('id')) {
           return value.id === payload.id
         } else if (payload.hasOwnProperty('subject')) {
@@ -55,10 +54,12 @@ export class ConversationService {
     })
   }
 
-  async convesationsById(id: any) {
-    console.log('[ConversationService.convesationsById]')
+  async existsConversation(item: any): Promise<boolean> {
+    console.log('[ConversationService.existsConversation]', { item })
 
-    return this.apiService.getItems(this.database).then((res) => res.find((value) => value.id === id))
+    return this.apiService.getItems(this.database).then((res: Array<Conversation>) => {
+      return res.some((value) => value.id === item.conversation_id)
+    })
   }
 
   async createConversation(item: any) {
@@ -67,8 +68,9 @@ export class ConversationService {
     const messages: Array<any> = [{ ...item }]
     const conversation: Conversation = {
       ...item,
-      messages,
       id: item.conversation_id,
+      participant: item.participant,
+      messages: messages,
     }
     return this.apiService.createItem(this.database, conversation)
   }
@@ -82,10 +84,13 @@ export class ConversationService {
   async updateConversationMessages(item: any) {
     console.log('[ConversationService.updateConversationMessages]', { item })
 
+    const participant_id = item.fromEmail.participant_id
+
     const conversation = await this.conversation({ id: item.conversation_id })
     if (!conversation) return
-
     const messages: Array<any> = [...conversation.messages, { ...item }]
-    return this.apiService.updateItem(this.database, conversation, 'messages', messages)
+
+    await this.updateConversation(conversation, 'participant_id', participant_id)
+    return this.updateConversation(conversation, 'messages', messages)
   }
 }

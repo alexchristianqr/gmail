@@ -14,131 +14,11 @@ export class StoragedbService {
     {
       id: '1',
       name: 'Alex Christian',
-      subject: 'Funciones lineales',
+      subject: 'Matricula Marzo 2023',
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      messages: [
-        {
-          uid: '1',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'alexchristianqr@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Alex Christian Quispe Roque',
-          subject: 'Funciones lineales',
-          to: 'sae@utp.edu.pe',
-        },
-        {
-          uid: '2',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'jacky@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Jacky',
-          subject: 'Matricula Marzo 2023',
-          to: 'sae@utp.edu.pe',
-        },
-        {
-          uid: '3',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'alexchristianqr@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Alex Christian Quispe Roque',
-          subject: 'Funciones lineales',
-          to: 'sae@utp.edu.pe',
-        },
-        {
-          uid: '4',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'jacky@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Jacky',
-          subject: 'Matricula Marzo 2023',
-          to: 'sae@utp.edu.pe',
-        },
-      ],
-      is_starred: true,
-      is_read: false,
-      created_at: '2023-01-25 11:50',
-    },
-    {
-      id: '2',
-      name: 'Manuel Plata',
-      subject: 'Funciones lineales',
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      messages: [
-        {
-          uid: '1',
-          conversation_id: '2',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'alexchristianqr@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Alex Christian Quispe Roque',
-          subject: 'Funciones lineales',
-          to: 'sae@utp.edu.pe',
-        },
-        {
-          uid: '2',
-          conversation_id: '2',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'jacky@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Jacky',
-          subject: 'Matricula Marzo 2023',
-          to: 'sae@utp.edu.pe',
-        },
-        {
-          uid: '3',
-          conversation_id: '2',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'alexchristianqr@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Alex Christian Quispe Roque',
-          subject: 'Funciones lineales',
-          to: 'sae@utp.edu.pe',
-        },
-        {
-          uid: '4',
-          conversation_id: '2',
-          created_at: '2023-01-25 11:50',
-          database: 'DATABASE_INBOX',
-          from: 'jacky@utp.edu.pe',
-          is_read: false,
-          is_starred: false,
-          message:
-            'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-          name: 'Jacky',
-          subject: 'Matricula Marzo 2023',
-          to: 'sae@utp.edu.pe',
-        },
-      ],
+      participant_id: '2',
+      messages: [],
       is_starred: true,
       is_read: false,
       created_at: '2023-01-25 11:50',
@@ -146,211 +26,63 @@ export class StoragedbService {
   ]
   messages: Array<Message> = [
     {
-      uid: '1',
       id: '1',
       conversation_id: '1',
+      participant_id: '1',
       created_at: '2023-01-25 11:50',
       database: 'DATABASE_INBOX',
       from: 'alexchristianqr@utp.edu.pe',
+      fromEmail: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
+      to: 'jacky@utp.edu.pe',
+      toEmail: { email: 'jacky@utp.edu.pe', participant_id: '2' },
       is_read: false,
       is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Alex Christian Quispe Roque',
-      subject: 'Funciones lineales',
-      to: 'sae@utp.edu.pe',
+      name: 'Alex Christian',
+      subject: 'Matricula Marzo 2023',
     },
     {
-      uid: '2',
       id: '2',
       conversation_id: '1',
+      participant_id: '2',
       created_at: '2023-01-25 11:50',
       database: 'DATABASE_INBOX',
       from: 'jacky@utp.edu.pe',
+      fromEmail: { email: 'jacky@utp.edu.pe', participant_id: '2' },
+      to: 'alexchristianqr@utp.edu.pe',
+      toEmail: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
       is_read: false,
       is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
       name: 'Jacky',
       subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
     },
   ]
   participants: Array<Participant> = [
     {
       id: '1',
-      conversation_id: '1',
       created_at: '2023-01-25 11:50',
       email: 'alexchristianqr@utp.edu.pe',
+      fullName: 'Alex Quispe',
     },
     {
       id: '2',
-      conversation_id: '1',
       created_at: '2023-01-25 11:50',
       email: 'jacky@utp.edu.pe',
-    },
-  ]
-  private initDataDB: Array<Message> = [
-    {
-      uid: '1',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'alexchristianqr@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Alex Christian Quispe Roque',
-      subject: 'Funciones lineales',
-      to: 'sae@utp.edu.pe',
+      fullName: 'Jackie Uchalin',
     },
     {
-      uid: '2',
+      id: '3',
       created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'jacky@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Jacky',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '3',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'yolanda@utp.edu.pe',
-      is_read: true,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Yolanda',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '4',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'nando@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Nando',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '5',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'jorge@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Jorge',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '6',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'teresa@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Teresa',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '7',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'beatriz@utp.edu.pe',
-      is_read: true,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Beatriz',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '8',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'carlos@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Carlos',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '9',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'estefany@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Estefany',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '10',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'gerardo@utp.edu.pe',
-      is_read: false,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Gerardo',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '11',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'kathy@utp.edu.pe',
-      is_read: true,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Kathy',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
-    },
-    {
-      uid: '12',
-      created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'melissa@utp.edu.pe',
-      is_read: true,
-      is_starred: false,
-      message:
-        'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Melissa',
-      subject: 'Matricula Marzo 2023',
-      to: 'sae@utp.edu.pe',
+      email: 'sae@utp.edu.pe',
+      fullName: 'SAE',
     },
   ]
   private initSharedPreferences: MyPreferences = SHARED_PREFERENCES
   private initVersion: { updated_at: number; version: string } = { updated_at: Date.now(), version: '2.1.*' }
-  public myDatabases: string[] = ['VERSION', 'DATABASE_INBOX', 'DATABASE_SENT', 'DATABASE_STARRED', 'DB_CONVERSATIONS', 'DB_MESSAGES', 'DB_PARTICIPANTS']
+  public myDatabases: string[] = ['VERSION', 'DB_CONVERSATIONS', 'DB_MESSAGES', 'DB_PARTICIPANTS']
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 
   constructor(private storage: Storage) {
@@ -394,15 +126,6 @@ export class StoragedbService {
           case 'VERSION':
             valuesDatabase = this.initVersion
             break
-          case 'DATABASE_INBOX':
-            valuesDatabase = this.initDataDB
-            break
-          case 'DATABASE_SENT':
-            valuesDatabase = []
-            break
-          case 'DATABASE_STARRED':
-            valuesDatabase = []
-            break
           case 'DB_CONVERSATIONS':
             valuesDatabase = this.conversations
             break
@@ -416,12 +139,12 @@ export class StoragedbService {
 
         // Set database
         return this.setStorage(database, valuesDatabase).then((data) => {
-          console.log(`Cargar BD ${database} por defecto`)
+          console.log(`Cargar ${database} por defecto`)
           return data
         })
       }
 
-      console.log(`Cargar BD ${database} por caché`)
+      console.log(`Cargar ${database} por caché`)
 
       if (database !== 'VERSION') {
         return data
@@ -443,12 +166,12 @@ export class StoragedbService {
     return this.getStorage(this.mySharedPreferences).then((data) => {
       if (!data) {
         return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then((data) => {
-          console.log(`Cargar BD ${this.mySharedPreferences} por defecto`)
+          console.log(`Cargar ${this.mySharedPreferences} por defecto`)
           return data
         })
       }
 
-      console.log(`Cargar BD ${this.mySharedPreferences} por caché`)
+      console.log(`Cargar ${this.mySharedPreferences} por caché`)
 
       // Iterar y actualizar
       const CREATE_SHARED_PREFERENCES = Object.create(SHARED_PREFERENCES)

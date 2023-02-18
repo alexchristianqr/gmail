@@ -175,12 +175,15 @@ export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
 
     // Set
     const itemData = { ...item }
+    console.log({ itemData })
 
     // Actualizar From/To email
     if (fromTo) {
-      const itemFrom = itemData.from
-      itemData.from = itemData.to
-      itemData.to = itemFrom
+      const itemFrom = itemData.fromEmail
+      // itemData.from = itemData.to
+      // itemData.to = itemFrom
+      itemData.fromEmail = itemData.toEmail
+      itemData.toEmail = itemFrom
     }
 
     const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/inbox-detail', item: itemData }

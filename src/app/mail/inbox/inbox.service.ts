@@ -5,6 +5,7 @@ import { ApiService } from '../../core/services/api/api.service'
 import { Message } from '../../core/types/Message'
 import { ConversationService } from '../../core/services/api/conversation.service'
 import { MessageService } from '../../core/services/api/message.service'
+import { ParticipantService } from '../../core/services/api/participant.service'
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class InboxService {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   myDatabase: string = 'DB_CONVERSATIONS'
 
-  constructor(private apiService: ApiService, private conversationService: ConversationService, private messageService: MessageService) {
+  constructor(private apiService: ApiService, private conversationService: ConversationService, private messageService: MessageService, private participantService: ParticipantService) {
     console.log('[InboxService.constructor]')
   }
 
