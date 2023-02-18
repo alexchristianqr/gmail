@@ -29,10 +29,13 @@ export class SentService {
   async createItem(item: any) {
     console.log('[SentService.createItem]', { item })
 
-    await this.messageService.create(item)
+    await this.messageService.createMessage(item)
     return this.conversationService.existsConversation(item).then((res) => {
-      if (res) return
-      this.conversationService.create(item)
+      if (res) {
+        this.conversationService.updateConversationMessages(item)
+      } else {
+        this.conversationService.createConversation(item)
+      }
     })
   }
 }

@@ -16,7 +16,8 @@ import { InboxService } from '../inbox.service'
   templateUrl: 'list-inbox.html',
 })
 export class ListInbox implements OnDestroy {
-  @ViewChild('popover') popover: any
+  @ViewChild('popover')
+  popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   mySubscribe$: Subscription
   items: Array<Message> | any = []
@@ -25,16 +26,16 @@ export class ListInbox implements OnDestroy {
     console.log('[ListInbox.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())
-    this.listInbox()
+    this.listInbox().then()
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
     console.log('[ListInbox.ngOnDestroy]')
 
     this.mySubscribe$.unsubscribe()
   }
 
-  listInbox(): void {
+  async listInbox() {
     console.log('[ListInbox.listInbox]')
 
     this.inboxService.getItems().then((data) => {
@@ -45,8 +46,8 @@ export class ListInbox implements OnDestroy {
   async doRefresh(event: any) {
     console.log('[ListInbox.doRefresh]')
 
-    setTimeout(() => {
-      this.listInbox()
+    setTimeout(async () => {
+      await this.listInbox()
       event.target.complete()
     }, 2000)
   }

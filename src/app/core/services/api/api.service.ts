@@ -57,14 +57,14 @@ export class ApiService {
   async updateItem(database: string, item: any, keyItem: string, valueItem: any) {
     console.log('[ApiService.updateItem]', { keyItem, valueItem })
 
-    return this.storagedbService.getStorage(database).then((data: Array<any>) => {
+    return this.storagedbService.getStorage(database).then(async (data: Array<any>) => {
       // Encontrar un item
-      const dataFounded: any = data.find((value) => value.id === item.id)
+      const dataFounded = data.find((value) => value.id === item.id)
       if (!dataFounded) return
       dataFounded[keyItem] = valueItem // Actualizar campo
 
       // Actualizar almacenamiento
-      this.storagedbService.setStorage(database, data)
+      await this.storagedbService.setStorage(database, data)
     })
   }
 

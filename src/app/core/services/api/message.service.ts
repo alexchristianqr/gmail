@@ -2,37 +2,59 @@ import { Injectable } from '@angular/core'
 import { ApiService } from './api.service'
 import { Message } from '../../types/Message'
 
+type MessagePayload = {
+  id?: string | any
+  conversation_id?: string | any
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
   database: string = 'DB_MESSAGES'
+
   constructor(private apiService: ApiService) {}
 
-  async message(item: Message) {
-    console.log('[MessageService.message]')
+  async message(payload: MessagePayload) {
+    console.log('[MessageService.message]', { payload })
 
     return this.apiService.getItems(this.database).then((res: Array<Message>) => {
-      return res.find((value: Message) => value.id === item.id)
+      return res.find((value: Message) => {
+        if (payload.hasOwnProperty('id')) {
+          return value.id === payload.id
+        } else if (payload.hasOwnProperty('conversation_id')) {
+          return value.conversation_id === payload.conversation_id
+        } else {
+          return null
+        }
+      })
     })
   }
 
-  async messages() {
-    console.log('[MessageService.messages]')
+  async messages(payload?: MessagePayload) {
+    console.log('[MessageService.messages]', { payload })
 
-    return this.apiService.getItems(this.database)
+    return this.apiService.getItems(this.database).then((res: Array<Message>) => {
+      if (!payload) return res
+      return res.filter((value: Message) => {
+        if (payload.hasOwnProperty('id')) {
+          return value.id === payload.id
+        } else if (payload.hasOwnProperty('conversation_id')) {
+          return value.conversation_id === payload.conversation_id
+        } else {
+          return []
+        }
+      })
+    })
   }
 
-  async create(item: Message) {
+  async createMessage(item: Message) {
     console.log('[MessageService.create]', { item })
 
-    const message: Message = {
-      ...item,
-    }
-    return this.apiService.createItem(this.database, message)
+    return this.apiService.createItem(this.database, item)
   }
 
-  async update(item: Message, keyItem: string, valueItem: any) {
+  async updateMessage(item: Message, keyItem: string, valueItem: any) {
     console.log('[MessageService.update]', { item })
 
     return this.apiService.updateItem(this.database, item, keyItem, valueItem)

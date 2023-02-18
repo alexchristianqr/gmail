@@ -12,6 +12,7 @@ import { UtilsService } from '../../../core/services/utils/utils.service'
 import { StarredService } from '../../starred/starred.service'
 import { Conversation } from '../../../core/types/Conversation'
 import { InboxService } from '../inbox.service'
+import { Subscription } from 'rxjs'
 
 interface AccordionGroupChangeEventDetail<T = any> {
   value: T
@@ -158,13 +159,6 @@ export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
 
     // Action API
     this.starredService.removeOrCreate(this.item).then(async (res) => {
-      // if (value) {
-      //   await res.create()
-      // } else {
-      //   await res.remove()
-      // }
-
-      // this.updateMessage(key, value, message, disabledRoute, disabledToast)
       this.starredService.updateItem(this.myDatabase, this.item, key, value).then(async () => {
         if (!disabledRoute) {
           await this.back() // Volver a la página anterior
@@ -174,6 +168,23 @@ export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
         }
       })
     })
+  }
+
+  async viewCreatePage(item: any, fromTo: boolean = false) {
+    console.log('[DetailInbox.viewCreatePage]')
+
+    // Set
+    const itemData = { ...item }
+
+    // Actualizar From/To email
+    if (fromTo) {
+      const itemFrom = itemData.from
+      itemData.from = itemData.to
+      itemData.to = itemFrom
+    }
+
+    const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/inbox-detail', item: itemData }
+    await this.router.navigate(['mail/create'], { state: data })
   }
 
   async presentPopover(event: Event) {

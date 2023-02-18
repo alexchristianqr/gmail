@@ -74,14 +74,14 @@
               <div [innerHTML]="message?.message" style="white-space: pre-line; text-align: justify; text-justify: inter-word"></div>
             </ion-col>
             <ion-col size="12">
-              <div class="ion-float-left">
+              <div class="ion-float-left" (click)="viewCreatePage(message,false)">
                 <ion-button fill="clear" slot="end" color="danger">
                   <ion-icon slot="icon-only" name="return-up-forward-outline"></ion-icon>
                   <ion-text>&nbsp;Reenviar</ion-text>
                 </ion-button>
               </div>
               <div class="ion-float-right">
-                <ion-button fill="clear" slot="start" color="danger">
+                <ion-button fill="clear" slot="start" color="danger" (click)="viewCreatePage(message, true)">
                   <ion-icon slot="icon-only" name="return-up-back-outline"></ion-icon>
                   <ion-text>&nbsp;Responder</ion-text>
                 </ion-button>

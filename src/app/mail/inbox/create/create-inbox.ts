@@ -53,14 +53,14 @@ export class CreateInbox implements OnInit {
 
     return this.formBuilder.group({
       id: this.formBuilder.control(null, [Validators.required]),
-      conversation_id: this.formBuilder.control(null, [Validators.required]),
+      conversation_id: this.formBuilder.control(this.data?.item?.conversation_id, [Validators.required]),
       uid: this.formBuilder.control(null, [Validators.required]),
-      database: this.formBuilder.control(this.data.database, [Validators.required]),
-      name: this.formBuilder.control(null, [Validators.required]),
-      subject: this.formBuilder.control(null, [Validators.required]),
+      database: this.formBuilder.control(this.data?.database, [Validators.required]),
+      name: this.formBuilder.control(this.data?.item?.name, [Validators.required]),
+      subject: this.formBuilder.control(this.data?.item?.subject, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
-      from: this.formBuilder.control('alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
-      to: this.formBuilder.control('teacher2022@utp.edu.pe', [Validators.required, Validators.email]),
+      from: this.formBuilder.control(this.data?.item?.from || 'alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
+      to: this.formBuilder.control(this.data?.item?.to || 'teacher2022@utp.edu.pe', [Validators.required, Validators.email]),
       is_read: this.formBuilder.control(false, [Validators.required]),
       created_at: this.formBuilder.control(Date.now(), [Validators.required]),
     })
@@ -79,8 +79,12 @@ export class CreateInbox implements OnInit {
     this.formGroup.patchValue({ id: uniqueMessageUID })
     this.formGroup.patchValue({ uid: uniqueMessageUID })
 
-    const uniqueConversationUID = await this.getUniqueUID()
-    this.formGroup.patchValue({ conversation_id: uniqueConversationUID })
+    // Obtener Conversation ID
+    const { conversation_id } = this.formGroup.value
+    if (!conversation_id) {
+      const uniqueConversationUID = await this.getUniqueUID()
+      this.formGroup.patchValue({ conversation_id: uniqueConversationUID })
+    }
 
     // Detener envío del formulario
     if (this.formGroup.invalid) {
@@ -97,7 +101,7 @@ export class CreateInbox implements OnInit {
         .createItem(item)
         .then(async () => {
           this.eventService.publish() // Emitir evento de actualización
-          await this.router.navigate(['mail/sent'])
+          await this.router.navigate(['mail/inbox'])
         })
         .catch((error) => {
           console.error(error)
