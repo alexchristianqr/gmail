@@ -55,15 +55,17 @@ export class CreateInbox implements OnInit {
       id: this.formBuilder.control(null, [Validators.required]),
       conversation_id: this.formBuilder.control(this.data?.item?.conversation_id, [Validators.required]),
       participant_id: this.formBuilder.control(this.data?.item?.participant_id, [Validators.required]),
-      participant: this.formBuilder.control(this.data?.item?.participant, [Validators.required]),
-      database: this.formBuilder.control(this.data?.database, [Validators.required]),
-      name: this.formBuilder.control(this.data?.item?.fromEmail?.participant?.fullName, [Validators.required]),
-      subject: this.formBuilder.control(this.data?.item?.subject, [Validators.required]),
+      fullName: this.formBuilder.control(this.data?.item?.from?.participant?.fullName, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
-      from: this.formBuilder.control(this.data?.item?.fromEmail?.email || 'alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
-      fromEmail: this.formBuilder.control(this.data?.item?.fromEmail || '@utp.edu.pe', [Validators.required]),
-      to: this.formBuilder.control(this.data?.item?.toEmail?.email || 'teacher2022@utp.edu.pe', [Validators.required, Validators.email]),
-      toEmail: this.formBuilder.control(this.data?.item?.toEmail || '@utp.edu.pe', [Validators.required]),
+      from: this.formBuilder.group({
+        email: this.formBuilder.control(this.data?.item?.from?.email || 'alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
+        participant_id: this.formBuilder.control(this.data?.item?.from?.participant_id, [Validators.required]),
+      }),
+      to: this.formBuilder.group({
+        email: this.formBuilder.control(this.data?.item?.to?.email || 'jackie@utp.edu.pe', [Validators.required, Validators.email]),
+        participant_id: this.formBuilder.control(this.data?.item?.to?.participant_id, [Validators.required]),
+      }),
+      subject: this.formBuilder.control(this.data?.item?.subject, [Validators.required]),
       is_read: this.formBuilder.control(false, [Validators.required]),
       created_at: this.formBuilder.control(Date.now(), [Validators.required]),
     })
@@ -82,13 +84,13 @@ export class CreateInbox implements OnInit {
     this.formGroup.patchValue({ id: uniqueMessageUID })
 
     // Obtener Conversation ID
-    const { conversation_id, from, fromEmail, to, toEmail } = this.formGroup.value
+    const { conversation_id } = this.formGroup.value
     if (!conversation_id) {
       const uniqueConversationUID = await this.getUniqueUID()
       this.formGroup.patchValue({ conversation_id: uniqueConversationUID })
     }
-    this.formGroup.patchValue({ fromEmail: { ...fromEmail, email: from } })
-    this.formGroup.patchValue({ toEmail: { ...toEmail, email: to } })
+    // this.formGroup.patchValue({ fromEmail: { ...fromEmail, email: from } })
+    // this.formGroup.patchValue({ toEmail: { ...toEmail, email: to } })
 
     // Detener envío del formulario
     if (this.formGroup.invalid) {

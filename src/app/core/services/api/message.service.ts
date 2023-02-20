@@ -39,8 +39,8 @@ export class MessageService {
       return res.filter(async (value: Message) => {
         // Set
         value.participant = await this.participantService.participant({ id: value.participant_id })
-        value.fromEmail.participant = await this.participantService.participant({ id: value.fromEmail.participant_id })
-        value.toEmail.participant = await this.participantService.participant({ id: value.toEmail.participant_id })
+        value.from.participant = await this.participantService.participant({ id: value.from.participant_id })
+        value.to.participant = await this.participantService.participant({ id: value.to.participant_id })
 
         // Obtener todos los registros
         if (!payload) return true

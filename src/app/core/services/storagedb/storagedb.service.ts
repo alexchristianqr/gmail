@@ -13,11 +13,11 @@ export class StoragedbService {
   conversations: Array<Conversation> = [
     {
       id: '1',
+      participant_id: '2',
       name: 'Alex Christian',
       subject: 'Matricula Marzo 2023',
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      participant_id: '2',
       messages: [],
       is_starred: true,
       is_read: false,
@@ -27,36 +27,30 @@ export class StoragedbService {
   messages: Array<Message> = [
     {
       id: '1',
-      conversation_id: '1',
       participant_id: '1',
+      conversation_id: '1',
       created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'alexchristianqr@utp.edu.pe',
-      fromEmail: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
-      to: 'jacky@utp.edu.pe',
-      toEmail: { email: 'jacky@utp.edu.pe', participant_id: '2' },
+      from: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
+      to: { email: 'jacky@utp.edu.pe', participant_id: '2' },
       is_read: false,
       is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Alex Christian',
+      fullName: 'Alex Christian',
       subject: 'Matricula Marzo 2023',
     },
     {
       id: '2',
-      conversation_id: '1',
       participant_id: '2',
+      conversation_id: '1',
       created_at: '2023-01-25 11:50',
-      database: 'DATABASE_INBOX',
-      from: 'jacky@utp.edu.pe',
-      fromEmail: { email: 'jacky@utp.edu.pe', participant_id: '2' },
-      to: 'alexchristianqr@utp.edu.pe',
-      toEmail: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
+      from: { email: 'jacky@utp.edu.pe', participant_id: '2' },
+      to: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
       is_read: false,
       is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      name: 'Jacky',
+      fullName: 'Jacky',
       subject: 'Matricula Marzo 2023',
     },
   ]

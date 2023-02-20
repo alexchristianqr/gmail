@@ -65,6 +65,7 @@ export class ConversationService {
   async createConversation(item: any) {
     console.log('[ConversationService.createConversation]', { item })
 
+    // Set
     const messages: Array<any> = [{ ...item }]
     const conversation: Conversation = {
       ...item,
@@ -72,6 +73,8 @@ export class ConversationService {
       participant: item.participant,
       messages: messages,
     }
+
+    // API
     return this.apiService.createItem(this.database, conversation)
   }
 
@@ -84,13 +87,14 @@ export class ConversationService {
   async updateConversationMessages(item: any) {
     console.log('[ConversationService.updateConversationMessages]', { item })
 
-    const participant_id = item.fromEmail.participant_id
-
+    // Set
     const conversation = await this.conversation({ id: item.conversation_id })
     if (!conversation) return
     const messages: Array<any> = [...conversation.messages, { ...item }]
+    const participant_id = item.from.participant_id
 
+    // API
     await this.updateConversation(conversation, 'participant_id', participant_id)
-    return this.updateConversation(conversation, 'messages', messages)
+    await this.updateConversation(conversation, 'messages', messages)
   }
 }

@@ -19,27 +19,27 @@
 <ion-content>
   <form [formGroup]="formGroup">
     <ion-list>
+      <!--      <ion-item>-->
+      <!--        <ion-label>Base de datos</ion-label>-->
+      <!--        <ion-select interface="popover" formControlName="database">-->
+      <!--          <ion-select-option value="DATABASE_INBOX" [disabled]="true">Inbox</ion-select-option>-->
+      <!--          <ion-select-option value="DATABASE_SENT" [disabled]="true">Sent</ion-select-option>-->
+      <!--        </ion-select>-->
+      <!--      </ion-item>-->
       <ion-item>
-        <ion-label>Base de datos</ion-label>
-        <ion-select interface="popover" formControlName="database">
-          <ion-select-option value="DATABASE_INBOX" [disabled]="true">Inbox</ion-select-option>
-          <ion-select-option value="DATABASE_SENT" [disabled]="true">Sent</ion-select-option>
-        </ion-select>
+        <ion-label>Nombre</ion-label>
+        <ion-input formControlName="fullName" type="text" value="{{formGroup}}"></ion-input>
+      </ion-item>
+      <ion-item [formGroupName]="'from'">
+        <ion-label>De</ion-label>
+        <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
+      </ion-item>
+      <ion-item [formGroupName]="'to'">
+        <ion-label>Para</ion-label>
+        <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-input formControlName="name" type="text" value="{{formGroup}}"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>From</ion-label>
-        <ion-input formControlName="from" type="text" value="{{formGroup}}"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>To</ion-label>
-        <ion-input formControlName="to" type="text" value="{{formGroup}}"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Subject</ion-label>
+        <ion-label>Asunto</ion-label>
         <ion-input formControlName="subject" type="text" value="{{formGroup}}"></ion-input>
       </ion-item>
       <ion-item>

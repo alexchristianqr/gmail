@@ -80,7 +80,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (!data) return
         this.items = data.filter((value: Message) => {
           return (
-            value.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
+            value.fullName.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
             value.subject.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
             value.message.toLowerCase().indexOf(searchText.toLowerCase()) > -1
           )

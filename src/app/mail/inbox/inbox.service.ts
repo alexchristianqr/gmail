@@ -22,6 +22,7 @@ export class InboxService {
     console.log('[InboxService.getItems]')
 
     const conversations = await this.conversationService.convesations()
+    console.log('aquiiii', conversations)
     for (let conversation of conversations) {
       const messages = await this.messageService.messages({ conversation_id: conversation.id })
       messages.sort((a, b) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
