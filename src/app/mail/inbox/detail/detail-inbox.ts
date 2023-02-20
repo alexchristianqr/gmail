@@ -3,7 +3,6 @@ import { ApiService } from '../../../core/services/api/api.service'
 import { PopoverDetailInbox } from './layouts/popover-detail-inbox'
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router'
-import { Message } from '../../../core/types/Message'
 import { MyParams } from '../../../core/types/MyParams'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { EventService } from '../../../core/services/events/event.service'
@@ -12,20 +11,14 @@ import { UtilsService } from '../../../core/services/utils/utils.service'
 import { StarredService } from '../../starred/starred.service'
 import { Conversation } from '../../../core/types/Conversation'
 import { InboxService } from '../inbox.service'
-import { Subscription } from 'rxjs'
-
-interface AccordionGroupChangeEventDetail<T = any> {
-  value: T
-}
 
 @Component({
   selector: 'app-detail-inbox',
   templateUrl: 'detail-inbox.html',
   styleUrls: ['detail-inbox.scss'],
 })
-export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
+export class DetailInbox implements OnInit {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  // myDatabase: string = 'DATABASE_INBOX'
   myDatabase: string = 'DB_CONVERSATIONS'
   data: MyParams | any
   item: Conversation | undefined
@@ -34,7 +27,7 @@ export class DetailInbox implements OnInit, AccordionGroupChangeEventDetail {
   constructor(
     private inboxService: InboxService,
     private starredService: StarredService,
-    private utilsService: UtilsService,
+    public utilsService: UtilsService,
     private eventService: EventService,
     private apiService: ApiService,
     private storage: Storage,

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { AlertController, PopoverController, ToastController } from '@ionic/angular'
+import * as dayjs from 'dayjs'
 
 type MyToast = {
   message?: string
@@ -35,6 +36,9 @@ type MyPopover = {
 export class UtilsService {
   constructor(private toastController: ToastController, private alertController: AlertController, private popoverCtrl: PopoverController) {}
 
+  formatDate(date?: Date | string | number, format: string = 'Y-MM-DD HH:mm:ss') {
+    return dayjs(date).format(format)
+  }
   async presentToast(payload: MyToast) {
     console.log('[UtilsService.presentToast]')
 
