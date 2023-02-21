@@ -107,7 +107,7 @@ export class CreateInbox implements OnInit {
       return this.sentService
         .createItem(item)
         .then(() => {
-          this.eventService.publish() // Emitir evento de actualización
+          // this.eventService.publish() // Emitir evento de actualización
           this.router.navigate(['mail/inbox'])
         })
         .catch((error) => {

@@ -55,7 +55,7 @@ export class DetailInbox implements OnInit {
   async back() {
     console.log('[DetailInbox.back]')
 
-    this.eventService.publish(this.item)
+    // this.eventService.publish(this.item)
     await this.router.navigate([this.data.path])
   }
 

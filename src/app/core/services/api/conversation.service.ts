@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { ApiService } from './api.service'
 import { Conversation } from '../../types/Conversation'
 import { ParticipantService } from './participant.service'
+import { EventService } from '../events/event.service'
 
 type ConversationPayload = {
   id?: string | any
@@ -13,7 +14,7 @@ type ConversationPayload = {
 })
 export class ConversationService {
   database: string = 'DB_CONVERSATIONS'
-  constructor(private apiService: ApiService, private participantService: ParticipantService) {}
+  constructor(private apiService: ApiService, private participantService: ParticipantService, private eventService: EventService) {}
 
   async conversation(payload: ConversationPayload) {
     console.log('[ConversationService.conversation]', { payload })
@@ -92,9 +93,12 @@ export class ConversationService {
     if (!conversation) return
     const messages: Array<any> = [...conversation.messages, { ...item }]
     const participant_id = item.from.participant_id
+    const is_read = item.is_read
 
     // API
-    await this.updateConversation(conversation, 'participant_id', participant_id)
+    await this.updateConversation(conversation, 'is_read', is_read)
     await this.updateConversation(conversation, 'messages', messages)
+    await this.updateConversation(conversation, 'participant_id', participant_id)
+    this.eventService.publish() // Emitir evento de actualización
   }
 }
