@@ -2,11 +2,12 @@ import { Message } from './Message'
 import { Participant } from './Participant'
 
 export type Conversation = {
+  uuid?: string
   id: string
   name: string
   message?: string
   participant_id?: string
-  participant?: Participant
+  participant?: Participant | undefined | null | void
   messages: Array<Message>
   subject: string
   is_read: boolean | undefined

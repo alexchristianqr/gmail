@@ -3,6 +3,7 @@ import uuid from 'uuidv4'
 import { StoragedbService } from '../storagedb/storagedb.service'
 import { MyPreferences } from '../../types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
+import { FirebaseService } from './firebase.service'
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { SHARED_PREFERENCES } from '../../../shared-preferences'
 export class ApiService {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
 
-  constructor(private storagedbService: StoragedbService) {
+  constructor(private storagedbService: StoragedbService, private firebaseService: FirebaseService) {
     console.log('[ApiService.constructor]')
   }
 
@@ -21,12 +22,22 @@ export class ApiService {
   async getItems(database: string) {
     console.log('[ApiService.getItems]', { database })
 
-    return this.storagedbService.loadSharedPreferences().then((data: MyPreferences) => {
-      this.MY_SHARED_PREFERENCES.SETTINGS = data.SETTINGS
-      return this.storagedbService.loadDatabaseStorage(database).then((data: Array<any>) => {
-        return data // Lista de orden ASC
-      })
-    })
+    return this.firebaseService.getCollection(database)
+    // return this.firebaseService.getCollection('conversations')
+    // console.log({dataList})
+    // await this.firebaseService.setCollection('participants', {
+    //   // id: '1',
+    //   created_at: '2023-01-25 11:50',
+    //   email: 'alexchristianqr@utp.edu.pe',
+    //   fullName: 'Alex Quispe',
+    // })
+    //
+    // return this.storagedbService.loadSharedPreferences().then((data: MyPreferences) => {
+    //   this.MY_SHARED_PREFERENCES.SETTINGS = data.SETTINGS
+    //   return this.storagedbService.loadDatabaseStorage(database).then((data: Array<any>) => {
+    //     return data // Lista de orden ASC
+    //   })
+    // })
   }
 
   /**
@@ -92,7 +103,8 @@ export class ApiService {
   async purgeItems(database: string) {
     console.log('[ApiService.purgeItems]')
 
-    return this.storagedbService.removeStorage(database)
+    // return this.storagedbService.removeStorage(database)
+    return this.firebaseService.purgeCollection(database)
   }
 
   /**

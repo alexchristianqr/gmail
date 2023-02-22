@@ -30,6 +30,7 @@
     "@ionic/storage": "^3.0.6",
     "@ionic/storage-angular": "^3.0.6",
     "dayjs": "^1.11.7",
+    "firebase": "^9.17.1",
     "ionicons": "^6.0.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

@@ -49,12 +49,13 @@ export class CreateInbox implements OnInit {
   }
 
   formGroupInitialize(): FormGroup {
-    console.log('[CreateInbox.formGroupInitialize]')
+    console.log('[CreateInbox.formGroupInitialize]', this.data)
 
     return this.formBuilder.group({
+      uuid: this.formBuilder.control(null, [Validators.required]),
       id: this.formBuilder.control(null, [Validators.required]),
       conversation_id: this.formBuilder.control(this.data?.item?.conversation_id, [Validators.required]),
-      participant_id: this.formBuilder.control(this.data?.item?.participant_id, [Validators.required]),
+      // participant_id: this.formBuilder.control(this.data?.item?.participant_id, [Validators.required]),
       fullName: this.formBuilder.control(this.data?.item?.from?.participant?.fullName, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
       from: this.formBuilder.group({
@@ -82,6 +83,7 @@ export class CreateInbox implements OnInit {
     // Obtener UID
     const uniqueMessageUID = await this.getUniqueUID()
     this.formGroup.patchValue({ id: uniqueMessageUID })
+    this.formGroup.patchValue({ uuid: uniqueMessageUID })
 
     // Obtener Conversation ID
     const { conversation_id } = this.formGroup.value
@@ -89,8 +91,6 @@ export class CreateInbox implements OnInit {
       const uniqueConversationUID = await this.getUniqueUID()
       this.formGroup.patchValue({ conversation_id: uniqueConversationUID })
     }
-    // this.formGroup.patchValue({ fromEmail: { ...fromEmail, email: from } })
-    // this.formGroup.patchValue({ toEmail: { ...toEmail, email: to } })
 
     // Detener envío del formulario
     if (this.formGroup.invalid) {
@@ -107,7 +107,7 @@ export class CreateInbox implements OnInit {
       return this.sentService
         .createItem(item)
         .then(() => {
-          // this.eventService.publish() // Emitir evento de actualización
+          this.eventService.publish() // Emitir evento de actualización
           this.router.navigate(['mail/inbox'])
         })
         .catch((error) => {

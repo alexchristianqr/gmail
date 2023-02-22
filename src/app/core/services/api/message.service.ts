@@ -2,24 +2,31 @@ import { Injectable } from '@angular/core'
 import { ApiService } from './api.service'
 import { Message } from '../../types/Message'
 import { ParticipantService } from './participant.service'
+import { FirebaseService } from './firebase.service'
 
 type MessagePayload = {
   id?: string | any
   conversation_id?: string
+  item?: any
+  dataItem?: any
+  keyItem?: any
+  valueItem?: any
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
-  database: string = 'DB_MESSAGES'
+  database: string = 'messages'
 
-  constructor(private apiService: ApiService, private participantService: ParticipantService) {}
+  constructor(private firebaseService: FirebaseService, private apiService: ApiService, private participantService: ParticipantService) {}
 
   async message(payload: MessagePayload) {
     console.log('[MessageService.message]', { payload })
 
-    return this.apiService.getItems(this.database).then((res: Array<Message>) => {
+    return this.firebaseService.getCollection(this.database).then((res: Array<Message>) => {
+      if (!res) return null
+
       return res.find((value: Message) => {
         if (payload.hasOwnProperty('id')) {
           return value.id === payload.id
@@ -35,12 +42,13 @@ export class MessageService {
   async messages(payload?: MessagePayload) {
     console.log('[MessageService.messages]', { payload })
 
-    return this.apiService.getItems(this.database).then((res: Array<Message>) => {
-      return res.filter(async (value: Message) => {
+    return this.firebaseService.getCollection(this.database).then((res: Array<Message>) => {
+      if (!res) return []
+
+      return res.filter(async (value: Message | any) => {
         // Set
-        value.participant = await this.participantService.participant({ id: value.participant_id })
-        value.from.participant = await this.participantService.participant({ id: value.from.participant_id })
-        value.to.participant = await this.participantService.participant({ id: value.to.participant_id })
+        value.from.participant = await this.participantService.participant({ uuid: value.from.participant_id })
+        value.to.participant = await this.participantService.participant({ uuid: value.to.participant_id })
 
         // Obtener todos los registros
         if (!payload) return true
@@ -58,15 +66,24 @@ export class MessageService {
   }
 
   async createMessage(item: Message) {
-    console.log('[MessageService.create]', { item })
+    console.log('[MessageService.createMessage]', { item })
 
-    item.participant = await this.participantService.participant({ id: item.participant_id })
-    return this.apiService.createItem(this.database, item)
+    // item.participant = await this.participantService.participant({ id: item.participant_id })
+    return this.firebaseService.setCollection(this.database, item)
   }
 
-  async updateMessage(item: Message, keyItem: string, valueItem: any) {
-    console.log('[MessageService.update]', { item })
+  async updateMessage(payload: MessagePayload) {
+    console.log('[MessageService.updateMessage]', { payload })
 
-    return this.apiService.updateItem(this.database, item, keyItem, valueItem)
+    const uuid: string = payload.item.uuid
+    let data: object | any = {}
+    if (payload.keyItem && payload.valueItem.toString()) {
+      data[payload.keyItem] = payload.valueItem
+    }
+    if (payload.dataItem) {
+      data = payload.dataItem
+    }
+
+    return this.firebaseService.updateCollection(this.database, uuid, data)
   }
 }

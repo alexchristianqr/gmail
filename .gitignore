@@ -69,3 +69,4 @@ Thumbs.db
 
 .vscode
 package-lock.json
+firebase.json

@@ -5,6 +5,9 @@ import { Message } from '../../core/types/Message'
 import { MyParams } from '../../core/types/MyParams'
 import { Subscription } from 'rxjs'
 import { EventService } from '../../core/services/events/event.service'
+import { ConversationService } from '../../core/services/api/conversation.service'
+import { Conversation } from '../../core/types/Conversation'
+import { MessageService } from '../../core/services/api/message.service'
 
 @Component({
   selector: 'app-search',
@@ -13,9 +16,9 @@ import { EventService } from '../../core/services/events/event.service'
 export class SearchComponent implements OnInit, OnDestroy {
   data: MyParams | any
   mySubscribe$: Subscription
-  items: Array<Message> = []
+  items: Array<any> = []
 
-  constructor(private eventService: EventService, private apiService: ApiService, private router: Router) {
+  constructor(private messageService: MessageService, private eventService: EventService, private apiService: ApiService, private router: Router, private conversationService: ConversationService) {
     console.log('[SearchComponent.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(async () => {
@@ -49,8 +52,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     await this.router.navigate([this.data.path])
   }
 
-  async fnViewDetail(item: Message) {
-    console.log('[SearchComponent.back]')
+  async fnViewDetail(item: any) {
+    console.log('[SearchComponent.back]', { item })
 
     const data: MyParams = { item: item, path: 'mail/search' }
     await this.router.navigate(['mail/inbox-detail'], { state: data })
@@ -72,22 +75,23 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     // Set items
     this.items = []
+    let data = null
 
     // API
-    return this.apiService
-      .getItems(this.data.database)
-      .then((data: Array<Message>) => {
-        if (!data) return
-        this.items = data.filter((value: Message) => {
-          return (
-            value.fullName.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
-            value.subject.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
-            value.message.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-          )
-        })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    switch (this.data.database) {
+      case 'conversations':
+        const conversations = await this.conversationService.conversations()
+        if (!conversations) return
+
+        // Iterar conversación
+        for (const conversation of conversations) {
+          const messages = await this.messageService.messages({ conversation_id: conversation.uuid })
+          messages.sort((a, b) => (new Date(a.created_at) < new Date(b.created_at) ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+          conversation.messages = messages
+        }
+
+        this.items = conversations.filter((value: any) => value.subject.toLowerCase().indexOf(searchText.toLowerCase()) > -1 || value.message.toLowerCase().indexOf(searchText.toLowerCase()) > -1)
+        break
+    }
   }
 }

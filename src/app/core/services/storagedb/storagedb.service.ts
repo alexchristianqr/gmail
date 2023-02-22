@@ -5,6 +5,7 @@ import { MyPreferences } from '../../types/MyPreferences'
 import { Message } from '../../types/Message'
 import { Conversation } from '../../types/Conversation'
 import { Participant } from '../../types/Participant'
+import { FirebaseService } from '../api/firebase.service'
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,9 @@ import { Participant } from '../../types/Participant'
 export class StoragedbService {
   conversations: Array<Conversation> = [
     {
-      id: '1',
-      participant_id: '2',
+      uuid: '7718f578-02c9-40f7-a9de-951b3345f817',
+      id: '7718f578-02c9-40f7-a9de-951b3345f817',
+      participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
       name: 'Alex Christian',
       subject: 'Matricula Marzo 2023',
       message:
@@ -26,12 +28,13 @@ export class StoragedbService {
   ]
   messages: Array<Message> = [
     {
+      uuid: '09557594-dd44-4b2c-bc94-d9b8a9e1f06f',
       id: '1',
-      participant_id: '1',
-      conversation_id: '1',
+      // participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
+      conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
-      from: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
-      to: { email: 'jacky@utp.edu.pe', participant_id: '2' },
+      from: { email: 'alexchristianqr@utp.edu.pe', participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b' },
+      to: { email: 'jacky@utp.edu.pe', participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a' },
       is_read: false,
       is_starred: false,
       message:
@@ -40,12 +43,13 @@ export class StoragedbService {
       subject: 'Matricula Marzo 2023',
     },
     {
+      uuid: '14671615-c0c6-4e2b-8907-7a633d68da28',
       id: '2',
-      participant_id: '2',
-      conversation_id: '1',
+      // participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
+      conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
-      from: { email: 'jacky@utp.edu.pe', participant_id: '2' },
-      to: { email: 'alexchristianqr@utp.edu.pe', participant_id: '1' },
+      from: { email: 'jacky@utp.edu.pe', participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a' },
+      to: { email: 'alexchristianqr@utp.edu.pe', participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b' },
       is_read: false,
       is_starred: false,
       message:
@@ -56,18 +60,21 @@ export class StoragedbService {
   ]
   participants: Array<Participant> = [
     {
+      uuid: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
       id: '1',
       created_at: '2023-01-25 11:50',
       email: 'alexchristianqr@utp.edu.pe',
       fullName: 'Alex Quispe',
     },
     {
+      uuid: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
       id: '2',
       created_at: '2023-01-25 11:50',
       email: 'jacky@utp.edu.pe',
       fullName: 'Jackie Uchalin',
     },
     {
+      uuid: '09caff06-3940-4729-8889-105a9483b044',
       id: '3',
       created_at: '2023-01-25 11:50',
       email: 'sae@utp.edu.pe',
@@ -76,10 +83,10 @@ export class StoragedbService {
   ]
   private initSharedPreferences: MyPreferences = SHARED_PREFERENCES
   private initVersion: { updated_at: number; version: string } = { updated_at: Date.now(), version: '2.1.*' }
-  public myDatabases: string[] = ['VERSION', 'DB_CONVERSATIONS', 'DB_MESSAGES', 'DB_PARTICIPANTS']
+  public myDatabases: string[] = ['conversations', 'messages', 'participants']
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private firebaseService: FirebaseService) {
     console.log('[StoragedbService.constructor]')
 
     // Inicializar storage
@@ -109,8 +116,8 @@ export class StoragedbService {
   public async loadDatabaseStorage(database: string) {
     console.log('[StoragedbService.loadDatabaseStorage]')
 
-    return this.getStorage(database).then(async (data) => {
-      if (!data) {
+    return this.firebaseService.getCollection(database).then(async (res: any) => {
+      if (!res) {
         if (!SHARED_PREFERENCES.SETTINGS.GENERAL_INITIALIZE_DATABASE) return []
 
         let valuesDatabase: any = []
@@ -120,34 +127,43 @@ export class StoragedbService {
           case 'VERSION':
             valuesDatabase = this.initVersion
             break
-          case 'DB_CONVERSATIONS':
+          case 'conversations':
             valuesDatabase = this.conversations
+            for (const conversation of this.conversations) {
+              await this.firebaseService.setCollection(database, conversation)
+            }
             break
-          case 'DB_MESSAGES':
+          case 'messages':
             valuesDatabase = this.messages
+            for (const message of this.messages) {
+              await this.firebaseService.setCollection(database, message)
+            }
             break
-          case 'DB_PARTICIPANTS':
+          case 'participants':
             valuesDatabase = this.participants
+            for (const participant of this.participants) {
+              await this.firebaseService.setCollection(database, participant)
+            }
             break
         }
 
         // Set database
-        return this.setStorage(database, valuesDatabase).then((data) => {
+        return this.firebaseService.getCollection(database).then((res) => {
           console.log(`Cargar ${database} por defecto`)
-          return data
+          return res
         })
       }
 
       console.log(`Cargar ${database} por caché`)
 
       if (database !== 'VERSION') {
-        return data
+        return res
       }
 
-      if (data.version !== this.initVersion.version) {
-        await this.storage.clear() // Depurar datos
-        await this.eachDatabases() // Iterar bases de datos
-      }
+      // if (data?.version !== this.initVersion.version) {
+      //   await this.storage.clear() // Depurar datos
+      //   await this.eachDatabases() // Iterar bases de datos
+      // }
     })
   }
 
@@ -157,11 +173,11 @@ export class StoragedbService {
   async loadSharedPreferences() {
     console.log('[StoragedbService.loadSharedPreferences]')
 
-    return this.getStorage(this.mySharedPreferences).then((data) => {
-      if (!data) {
-        return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then((data) => {
+    return this.getStorage(this.mySharedPreferences).then((res) => {
+      if (!res) {
+        return this.setStorage(this.mySharedPreferences, this.initSharedPreferences).then((res) => {
           console.log(`Cargar ${this.mySharedPreferences} por defecto`)
-          return data
+          return res
         })
       }
 
@@ -169,13 +185,13 @@ export class StoragedbService {
 
       // Iterar y actualizar
       const CREATE_SHARED_PREFERENCES = Object.create(SHARED_PREFERENCES)
-      for (let item in data.SETTINGS) {
-        CREATE_SHARED_PREFERENCES.SETTINGS[item] = data.SETTINGS[item]
+      for (let item in res.SETTINGS) {
+        CREATE_SHARED_PREFERENCES.SETTINGS[item] = res.SETTINGS[item]
       }
 
       // Actualizar prefencias del usuario
       SHARED_PREFERENCES.SETTINGS = CREATE_SHARED_PREFERENCES.SETTINGS
-      return data
+      return res
     })
   }
 

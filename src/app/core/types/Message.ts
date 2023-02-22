@@ -1,10 +1,11 @@
 import { Participant } from './Participant'
 
 export type Message = {
-  id?: string
+  uuid?: string
+  id: string
   conversation_id?: string
   participant_id?: string
-  participant?: Participant
+  participant?: Participant | null
   fullName: string
   subject: string
   message: string

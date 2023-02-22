@@ -21,4 +21,16 @@ export class EventService {
     console.log('refreshSource$ ->', this.refreshSource$)
     this.dataSource.next(value)
   }
+
+  emitEvent(value?: any): void {
+    console.log('[EventService.emitEvent]', { value })
+    console.log('refreshSource$ ->', this.refreshSource$)
+    this.dataSource.next(value)
+  }
+
+  createEvent(value?: any) {
+    console.log('[EventService.createEvent]', { value })
+    console.log('refreshSource$ ->', this.refreshSource$)
+    return this.dataSource.asObservable()
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core'
+import { Component, OnDestroy } from '@angular/core'
 import { MyPreferences } from '../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { Subscription } from 'rxjs'
@@ -16,7 +16,6 @@ import { StarredService } from '../starred.service'
   templateUrl: 'list-starred.html',
 })
 export class ListStarred implements OnDestroy {
-  @ViewChild('popover') popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   mySubscribe$: Subscription
   items: Array<Message> | any = []

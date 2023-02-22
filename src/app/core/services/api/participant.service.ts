@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core'
 import { ApiService } from './api.service'
 import { Participant } from '../../types/Participant'
+import { FirebaseService } from './firebase.service'
 
 type ParticipantPayload = {
+  uuid?: string | any
   id?: string | any
   email?: string
 }
@@ -11,23 +13,16 @@ type ParticipantPayload = {
   providedIn: 'root',
 })
 export class ParticipantService {
-  database: string = 'DB_PARTICIPANTS'
+  database: string = 'participants'
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private firebaseService: FirebaseService) {}
 
   async participant(payload: ParticipantPayload) {
     console.log('[ParticipantService.participant]', { payload })
 
-    return this.apiService.getItems(this.database).then((res: Array<Participant>) => {
-      return res.find((value: Participant) => {
-        if (payload.hasOwnProperty('id')) {
-          return value.id === payload.id
-        } else if (payload.hasOwnProperty('email')) {
-          return value.email === payload.email
-        } else {
-          return null
-        }
-      })
+    return this.firebaseService.oneCollection(this.database, payload.uuid).then((res: Participant | any) => {
+      if (!res) return null
+      return res
     })
   }
 }

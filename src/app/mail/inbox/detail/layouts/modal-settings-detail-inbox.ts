@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { ApiService } from '../../../../core/services/api/api.service'
 import { Router } from '@angular/router'
 import { MyPreferences } from '../../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../../shared-preferences'

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core'
+import { Component, OnDestroy } from '@angular/core'
 import { ApiService } from '../../../core/services/api/api.service'
 import { PopoverListInbox } from './layouts/popover-list-inbox'
 import { Router } from '@angular/router'
@@ -16,8 +16,6 @@ import { InboxService } from '../inbox.service'
   templateUrl: 'list-inbox.html',
 })
 export class ListInbox implements OnDestroy {
-  @ViewChild('popover')
-  popover: any
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   mySubscribe$: Subscription
   items: Array<Message> | any = []
@@ -25,6 +23,7 @@ export class ListInbox implements OnDestroy {
   constructor(private inboxService: InboxService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListInbox.constructor]')
 
+    // this.mySubscribe$ = this.eventService.createEvent().subscribe(() => this.listInbox())
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())
     this.listInbox().then()
   }
@@ -62,14 +61,14 @@ export class ListInbox implements OnDestroy {
   async viewSearch() {
     console.log('[ListInbox.fnViewSearch]')
 
-    const data: MyParams = { database: 'DATABASE_INBOX', path: 'mail/inbox' }
+    const data: MyParams = { database: 'conversations', path: 'mail/inbox' }
     await this.router.navigate(['mail/search'], { state: data })
   }
 
   async viewCreatePage() {
     console.log('[ListInbox.viewCreatePage]')
 
-    const data: MyParams = { database: 'DATABASE_SENT', path: 'mail/inbox' }
+    const data: MyParams = { path: 'mail/inbox' }
     await this.router.navigate(['mail/create'], { state: data })
   }
 

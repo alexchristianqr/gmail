@@ -19,7 +19,6 @@ import { InboxService } from '../inbox.service'
 })
 export class DetailInbox implements OnInit {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
-  myDatabase: string = 'DB_CONVERSATIONS'
   data: MyParams | any
   item: Conversation | undefined
   value: any
@@ -55,7 +54,6 @@ export class DetailInbox implements OnInit {
   async back() {
     console.log('[DetailInbox.back]')
 
-    // this.eventService.publish(this.item)
     await this.router.navigate([this.data.path])
   }
 
@@ -94,17 +92,24 @@ export class DetailInbox implements OnInit {
   }
 
   /**
-   * Actualizar mensaje
-   * @param key
+   * Actualizar mensaje como leído o no leído
    * @param value
    * @param message
-   * @param disabledRoute
-   * @param disabledToast
    */
-  updateMessage(key: string, value: any, message: string, disabledRoute: boolean = true, disabledToast: boolean = true) {
-    console.log('[DetailInbox.updateMessage]')
+  readUnreadMessage(value: boolean, message: string) {
+    console.log('[DetailInbox.readUnreadMessage]')
 
-    this.inboxService.updateItem(this.item, key, value).then(async () => {
+    // Error exception
+    if (!this.item) return
+
+    // Control UI
+    const key = 'is_read'
+    this.item.is_read = value
+    const disabledRoute: boolean = value
+    const disabledToast: boolean = value
+
+    // Action API
+    return this.inboxService.updateItem(this.item, key, value).then(async () => {
       if (!disabledRoute) {
         await this.back() // Volver a la página anterior
       }
@@ -115,51 +120,30 @@ export class DetailInbox implements OnInit {
   }
 
   /**
-   * Actualizar mensaje como leído o no leído
-   * @param value
-   * @param message
-   */
-  readUnreadMessage(value: boolean, message: string) {
-    console.log('[DetailInbox.readUnreadMessage]')
-
-    // Actualizar atributo de base de datos
-    if (!this.item) return
-    this.item.is_read = value
-
-    // Control UI
-    const key = 'is_read'
-
-    // Action API
-    this.updateMessage(key, value, message, value, value)
-  }
-
-  /**
    * Actualizar mensaje como destacado
    * @param message
    */
   starredMessage(message: string): void {
     console.log('[DetailInbox.starredMessage]')
 
-    // Actualizar atributo de base de datos
+    // Error exception
     if (!this.item) return
-    this.item.is_starred = !this.item.is_starred
 
     // Control UI
     const key = 'is_starred'
-    const value = this.item.is_starred
+    this.item.is_starred = !this.item.is_starred
+    const value: boolean = this.item.is_starred
     const disabledRoute: boolean = false
     const disabledToast: boolean = !value
 
     // Action API
-    this.starredService.removeOrCreate(this.item).then(async (res) => {
-      this.starredService.updateItem(this.myDatabase, this.item, key, value).then(async () => {
-        if (!disabledRoute) {
-          await this.back() // Volver a la página anterior
-        }
-        if (!disabledToast) {
-          await this.presentToast(message) // Mostrar toast notificación
-        }
-      })
+    this.starredService.updateItem(this.item, key, value).then(async () => {
+      if (!disabledRoute) {
+        await this.back() // Volver a la página anterior
+      }
+      if (!disabledToast) {
+        await this.presentToast(message) // Mostrar toast notificación
+      }
     })
   }
 
@@ -176,7 +160,7 @@ export class DetailInbox implements OnInit {
       itemData.to = itemFrom
     }
 
-    const data: MyParams = { database: 'DB_CONVERSATIONS', path: 'mail/inbox-detail', item: itemData }
+    const data: MyParams = { path: 'mail/inbox-detail', item: itemData }
     await this.router.navigate(['mail/create'], { state: data })
   }
 
