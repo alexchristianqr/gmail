@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { SHARED_PREFERENCES } from '../../shared-preferences'
 import { MyPreferences } from '../../core/types/MyPreferences'
-import { ApiService } from '../../core/services/api/api.service'
 import { MessageService } from '../../core/services/api/message.service'
 import { ConversationService } from '../../core/services/api/conversation.service'
 
@@ -11,7 +10,7 @@ import { ConversationService } from '../../core/services/api/conversation.servic
 export class SentService {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
 
-  constructor(private apiService: ApiService, private messageService: MessageService, private conversationService: ConversationService) {
+  constructor(private messageService: MessageService, private conversationService: ConversationService) {
     console.log('[SentService.constructor]')
   }
 
@@ -38,12 +37,16 @@ export class SentService {
     console.log('[SentService.createItem]', { item })
 
     await this.messageService.createMessage(item)
-    // return this.conversationService.existsConversation(item).then((res) => {
-    //   if (res) {
-    //     this.conversationService.updateConversationMessages(item)
-    //   } else {
-    //     this.conversationService.createConversation(item)
-    //   }
-    // })
+    return this.conversationService.existsConversation(item).then((res) => {
+      if (!res) return this.conversationService.createConversation(item)
+
+      const id = item.conversation_id
+      return this.conversationService.updateConversation(id, {
+        dataItem: {
+          participant_id: item.from.participant_id,
+          is_read: false,
+        },
+      })
+    })
   }
 }

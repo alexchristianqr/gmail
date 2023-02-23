@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core'
-import { ApiService } from './api.service'
 import { Conversation } from '../../types/Conversation'
 import { ParticipantService } from './participant.service'
-import { EventService } from '../events/event.service'
 import { FirebaseService } from './firebase.service'
+import { Message } from '../../types/Message'
 
 type ConversationPayload = {
   id?: string
@@ -20,12 +19,11 @@ type ConversationPayload = {
 export class ConversationService {
   database: string = 'conversations'
 
-  constructor(private firebaseService: FirebaseService, private apiService: ApiService, private participantService: ParticipantService, private eventService: EventService) {}
+  constructor(private firebaseService: FirebaseService, private participantService: ParticipantService) {}
 
-  async conversation(payload: ConversationPayload) {
-    console.log('[ConversationService.conversation]', { payload })
+  async conversation(id: string) {
+    console.log('[ConversationService.conversation]', { id })
 
-    const id: string = payload.item.id
     return this.firebaseService.oneCollection(this.database, id).then((res: any) => {
       if (!res) return null
       return res
@@ -40,7 +38,8 @@ export class ConversationService {
 
       return res.filter(async (value: Conversation) => {
         // Obtener participante
-        value.participant = await this.participantService.participant({ id: value.participant_id })
+        const id: string | any = value.participant_id
+        value.participant = await this.participantService.participant(id)
 
         // Obtener todos los registros
         if (!payload) return true
@@ -57,26 +56,24 @@ export class ConversationService {
     })
   }
 
-  async createConversation(item: Conversation | any) {
+  async createConversation(item: any) {
     console.log('[ConversationService.createConversation]', { item })
 
     // Set
-    const messages: Array<any> = [{ ...item }]
+    // const messages: Array<any> = [{ ...item }]
     const conversation: Conversation = {
       ...item,
-      id: item.conversation_id,
-      participant: item.participant,
-      messages: messages,
+      participant_id: item.from.participant_id,
+      is_read: false,
     }
 
     // API
     return this.firebaseService.setCollection(this.database, conversation)
   }
 
-  async updateConversation(payload: ConversationPayload) {
+  async updateConversation(id: string, payload: ConversationPayload) {
     console.log('[ConversationService.updateConversation]', { payload })
 
-    const id: string = payload.item.id
     let data: object | any = {}
     if (payload.keyItem && payload.valueItem.toString()) {
       data[payload.keyItem] = payload.valueItem
@@ -88,8 +85,16 @@ export class ConversationService {
     return this.firebaseService.updateCollection(this.database, id, data)
   }
 
-  async deleteConversation(payload: ConversationPayload) {
-    const id = payload.item.id
+  async deleteConversation(id: string, payload?: ConversationPayload) {
     return this.firebaseService.deleteCollection(this.database, id)
+  }
+
+  async existsConversation(item: any): Promise<boolean> {
+    console.log('[ConversationService.existsConversation]', { item })
+
+    const id = item.conversation_id
+    return this.conversation(id).then((res: Conversation) => {
+      return !!res
+    })
   }
 }

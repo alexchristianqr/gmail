@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core'
 import { SHARED_PREFERENCES } from '../../shared-preferences'
 import { MyPreferences } from '../../core/types/MyPreferences'
-import { ApiService } from '../../core/services/api/api.service'
-import { Message } from '../../core/types/Message'
 import { FirebaseService } from '../../core/services/api/firebase.service'
 import { ConversationService } from '../../core/services/api/conversation.service'
 import { MessageService } from '../../core/services/api/message.service'
@@ -13,7 +11,7 @@ import { MessageService } from '../../core/services/api/message.service'
 export class StarredService {
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
 
-  constructor(private messageService: MessageService, private firebaseService: FirebaseService, private apiService: ApiService, private conversationService: ConversationService) {
+  constructor(private messageService: MessageService, private firebaseService: FirebaseService, private conversationService: ConversationService) {
     console.log('[StarredService.constructor]')
   }
 
@@ -36,11 +34,11 @@ export class StarredService {
     return conversations
   }
 
-  async updateItem(item: Message | any, keyItem: string, valueItem: any) {
+  async updateItem(item: any, keyItem: string, valueItem: any) {
     console.log('[StarredService.updateItem]', { keyItem, valueItem })
 
-    return this.conversationService.updateConversation({
-      item: item,
+    const id = item.id
+    return this.conversationService.updateConversation(id, {
       keyItem: keyItem,
       valueItem: valueItem,
     })

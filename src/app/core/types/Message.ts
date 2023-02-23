@@ -4,7 +4,7 @@ export type Message = {
   id: string
   conversation_id?: string
   participant_id?: string
-  participant?: Participant | null
+  participant?: Participant
   fullName: string
   subject: string
   message: string

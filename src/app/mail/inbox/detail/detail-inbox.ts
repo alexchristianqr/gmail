@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { ApiService } from '../../../core/services/api/api.service'
 import { PopoverDetailInbox } from './layouts/popover-detail-inbox'
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router'
@@ -28,7 +27,6 @@ export class DetailInbox implements OnInit {
     private starredService: StarredService,
     public utilsService: UtilsService,
     private eventService: EventService,
-    private apiService: ApiService,
     private storage: Storage,
     private router: Router
   ) {

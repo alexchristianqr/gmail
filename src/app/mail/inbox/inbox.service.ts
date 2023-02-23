@@ -35,17 +35,17 @@ export class InboxService {
     return conversations
   }
 
-  async deleteItem(item: Message | any) {
+  async deleteItem(item: any) {
     console.log('[InboxService.deleteItem]')
-
-    return this.conversationService.deleteConversation({ item })
+    const id = item.id
+    return this.conversationService.deleteConversation(id)
   }
 
-  async updateItem(item: Message | any, keyItem: string, valueItem: any) {
+  async updateItem(item: any, keyItem: string, valueItem: any) {
     console.log('[InboxService.updateItem]', { keyItem, valueItem })
 
-    return this.conversationService.updateConversation({
-      item: item,
+    const id = item.id
+    return this.conversationService.updateConversation(id, {
       keyItem: keyItem,
       valueItem: valueItem,
     })

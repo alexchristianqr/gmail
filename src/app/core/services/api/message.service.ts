@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { ApiService } from './api.service'
 import { Message } from '../../types/Message'
 import { ParticipantService } from './participant.service'
 import { FirebaseService } from './firebase.service'
@@ -19,23 +18,15 @@ type MessagePayload = {
 export class MessageService {
   database: string = 'messages'
 
-  constructor(private firebaseService: FirebaseService, private apiService: ApiService, private participantService: ParticipantService) {}
+  constructor(private firebaseService: FirebaseService, private participantService: ParticipantService) {}
 
   async message(payload: MessagePayload) {
     console.log('[MessageService.message]', { payload })
 
-    return this.firebaseService.getCollection(this.database).then((res: Array<Message>) => {
+    const id: string | any = payload.id
+    return this.firebaseService.oneCollection(this.database, id).then((res: Message | any) => {
       if (!res) return null
-
-      return res.find((value: Message) => {
-        if (payload.hasOwnProperty('id')) {
-          return value.id === payload.id
-        } else if (payload.hasOwnProperty('conversation_id')) {
-          return value.conversation_id === payload.conversation_id
-        } else {
-          return null
-        }
-      })
+      return res
     })
   }
 
@@ -47,8 +38,10 @@ export class MessageService {
 
       return res.filter(async (value: Message | any) => {
         // Set
-        value.from.participant = await this.participantService.participant({ id: value.from.participant_id })
-        value.to.participant = await this.participantService.participant({ id: value.to.participant_id })
+        const idFromParticipant: string | any = value.from.participant_id
+        const idToParticipant: string | any = value.to.participant_id
+        value.from.participant = await this.participantService.participant(idFromParticipant)
+        value.to.participant = await this.participantService.participant(idToParticipant)
 
         // Obtener todos los registros
         if (!payload) return true
