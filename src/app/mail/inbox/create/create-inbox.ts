@@ -52,8 +52,8 @@ export class CreateInbox implements OnInit {
     console.log('[CreateInbox.formGroupInitialize]', this.data)
 
     return this.formBuilder.group({
-      uuid: this.formBuilder.control(null, [Validators.required]),
       id: this.formBuilder.control(null, [Validators.required]),
+      // id: this.formBuilder.control(null, [Validators.required]),
       conversation_id: this.formBuilder.control(this.data?.item?.conversation_id, [Validators.required]),
       // participant_id: this.formBuilder.control(this.data?.item?.participant_id, [Validators.required]),
       fullName: this.formBuilder.control(this.data?.item?.from?.participant?.fullName, [Validators.required]),
@@ -83,7 +83,7 @@ export class CreateInbox implements OnInit {
     // Obtener UID
     const uniqueMessageUID = await this.getUniqueUID()
     this.formGroup.patchValue({ id: uniqueMessageUID })
-    this.formGroup.patchValue({ uuid: uniqueMessageUID })
+    this.formGroup.patchValue({ id: uniqueMessageUID })
 
     // Obtener Conversation ID
     const { conversation_id } = this.formGroup.value

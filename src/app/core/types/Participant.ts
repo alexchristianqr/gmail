@@ -1,5 +1,4 @@
 export type Participant = {
-  uuid?: string
   id: string
   fullName?: string
   email?: string

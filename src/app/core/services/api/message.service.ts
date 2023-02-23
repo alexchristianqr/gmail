@@ -5,7 +5,7 @@ import { ParticipantService } from './participant.service'
 import { FirebaseService } from './firebase.service'
 
 type MessagePayload = {
-  id?: string | any
+  id?: string
   conversation_id?: string
   item?: any
   dataItem?: any
@@ -47,8 +47,8 @@ export class MessageService {
 
       return res.filter(async (value: Message | any) => {
         // Set
-        value.from.participant = await this.participantService.participant({ uuid: value.from.participant_id })
-        value.to.participant = await this.participantService.participant({ uuid: value.to.participant_id })
+        value.from.participant = await this.participantService.participant({ id: value.from.participant_id })
+        value.to.participant = await this.participantService.participant({ id: value.to.participant_id })
 
         // Obtener todos los registros
         if (!payload) return true
@@ -75,7 +75,7 @@ export class MessageService {
   async updateMessage(payload: MessagePayload) {
     console.log('[MessageService.updateMessage]', { payload })
 
-    const uuid: string = payload.item.uuid
+    const id: string = payload.item.id
     let data: object | any = {}
     if (payload.keyItem && payload.valueItem.toString()) {
       data[payload.keyItem] = payload.valueItem
@@ -84,6 +84,6 @@ export class MessageService {
       data = payload.dataItem
     }
 
-    return this.firebaseService.updateCollection(this.database, uuid, data)
+    return this.firebaseService.updateCollection(this.database, id, data)
   }
 }

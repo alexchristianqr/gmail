@@ -22,7 +22,7 @@ export class FirebaseService {
   async getCollection(nameCollection: string) {
     const myCollection = collection(this.db, nameCollection)
     const myDocuments = await getDocs(myCollection)
-    const data: any = myDocuments.docs.map((value) => ({ ...value.data(), uuid: value.id }))
+    const data: any = myDocuments.docs.map((value) => ({ ...value.data(), id: value.id }))
     if (data.length > 0) {
       console.log('[FirebaseService.getCollection]', { nameCollection, data })
       return data
@@ -31,42 +31,42 @@ export class FirebaseService {
     }
   }
 
-  async oneCollection(nameCollection: string, uuid: string) {
-    const myCollection = doc(this.db, nameCollection, uuid)
+  async oneCollection(nameCollection: string, id: string) {
+    const myCollection = doc(this.db, nameCollection, id)
     const myDocument = await getDoc(myCollection)
     const data = myDocument.data()
-    console.log('[FirebaseService.oneCollection]', { nameCollection, uuid, data })
+    console.log('[FirebaseService.oneCollection]', { nameCollection, id, data })
     return data
   }
 
   async setCollection(nameCollection: string, data: any) {
     console.log('[FirebaseService.setCollection]', { nameCollection, data })
 
-    let uuId: string = data.uuid
-    if (!data.uuid) uuId = uuid()
+    let id: string = data.id
+    if (!data.id) id = uuid()
 
-    const myCollection = doc(this.db, nameCollection, uuId)
+    const myCollection = doc(this.db, nameCollection, id)
     return setDoc(myCollection, data)
   }
 
-  async updateCollection(nameCollection: string, uuid: string, data: any) {
-    console.log('[FirebaseService.updateCollection]', { nameCollection, uuid, data })
+  async updateCollection(nameCollection: string, id: string, data: any) {
+    console.log('[FirebaseService.updateCollection]', { nameCollection, id, data })
 
-    const myCollection = doc(this.db, nameCollection, uuid)
+    const myCollection = doc(this.db, nameCollection, id)
     return updateDoc(myCollection, data)
   }
 
-  async deleteCollection(nameCollection: string, uuid: string) {
-    console.log('[FirebaseService.deleteCollection]', { nameCollection, uuid })
+  async deleteCollection(nameCollection: string, id: string) {
+    console.log('[FirebaseService.deleteCollection]', { nameCollection, id })
 
-    const myCollection = doc(this.db, nameCollection, uuid)
+    const myCollection = doc(this.db, nameCollection, id)
     return deleteDoc(myCollection)
   }
 
   async purgeCollection(nameCollection?: string) {
     console.log('[FirebaseService.purgeCollection]', { nameCollection })
 
-    const databases = ['conversations', 'messages']
+    const databases = ['conversations', 'messages', 'participants']
     for (let database of databases) {
       const myCollection = collection(this.db, database)
       const myDocuments = await getDocs(myCollection)

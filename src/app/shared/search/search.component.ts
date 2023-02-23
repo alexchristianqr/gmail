@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ApiService } from '../../core/services/api/api.service'
 import { Router } from '@angular/router'
-import { Message } from '../../core/types/Message'
 import { MyParams } from '../../core/types/MyParams'
 import { Subscription } from 'rxjs'
 import { EventService } from '../../core/services/events/event.service'
 import { ConversationService } from '../../core/services/api/conversation.service'
-import { Conversation } from '../../core/types/Conversation'
 import { MessageService } from '../../core/services/api/message.service'
 
 @Component({
@@ -75,7 +73,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     // Set items
     this.items = []
-    let data = null
 
     // API
     switch (this.data.database) {
@@ -85,7 +82,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
         // Iterar conversación
         for (const conversation of conversations) {
-          const messages = await this.messageService.messages({ conversation_id: conversation.uuid })
+          const messages = await this.messageService.messages({ conversation_id: conversation.id })
           messages.sort((a, b) => (new Date(a.created_at) < new Date(b.created_at) ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
           conversation.messages = messages
         }

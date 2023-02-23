@@ -4,8 +4,7 @@ import { Participant } from '../../types/Participant'
 import { FirebaseService } from './firebase.service'
 
 type ParticipantPayload = {
-  uuid?: string | any
-  id?: string | any
+  id?: string
   email?: string
 }
 
@@ -20,7 +19,8 @@ export class ParticipantService {
   async participant(payload: ParticipantPayload) {
     console.log('[ParticipantService.participant]', { payload })
 
-    return this.firebaseService.oneCollection(this.database, payload.uuid).then((res: Participant | any) => {
+    const id: string | any = payload.id
+    return this.firebaseService.oneCollection(this.database, id).then((res: Participant | any) => {
       if (!res) return null
       return res
     })

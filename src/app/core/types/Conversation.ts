@@ -2,7 +2,6 @@ import { Message } from './Message'
 import { Participant } from './Participant'
 
 export type Conversation = {
-  uuid?: string
   id: string
   name: string
   message?: string

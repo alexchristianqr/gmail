@@ -13,7 +13,6 @@ import { FirebaseService } from '../api/firebase.service'
 export class StoragedbService {
   conversations: Array<Conversation> = [
     {
-      uuid: '7718f578-02c9-40f7-a9de-951b3345f817',
       id: '7718f578-02c9-40f7-a9de-951b3345f817',
       participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
       name: 'Alex Christian',
@@ -28,8 +27,7 @@ export class StoragedbService {
   ]
   messages: Array<Message> = [
     {
-      uuid: '09557594-dd44-4b2c-bc94-d9b8a9e1f06f',
-      id: '1',
+      id: '09557594-dd44-4b2c-bc94-d9b8a9e1f06f',
       conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
       from: { email: 'alexchristianqr@utp.edu.pe', participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b' },
@@ -42,8 +40,7 @@ export class StoragedbService {
       subject: 'Matricula Marzo 2023',
     },
     {
-      uuid: '14671615-c0c6-4e2b-8907-7a633d68da28',
-      id: '2',
+      id: '14671615-c0c6-4e2b-8907-7a633d68da28',
       conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
       from: { email: 'jacky@utp.edu.pe', participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a' },
@@ -58,22 +55,19 @@ export class StoragedbService {
   ]
   participants: Array<Participant> = [
     {
-      uuid: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
-      id: '1',
+      id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
       created_at: '2023-01-25 11:50',
       email: 'alexchristianqr@utp.edu.pe',
       fullName: 'Alex Quispe',
     },
     {
-      uuid: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
-      id: '2',
+      id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
       created_at: '2023-01-25 11:50',
       email: 'jacky@utp.edu.pe',
       fullName: 'Jackie Uchalin',
     },
     {
-      uuid: '09caff06-3940-4729-8889-105a9483b044',
-      id: '3',
+      id: '09caff06-3940-4729-8889-105a9483b044',
       created_at: '2023-01-25 11:50',
       email: 'sae@utp.edu.pe',
       fullName: 'SAE',
