@@ -43,9 +43,8 @@ export class FirebaseService {
     console.log('[FirebaseService.setCollection]', { nameCollection, data })
 
     let uuId: string = data.uuid
-    if (!data.uuid) {
-      uuId = uuid()
-    }
+    if (!data.uuid) uuId = uuid()
+
     const myCollection = doc(this.db, nameCollection, uuId)
     return setDoc(myCollection, data)
   }
@@ -67,12 +66,12 @@ export class FirebaseService {
   async purgeCollection(nameCollection?: string) {
     console.log('[FirebaseService.purgeCollection]', { nameCollection })
 
-    const databases = ['conversations', 'messages', 'VERSION']
+    const databases = ['conversations', 'messages']
     for (let database of databases) {
       const myCollection = collection(this.db, database)
       const myDocuments = await getDocs(myCollection)
       myDocuments.forEach((doc) => {
-        deleteDoc(doc.ref) // and not doc.data()
+        deleteDoc(doc.ref)
       })
     }
   }

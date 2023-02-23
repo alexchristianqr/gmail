@@ -30,7 +30,6 @@ export class StoragedbService {
     {
       uuid: '09557594-dd44-4b2c-bc94-d9b8a9e1f06f',
       id: '1',
-      // participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
       conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
       from: { email: 'alexchristianqr@utp.edu.pe', participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b' },
@@ -45,7 +44,6 @@ export class StoragedbService {
     {
       uuid: '14671615-c0c6-4e2b-8907-7a633d68da28',
       id: '2',
-      // participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
       conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
       from: { email: 'jacky@utp.edu.pe', participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a' },
