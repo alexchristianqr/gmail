@@ -11,7 +11,7 @@
 <ion-content>
   <ion-list *ngIf="items.length > 0">
     <ion-item-sliding *ngFor="let item of items; let i = index" (click)="fnViewDetail(item)">
-      <ion-item [button]="true" lines="full">
+      <ion-item lines="full">
         <table>
           <tr>
             <td style="padding: 0 0.75rem 0 0" rowspan="3">

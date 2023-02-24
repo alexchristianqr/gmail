@@ -24,13 +24,13 @@ export class ListSent implements OnDestroy, OnInit {
     console.log('[ListSent.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listSentMessages())
-    this.listSentMessages()
+    this.listSentMessages().then()
   }
 
   ngOnInit(): void {
     console.log('[ListSent.ngOnInit]')
 
-    this.listSentMessages()
+    this.listSentMessages().then()
   }
 
   ngOnDestroy() {
@@ -39,12 +39,13 @@ export class ListSent implements OnDestroy, OnInit {
     this.mySubscribe$.unsubscribe()
   }
 
-  listSentMessages(): void {
+  async listSentMessages(isLoading: boolean = true) {
     console.log('[ListSent.listSentMessages]')
 
-    this.sentService.getItems().then((data) => {
-      this.items = data
-    })
+    let loading: any
+    if (isLoading) loading = await this.utilsService.showLoading()
+    this.items = await this.sentService.getItems()
+    if (isLoading) await loading.dismiss()
   }
 
   async refreshList(event: any) {

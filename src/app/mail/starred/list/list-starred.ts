@@ -24,7 +24,7 @@ export class ListStarred implements OnDestroy {
     console.log('[ListStarred.constructor]')
 
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listStarredMessages())
-    this.listStarredMessages()
+    this.listStarredMessages().then()
   }
 
   ngOnDestroy() {
@@ -33,12 +33,13 @@ export class ListStarred implements OnDestroy {
     this.mySubscribe$.unsubscribe()
   }
 
-  listStarredMessages(): void {
-    console.log('[ListStarred.listSentMessages]')
+  async listStarredMessages(isLoading: boolean = true) {
+    console.log('[ListStarred.listStarredMessages]')
 
-    this.starredService.getItems().then((data) => {
-      this.items = data
-    })
+    let loading: any
+    if (isLoading) loading = await this.utilsService.showLoading()
+    this.items = await this.starredService.getItems()
+    if (isLoading) await loading.dismiss()
   }
 
   async refreshList(event: any) {

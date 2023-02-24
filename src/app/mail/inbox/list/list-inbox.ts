@@ -23,7 +23,6 @@ export class ListInbox implements OnDestroy {
   constructor(private inboxService: InboxService, private utilsService: UtilsService, private eventService: EventService, private apiService: ApiService, private router: Router) {
     console.log('[ListInbox.constructor]')
 
-    // this.mySubscribe$ = this.eventService.createEvent().subscribe(() => this.listInbox())
     this.mySubscribe$ = this.eventService.dataSource.subscribe(() => this.listInbox())
     this.listInbox().then()
   }
@@ -34,19 +33,20 @@ export class ListInbox implements OnDestroy {
     this.mySubscribe$.unsubscribe()
   }
 
-  async listInbox() {
+  async listInbox(isLoading: boolean = true) {
     console.log('[ListInbox.listInbox]')
 
-    this.inboxService.getItems().then((data) => {
-      this.items = data
-    })
+    let loading: any
+    if (isLoading) loading = await this.utilsService.showLoading()
+    this.items = await this.inboxService.getItems()
+    if (isLoading) await loading.dismiss()
   }
 
-  async doRefresh(event: any) {
-    console.log('[ListInbox.doRefresh]')
+  async refreshList(event: any) {
+    console.log('[ListInbox.refreshList]')
 
     setTimeout(async () => {
-      await this.listInbox()
+      await this.listInbox(false)
       event.target.complete()
     }, 2000)
   }
