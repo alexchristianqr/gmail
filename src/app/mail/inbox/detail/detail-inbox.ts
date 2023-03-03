@@ -158,7 +158,7 @@ export class DetailInbox implements OnInit {
       itemData.to = itemFrom
     }
 
-    const data: MyParams = { path: 'mail/inbox-detail', item: itemData }
+    const data: MyParams = { path: 'mail/inbox-detail', item: itemData, payload: { fromTo: fromTo } }
     await this.router.navigate(['mail/create'], { state: data })
   }
 

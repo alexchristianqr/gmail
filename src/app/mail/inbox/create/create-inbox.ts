@@ -59,14 +59,14 @@ export class CreateInbox {
     return this.formBuilder.group({
       id: this.formBuilder.control(null, [Validators.required]),
       conversation_id: this.formBuilder.control(this.data?.item?.conversation_id, [Validators.required]),
-      fullName: this.formBuilder.control(this.data?.item?.from?.participant?.fullName, [Validators.required]),
+      // fullName: this.formBuilder.control(this.data?.item?.from?.participant?.fullName, [Validators.required]),
       message: this.formBuilder.control(null, [Validators.required]),
       from: this.formBuilder.group({
-        email: this.formBuilder.control(this.data?.item?.from?.email || 'alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
+        email: this.formBuilder.control(this.data?.item?.from?.email, [Validators.required, Validators.email]),
         participant_id: this.formBuilder.control(this.data?.item?.from?.participant_id, [Validators.required]),
       }),
       to: this.formBuilder.group({
-        email: this.formBuilder.control(this.data?.item?.to?.email || 'jackie@utp.edu.pe', [Validators.required, Validators.email]),
+        email: this.formBuilder.control(this.data?.item?.to?.email, [Validators.required, Validators.email]),
         participant_id: this.formBuilder.control(this.data?.item?.to?.participant_id, [Validators.required]),
       }),
       subject: this.formBuilder.control(this.data?.item?.subject, [Validators.required]),

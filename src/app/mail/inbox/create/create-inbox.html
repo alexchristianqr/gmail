@@ -19,22 +19,25 @@
 <ion-content>
   <form [formGroup]="formGroup">
     <ion-list>
-      <ion-item>
-        <ion-label>Nombre</ion-label>
-        <ion-input formControlName="fullName" type="text" value="{{formGroup}}"></ion-input>
-      </ion-item>
       <ion-item [formGroupName]="'from'">
         <ion-label>De</ion-label>
         <ion-grid>
           <ion-row>
-            <ion-col size="9">
-              <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
-            </ion-col>
-            <ion-col size="3">
-              <ion-button (click)="openModal(1)" class="ion-float-end" fill="clear" color="danger" size="default">
-                <ion-icon slot="icon-only" name="search"></ion-icon>
-              </ion-button>
-            </ion-col>
+            <ng-template [ngIf]="data?.payload?.fromTo">
+              <ion-col size="12">
+                <ion-input formControlName="email" type="text" value="{{formGroup}}" [readonly]="true"></ion-input>
+              </ion-col>
+            </ng-template>
+            <ng-template [ngIf]="!data?.payload?.fromTo">
+              <ion-col size="9">
+                <ion-input formControlName="email" type="text" value="{{formGroup}}" (focusin)="openModal(1)"></ion-input>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button (click)="openModal(1)" class="ion-float-end" fill="clear" color="danger" size="default">
+                  <ion-icon slot="icon-only" name="search"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ng-template>
           </ion-row>
         </ion-grid>
       </ion-item>
@@ -42,14 +45,21 @@
         <ion-label>Para</ion-label>
         <ion-grid>
           <ion-row>
-            <ion-col size="9">
-              <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
-            </ion-col>
-            <ion-col size="3">
-              <ion-button (click)="openModal(2)" class="ion-float-end" fill="clear" color="danger" size="default">
-                <ion-icon slot="icon-only" name="search"></ion-icon>
-              </ion-button>
-            </ion-col>
+            <ng-template [ngIf]="data?.payload?.fromTo">
+              <ion-col size="12">
+                <ion-input formControlName="email" type="text" value="{{formGroup}}" [readonly]="true"></ion-input>
+              </ion-col>
+            </ng-template>
+            <ng-template [ngIf]="!data?.payload?.fromTo">
+              <ion-col size="9">
+                <ion-input formControlName="email" type="text" value="{{formGroup}}" (focusin)="openModal(2)"></ion-input>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button (click)="openModal(2)" class="ion-float-end" fill="clear" color="danger" size="default">
+                  <ion-icon slot="icon-only" name="search"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ng-template>
           </ion-row>
         </ion-grid>
       </ion-item>
