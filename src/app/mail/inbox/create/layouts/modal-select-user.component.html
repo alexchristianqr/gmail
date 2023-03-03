@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start" style="width: 100%">
+      <ion-button fill="clear" size="default" (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-searchbar animated="true" placeholder="Buscar"></ion-searchbar>
+      <ion-button fill="clear" size="default" (click)="ok()" [disabled]="!buttonCheck">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list id="modal-list" [inset]="false">
+    <ion-radio-group value="participants">
+    <ion-item lines="full" *ngFor="let item of filteredItems" (click)="trackItems(item)">
+      <ion-label>{{ item.email }}</ion-label>
+      <ion-radio slot="end" [value]="item"></ion-radio>
+    </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

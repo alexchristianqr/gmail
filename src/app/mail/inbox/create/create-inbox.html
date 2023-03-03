@@ -25,11 +25,33 @@
       </ion-item>
       <ion-item [formGroupName]="'from'">
         <ion-label>De</ion-label>
-        <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button (click)="openModal(1)" class="ion-float-end" fill="clear" color="danger" size="default">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
       <ion-item [formGroupName]="'to'">
         <ion-label>Para</ion-label>
-        <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-input formControlName="email" type="text" value="{{formGroup}}"></ion-input>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button (click)="openModal(2)" class="ion-float-end" fill="clear" color="danger" size="default">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
       <ion-item>
         <ion-label>Asunto</ion-label>
@@ -41,3 +63,16 @@
     </ion-list>
   </form>
 </ion-content>
+
+<ion-modal #modal>
+  <ng-template>
+    <app-modal-select-user
+      class="ion-page"
+      [modalParams]="modalParams"
+      [items]="participants"
+      [selectedItem]="selectedParticipant"
+      (selectionChange)="onChangeSelectedParticipant($event)"
+      (selectionCancel)="onCancelSelectedParticipant()"
+    ></app-modal-select-user>
+  </ng-template>
+</ion-modal>

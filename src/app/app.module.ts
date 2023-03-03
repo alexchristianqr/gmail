@@ -46,6 +46,7 @@ import { ModalSettingsGeneralStarred } from './mail/settings/starred/modal-setti
 import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
 import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
+import {ModalSelectUserComponent} from "./mail/inbox/create/layouts/modal-select-user.component";
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-passw
     ModalSettingsCreateInbox,
     ModalSettingsDetailInbox,
     ModalSettingsListInbox,
+    ModalSelectUserComponent,
 
     // SENT
     ListSent,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 import { PopoverCreateInbox } from './layouts/popover-create-inbox'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
@@ -10,17 +10,24 @@ import { MyPreferences } from '../../../core/types/MyPreferences'
 import { SHARED_PREFERENCES } from '../../../shared-preferences'
 import { MyParams } from '../../../core/types/MyParams'
 import { SentService } from '../../sent/sent.service'
+import { IonModal } from '@ionic/angular'
+import { ParticipantService } from '../../../core/services/api/participant.service'
+import { Participant } from '../../../core/types/Participant'
 
 @Component({
   selector: 'app-create-inbox',
   templateUrl: 'create-inbox.html',
 })
-export class CreateInbox implements OnInit {
+export class CreateInbox {
+  @ViewChild('modal', { static: true }) modal!: IonModal
   MY_SHARED_PREFERENCES: MyPreferences = SHARED_PREFERENCES
   formGroup: FormGroup
   submitted: boolean | undefined
   loading: boolean = false
   data: MyParams | any
+  modalParams: object = {}
+  selectedParticipant?: Participant
+  participants: Participant[] = []
 
   constructor(
     private sentService: SentService,
@@ -28,18 +35,16 @@ export class CreateInbox implements OnInit {
     private eventService: EventService,
     private apiService: ApiService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private participantService: ParticipantService
   ) {
     console.log('[CreateInbox.constructor]')
-    this.getState()
-    this.formGroup = this.formGroupInitialize()
-  }
-
-  ngOnInit(): void {
-    console.log('[CreateInbox.ngOnInit]')
 
     this.getState()
     this.formGroup = this.formGroupInitialize()
+    this.participantService.participants().then((res) => {
+      this.participants = res
+    })
   }
 
   getState(): void {
@@ -140,6 +145,45 @@ export class CreateInbox implements OnInit {
     console.log('[CreateInbox.getUniqueUID]')
 
     return this.apiService.getUniqueUID()
+  }
+
+  async onChangeSelectedParticipant(value: any) {
+    console.log('[CreateInbox.onChangeSelectParticipant]', value)
+
+    this.selectedParticipant = value
+    this.formGroup.patchValue(value)
+    this.closeModal()
+    await this.modal.dismiss()
+  }
+
+  async onCancelSelectedParticipant() {
+    console.log('[CreateInbox.onCancelSelectParticipant]')
+
+    this.closeModal()
+  }
+
+  async openModal(index: number) {
+    console.log('[CreateInbox.openModal]', { index })
+
+    switch (index) {
+      case 1:
+        this.modalParams = {
+          field: 'from',
+        }
+        break
+      case 2:
+        this.modalParams = {
+          field: 'to',
+        }
+        break
+      default:
+        new Error('No existe el índice')
+    }
+    this.modal.isOpen = true
+  }
+
+  closeModal(): void {
+    this.modal.isOpen = false
   }
 
   /**

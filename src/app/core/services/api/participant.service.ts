@@ -5,6 +5,7 @@ import { FirebaseService } from './firebase.service'
 type ParticipantPayload = {
   id?: string
   email?: string
+  fullName?: string
 }
 
 @Injectable({
@@ -20,6 +21,16 @@ export class ParticipantService {
 
     return this.firebaseService.oneCollection(this.database, id).then((res: Participant | any) => {
       if (!res) return null
+      return res
+    })
+  }
+
+  async participants(payload?: ParticipantPayload) {
+    console.log('[ParticipantService.participants]', { payload })
+
+    return this.firebaseService.getCollection(this.database).then((res: Array<Participant>) => {
+      if (!res) return []
+
       return res
     })
   }
