@@ -3,9 +3,10 @@ import { Participant } from './Participant'
 
 export type Conversation = {
   id: string
+  user_id?: string
+  participant_id?: string
   name: string
   message: string
-  participant_id?: string
   participant?: Participant | null
   messages: Array<Message>
   subject: string

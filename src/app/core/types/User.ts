@@ -1,8 +1,9 @@
-export type Participant = {
+export type User = {
   id: string
   fullName: string
   email: string
-  is_active?: boolean
+  phone?: string
+  age?: string
   created_at?: Date | string
   updated_at?: Date | string
 }
