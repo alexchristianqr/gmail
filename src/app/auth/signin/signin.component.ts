@@ -35,6 +35,7 @@ export class SigninComponent {
   }
 
   async onSubmit() {
+    console.log('[SigninComponent.onSubmit]')
     this.submitted = true
 
     // Stop here if form is invalid

@@ -33,6 +33,7 @@ import { PopoverListStarred } from './mail/starred/list/layouts/popover-list-sta
 // AUTH
 import { HomeComponent } from './auth/home/home.component'
 import { SigninComponent } from './auth/signin/signin.component'
+import { SignupComponent } from './auth/signup/signup.component'
 import { LogoutGuard } from './core/guards/logout.guard'
 
 // GENERAL SETTINGS
@@ -46,7 +47,7 @@ import { ModalSettingsGeneralStarred } from './mail/settings/starred/modal-setti
 import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
 import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
-import {ModalSelectUserComponent} from "./mail/inbox/create/layouts/modal-select-user.component";
+import { ModalSelectUserComponent } from './mail/inbox/create/layouts/modal-select-user.component'
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import {ModalSelectUserComponent} from "./mail/inbox/create/layouts/modal-select
 
     // AUTH
     SigninComponent,
+    SignupComponent,
     HomeComponent,
   ],
   imports: [FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
