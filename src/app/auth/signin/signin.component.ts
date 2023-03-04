@@ -31,7 +31,7 @@ export class SigninComponent {
 
     return this.formBuilder.group({
       email: this.formBuilder.control('invitado@gmail.com', [Validators.required, Validators.email]),
-      password: this.formBuilder.control('invitado@2023', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
+      password: this.formBuilder.control('Invitado@2023', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
     })
   }
 
