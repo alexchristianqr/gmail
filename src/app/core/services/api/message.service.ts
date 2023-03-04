@@ -24,7 +24,7 @@ export class MessageService {
     console.log('[MessageService.message]', { payload })
 
     const id: string | any = payload.id
-    return this.firebaseService.oneCollection(this.database, id).then((res: Message | any) => {
+    return this.firebaseService.singleCollection(this.database, id).then((res: Message | any) => {
       if (!res) return null
       return res
     })

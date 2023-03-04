@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Participant } from '../../types/Participant'
 import { FirebaseService } from './firebase.service'
+import { Message } from '../../types/Message'
 
 type ParticipantPayload = {
   id?: string
@@ -19,7 +20,7 @@ export class ParticipantService {
   async participant(id: string) {
     console.log('[ParticipantService.participant]', { id })
 
-    return this.firebaseService.oneCollection(this.database, id).then((res: Participant | any) => {
+    return this.firebaseService.singleCollection(this.database, id).then((res: Participant | any) => {
       if (!res) return null
       return res
     })
@@ -33,5 +34,11 @@ export class ParticipantService {
 
       return res
     })
+  }
+
+  async createParticipant(item: Participant) {
+    console.log('[ParticipantService.createMessage]', { item })
+
+    return this.firebaseService.setCollection(this.database, item)
   }
 }

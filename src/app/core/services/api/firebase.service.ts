@@ -1,25 +1,71 @@
 import { Injectable } from '@angular/core'
-import { getAnalytics } from 'firebase/analytics'
 import uuid from 'uuidv4'
 import { Firestore, collection, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc } from '@angular/fire/firestore'
-import { initializeApp } from '@angular/fire/app'
-import { environment } from '../../../../environments/environment'
+import { createUserWithEmailAndPassword, Auth, getAuth, signInWithEmailAndPassword, signOut, user, sendPasswordResetEmail } from '@angular/fire/auth'
+import { User } from '../../types/User'
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
   fs: Firestore
+  auth: Auth
 
   constructor(firestore: Firestore) {
     this.fs = firestore
-    const firebaseConfig = environment.firebase
-    const app = initializeApp(firebaseConfig)
-    getAnalytics(app)
+    this.auth = getAuth()
+  }
+
+  async setUserData(user: any) {
+    console.log({ user })
+    return this.setCollection('users', user)
+  }
+
+  async signUp(email: string, password: string) {
+    console.log('[FirebaseService.signUp]', { email, password })
+    try {
+      return createUserWithEmailAndPassword(this.auth, email, password).then((res: any) => {
+        return res
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  async signIn(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password).then((result) => {
+      console.log({ result })
+      // this.afAuth.authState.subscribe((user: any) => {
+      //   if (!user) return
+      // this.isUserAuthenticated = true
+      // this.setUserData(result.user) // Guardar en firebase
+      // this.storageService.set('users', user) // Guardar en localstorage
+      // this.router.navigate(['home']) // Redireccionar a la pagina de Home
+      // })
+    })
+  }
+
+  async signOut() {
+    return signOut(this.auth).then(() => {
+      // this.isUserAuthenticated = false
+      // localStorage.removeItem('user')
+      // this.router.navigate(['login'])
+    })
+  }
+
+  async sendVerificationMail() {
+    return user(this.auth)
+  }
+
+  async forgotPassword(passwordResetEmail: string) {
+    return sendPasswordResetEmail(this.auth, passwordResetEmail, {
+      url: 'https://alexchristianqr.github.io/game-apps/#/login',
+    })
   }
 
   async getCollection(nameCollection: string) {
     console.log('[FirebaseService.getCollection]', { nameCollection })
+
     const docRef = collection(this.fs, nameCollection)
     const myDocuments = await getDocs(docRef)
     const data: any = myDocuments.docs.map((value) => ({ ...value.data(), id: value.id }))
@@ -31,11 +77,11 @@ export class FirebaseService {
     }
   }
 
-  async oneCollection(nameCollection: string, id: string) {
+  async singleCollection(nameCollection: string, id: string) {
+    console.log('[FirebaseService.singleCollection]', { nameCollection, id })
     const docRef = doc(this.fs, nameCollection, id)
     const myDocument = await getDoc(docRef)
     const data = myDocument.data()
-    console.log('[FirebaseService.oneCollection]', { nameCollection, id, data })
     return data
   }
 

@@ -1,5 +1,6 @@
 export type Participant = {
-  id: string
+  id?: string
+  user_id?: string
   fullName: string
   email: string
   is_active?: boolean

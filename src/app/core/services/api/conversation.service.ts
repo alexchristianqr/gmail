@@ -25,7 +25,7 @@ export class ConversationService {
   async conversation(id: string) {
     console.log('[ConversationService.conversation]', { id })
 
-    return this.firebaseService.oneCollection(this.database, id).then((res: any) => {
+    return this.firebaseService.singleCollection(this.database, id).then((res: any) => {
       if (!res) return null
       return res
     })

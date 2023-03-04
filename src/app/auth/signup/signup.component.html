@@ -22,7 +22,7 @@
           <ion-list>
             <ion-item>
               <ion-label color="danger" position="floating">Nombre completo</ion-label>
-              <ion-input formControlName="fullName" type="email"></ion-input>
+              <ion-input formControlName="fullName" type="text"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label color="danger" position="floating">Email</ion-label>
@@ -46,7 +46,7 @@
       <ion-row>
         <ion-col size-xs="12" size-sm="12" size-md="7" size-lg="4" size-xl="4">
           <ion-button *ngIf="!submitted" size="large" color="danger" expand="block" (click)="onSubmit()">Crear cuenta</ion-button>
-          <ion-button *ngIf="submitted" size="large" color="danger" expand="block" [disabled]="true">Creando...</ion-button>
+          <ion-button *ngIf="submitted" size="large" color="danger" expand="block" [disabled]="loading">Creando...</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
