@@ -41,8 +41,8 @@ export class SignupComponent {
     return this.formBuilder.group({
       fullName: this.formBuilder.control(null),
       email: this.formBuilder.control(null, [Validators.required, Validators.email]),
-      password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
-      confirm_password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
+      password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
+      confirm_password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
     })
   }
 
@@ -55,6 +55,12 @@ export class SignupComponent {
     const actionReset = () => {
       this.submitted = false
       this.loading = false
+    }
+
+    // Reglas de validación
+    if (this.formGroup.invalid) {
+      actionReset()
+      return this.utilsService.presentAlert({ header: 'Error', subHeader: 'Crear cuenta', message: 'No cumple con las reglas de validación', buttons: [{ handler: () => {} }] })
     }
 
     // Request params

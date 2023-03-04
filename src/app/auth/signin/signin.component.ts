@@ -31,7 +31,7 @@ export class SigninComponent {
 
     return this.formBuilder.group({
       email: this.formBuilder.control('invitado@gmail.com', [Validators.required, Validators.email]),
-      password: this.formBuilder.control('invitado@2023', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
+      password: this.formBuilder.control('invitado@2023', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
     })
   }
 
@@ -49,8 +49,7 @@ export class SigninComponent {
     // Reglas de validación
     if (this.formGroup.invalid) {
       actionReset()
-      await this.utilsService.presentAlert({ header: 'Error', subHeader: 'Inicio de sesión', message: 'Al aplicar las reglas de validación', buttons: [{ handler: () => {} }] })
-      return
+      return this.utilsService.presentAlert({ header: 'Error', subHeader: 'Inicio de sesión', message: 'No cumple con las reglas de validación', buttons: [{ handler: () => {} }] })
     }
 
     // Request params
@@ -66,7 +65,7 @@ export class SigninComponent {
       })
       .catch(async () => {
         actionReset()
-        await this.utilsService.presentAlert({ header: 'Error', subHeader: 'Inicio de sesión', message: 'El email o la contraseña no es correcto', buttons: [{ handler: () => {} }] })
+        return this.utilsService.presentAlert({ header: 'Error', subHeader: 'Inicio de sesión', message: 'El email o la contraseña no es correcto', buttons: [{ handler: () => {} }] })
       })
   }
 }
