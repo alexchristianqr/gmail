@@ -83,7 +83,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         // Iterar conversación
         for (const conversation of conversations) {
           const messages = await this.messageService.messages({ conversation_id: conversation.id })
-          messages.sort((a, b) => (new Date(a.created_at) < new Date(b.created_at) ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+          messages.sort((a: any, b: any) => (new Date(a.created_at) < new Date(b.created_at) ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
           conversation.messages = messages
         }
 

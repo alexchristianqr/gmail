@@ -3,6 +3,7 @@ import { Conversation } from '../../types/Conversation'
 import { ParticipantService } from './participant.service'
 import { FirebaseService } from './firebase.service'
 import { Message } from '../../types/Message'
+import { Subscriber, Subscription } from 'rxjs'
 
 type ConversationPayload = {
   id?: string

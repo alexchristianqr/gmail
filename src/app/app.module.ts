@@ -48,6 +48,10 @@ import { SearchComponent } from './shared/search/search.component'
 import { MailComponent } from './mail/mail.component'
 import { ShowHidePasswordComponent } from './auth/signin/layouts/show-hide-password/show-hide-password.component'
 import { ModalSelectUserComponent } from './mail/inbox/create/layouts/modal-select-user.component'
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { getFirestore, provideFirestore } from '@angular/fire/firestore'
+import { environment } from '../environments/environment'
+const firebaseConfig: object = environment.firebase
 
 @NgModule({
   declarations: [
@@ -91,7 +95,16 @@ import { ModalSelectUserComponent } from './mail/inbox/create/layouts/modal-sele
     SignupComponent,
     HomeComponent,
   ],
-  imports: [FormsModule, ReactiveFormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, LogoutGuard],
   bootstrap: [AppComponent],
 })

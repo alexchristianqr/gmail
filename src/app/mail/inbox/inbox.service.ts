@@ -21,16 +21,17 @@ export class InboxService {
 
     // Obtener conversaciones
     const conversations = await this.conversationService.conversations()
+    console.log({ conversations })
 
     // Iterar conversación
     for (const conversation of conversations) {
       const messages = await this.messageService.messages({ conversation_id: conversation.id })
-      messages.sort((a, b) => (new Date(a.created_at) < new Date(b.created_at) ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+      messages.sort((a: any, b: any) => (new Date(a.created_at) < new Date(b.created_at) ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
       conversation.messages = messages
     }
 
     // Ordenar
-    conversations.sort((a, b) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+    conversations.sort((a: any, b: any) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
     return conversations
   }
 

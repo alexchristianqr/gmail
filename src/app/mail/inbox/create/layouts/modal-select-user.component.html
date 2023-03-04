@@ -14,10 +14,10 @@
 <ion-content>
   <ion-list id="modal-list" [inset]="false">
     <ion-radio-group value="participants">
-    <ion-item lines="full" *ngFor="let item of filteredItems" (click)="trackItems(item)">
-      <ion-label>{{ item.email }}</ion-label>
-      <ion-radio slot="end" [value]="item"></ion-radio>
-    </ion-item>
+      <ion-item lines="full" *ngFor="let item of filteredItems" (click)="trackItems(item)">
+        <ion-label>{{ item.email }}</ion-label>
+        <ion-radio slot="end" [value]="item"></ion-radio>
+      </ion-item>
     </ion-radio-group>
   </ion-list>
 </ion-content>

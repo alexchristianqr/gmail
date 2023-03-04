@@ -31,7 +31,7 @@ import { ModalSettingsGeneralStarred } from './mail/settings/starred/modal-setti
 // SHARED
 import { MailComponent } from './mail/mail.component'
 import { SearchComponent } from './shared/search/search.component'
-import {SignupComponent} from "./auth/signup/signup.component";
+import { SignupComponent } from './auth/signup/signup.component'
 
 const routes: Routes = [
   {

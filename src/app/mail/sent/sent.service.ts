@@ -24,12 +24,12 @@ export class SentService {
     // Iterar conversación
     for (const conversation of conversations) {
       const messages = await this.messageService.messages({ conversation_id: conversation.id })
-      messages.sort((a, b) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+      messages.sort((a: any, b: any) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
       conversation.messages = messages
     }
 
     // Ordenar
-    conversations.sort((a, b) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
+    conversations.sort((a: any, b: any) => (a > b ? 1 /* ASC */ : -1 /* DESC */)) // Lista de orden DESC
     return conversations
   }
 
