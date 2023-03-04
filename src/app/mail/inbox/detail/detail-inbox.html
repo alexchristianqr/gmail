@@ -40,14 +40,14 @@
           <table style="width: 100%">
             <tr>
               <td style="width: 10%">
-                <ion-avatar style="opacity: 0.8; width: 2.5rem; height: 2.5rem" [ngClass]="'color-' + message?.fullName?.charAt(0)?.toUpperCase()">
-                  {{message?.fullName?.charAt(0)?.toUpperCase()}}
+                <ion-avatar style="opacity: 0.8; width: 2.5rem; height: 2.5rem" [ngClass]="'color-' + message?.from?.participant?.fullName?.charAt(0)?.toUpperCase()">
+                  {{message?.from?.participant?.fullName?.charAt(0)?.toUpperCase()}}
                 </ion-avatar>
               </td>
               <td style="padding-left: 0.75rem; vertical-align: middle; width: 80%">
                 <div class="ion-float-start">
                   <ion-text>
-                    <div style="font-size: 1rem; font-weight: 500; margin-bottom: 0.15rem">{{message?.fullName}}</div>
+                    <div style="font-size: 1rem; font-weight: 500; margin-bottom: 0.15rem">{{message?.from?.participant?.fullName}}</div>
                     <div style="font-size: 0.8rem; margin: 0.15rem 0">De: {{message?.from?.email}}</div>
                   </ion-text>
                 </div>
