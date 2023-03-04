@@ -71,7 +71,8 @@ export class FirebaseService {
     console.log('[FirebaseService.singleCollection]', { nameCollection, id })
     const docRef = doc(this.fs, nameCollection, id)
     const myDocument = await getDoc(docRef)
-    return myDocument.data()
+    const data = myDocument.data()
+    return data
   }
 
   async setCollection(nameCollection: string, data: any) {
@@ -101,7 +102,7 @@ export class FirebaseService {
   async purgeCollection(nameCollection?: string) {
     console.log('[FirebaseService.purgeCollection]', { nameCollection })
 
-    const databases = ['conversations', 'messages', 'participants']
+    const databases = ['conversations', 'messages', 'participants', 'users']
     for (let database of databases) {
       const docRef = collection(this.fs, database)
       const myDocuments = await getDocs(docRef)

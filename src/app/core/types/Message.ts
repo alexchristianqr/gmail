@@ -5,7 +5,7 @@ export type Message = {
   conversation_id?: string
   participant_id?: string
   participant?: Participant
-  fullName: string
+  fullName?: string
   subject: string
   message: string
   from: {
@@ -18,8 +18,8 @@ export type Message = {
     participant_id: string
     participant?: Participant
   }
-  is_read: boolean
-  is_starred: boolean
+  is_read?: boolean
+  is_starred?: boolean
   created_at: Date | string
   updated_at?: Date | string
 }

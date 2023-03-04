@@ -6,6 +6,7 @@ import { Message } from '../../types/Message'
 import { Conversation } from '../../types/Conversation'
 import { Participant } from '../../types/Participant'
 import { FirebaseService } from '../api/firebase.service'
+import { User } from '../../types/User'
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class StoragedbService {
   conversations: Array<Conversation> = [
     {
       id: '7718f578-02c9-40f7-a9de-951b3345f817',
-      participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
+      participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
       name: 'Alex Christian',
       subject: 'Matricula Marzo 2023',
       message:
@@ -31,43 +32,53 @@ export class StoragedbService {
       conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
       from: { email: 'alexchristianqr@utp.edu.pe', participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b' },
-      to: { email: 'jacky@utp.edu.pe', participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a' },
-      is_read: false,
-      is_starred: false,
+      to: { email: 'sae@utp.edu.pe', participant_id: '09caff06-3940-4729-8889-105a9483b044' },
+      // is_read: false,
+      // is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      fullName: 'Alex Christian',
+      // fullName: 'Alex Christian',
       subject: 'Matricula Marzo 2023',
     },
     {
       id: '14671615-c0c6-4e2b-8907-7a633d68da28',
       conversation_id: '7718f578-02c9-40f7-a9de-951b3345f817',
       created_at: '2023-01-25 11:50',
-      from: { email: 'jacky@utp.edu.pe', participant_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a' },
+      from: { email: 'sae@utp.edu.pe', participant_id: '09caff06-3940-4729-8889-105a9483b044' },
       to: { email: 'alexchristianqr@utp.edu.pe', participant_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b' },
-      is_read: false,
-      is_starred: false,
+      // is_read: false,
+      // is_starred: false,
       message:
         'Tu matrícula en Verano 2023 se registró correctamente. El detalle de cursos y secciones matriculados lo podrás encontrar líneas abajo. Por favor, toma nota de tu código de operación, el cual deberás proporcionar ante cualquier requerimiento o consulta que tengas respecto al proceso de matrícula.',
-      fullName: 'Jacky',
+      // fullName: 'Jacky',
       subject: 'Matricula Marzo 2023',
     },
   ]
   participants: Array<Participant> = [
     {
       id: '2ff8f271-e105-47d2-96ab-9f1b8f8b748b',
+      user_id: '2ff8f271-e105-47d2-96ab-9f1b8f8b744t',
       created_at: '2023-01-25 11:50',
       email: 'alexchristianqr@utp.edu.pe',
       fullName: 'Alex Quispe',
     },
     {
-      id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49124a',
+      id: '09caff06-3940-4729-8889-105a9483b044',
+      user_id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49123t',
       created_at: '2023-01-25 11:50',
-      email: 'jacky@utp.edu.pe',
-      fullName: 'Jackie Uchalin',
+      email: 'sae@utp.edu.pe',
+      fullName: 'SAE',
+    },
+  ]
+  users: Array<User> = [
+    {
+      id: '2ff8f271-e105-47d2-96ab-9f1b8f8b744t',
+      created_at: '2023-01-25 11:50',
+      email: 'alexchristianqr@utp.edu.pe',
+      fullName: 'Alex Quispe',
     },
     {
-      id: '09caff06-3940-4729-8889-105a9483b044',
+      id: '2a065bbd-d4e7-4b9f-abf7-8a9a9a49123t',
       created_at: '2023-01-25 11:50',
       email: 'sae@utp.edu.pe',
       fullName: 'SAE',
@@ -75,7 +86,7 @@ export class StoragedbService {
   ]
   private initSharedPreferences: MyPreferences = SHARED_PREFERENCES
   private initVersion: { updated_at: number; version: string } = { updated_at: Date.now(), version: '2.1.*' }
-  public myDatabases: string[] = ['conversations', 'messages', 'participants']
+  public myDatabases: string[] = ['conversations', 'messages', 'participants', 'users']
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 
   constructor(private storage: Storage, private firebaseService: FirebaseService) {
@@ -116,9 +127,6 @@ export class StoragedbService {
 
         // Seleccionar base de datos
         switch (database) {
-          case 'VERSION':
-            valuesDatabase = this.initVersion
-            break
           case 'conversations':
             valuesDatabase = this.conversations
             for (const conversation of this.conversations) {
@@ -135,6 +143,12 @@ export class StoragedbService {
             valuesDatabase = this.participants
             for (const participant of this.participants) {
               await this.firebaseService.setCollection(database, participant)
+            }
+            break
+          case 'users':
+            valuesDatabase = this.users
+            for (const user of this.users) {
+              await this.firebaseService.setCollection(database, user)
             }
             break
         }

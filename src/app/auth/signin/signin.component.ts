@@ -30,8 +30,8 @@ export class SigninComponent {
     console.log('[SigninComponent.formGroupInitialize]')
 
     return this.formBuilder.group({
-      email: this.formBuilder.control('invitado@gmail.com', [Validators.required, Validators.email]),
-      password: this.formBuilder.control('Invitado@2023', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
+      email: this.formBuilder.control('alexchristianqr@utp.edu.pe', [Validators.required, Validators.email]),
+      password: this.formBuilder.control('Alex.2023', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[.!@#$&*])(?=.*[0-9])(?=.*[a-z]).{6,16}$/)]),
     })
   }
 
