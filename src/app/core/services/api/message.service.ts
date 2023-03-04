@@ -33,16 +33,10 @@ export class MessageService {
   async messages(payload?: MessagePayload) {
     console.log('[MessageService.messages]', { payload })
 
-    return this.firebaseService.getCollection(this.database).then((res: Array<Message>) => {
+    return this.firebaseService.getCollection(this.database).then(async (res: Array<Message> | any) => {
       if (!res) return []
 
-      return res.filter(async (value: Message | any) => {
-        // Set
-        const idFromParticipant: string | any = value.from.participant_id
-        const idToParticipant: string | any = value.to.participant_id
-        value.from.participant = await this.participantService.participant(idFromParticipant)
-        value.to.participant = await this.participantService.participant(idToParticipant)
-
+      const messages = res.filter((value: Message) => {
         // Obtener todos los registros
         if (!payload) return true
 
@@ -50,18 +44,28 @@ export class MessageService {
         if (payload.hasOwnProperty('id')) {
           return value.id === payload.id
         } else if (payload.hasOwnProperty('conversation_id')) {
-          return value.conversation_id === payload.conversation_id
+          return value?.conversation_id?.toString() === payload?.conversation_id?.toString()
         } else {
           return []
         }
       })
+
+      if (!messages) return []
+      for (const message of messages) {
+        // Set
+        const idFromParticipant: string | any = message.from.participant_id
+        const idToParticipant: string | any = message.to.participant_id
+        message.from.participant = await this.participantService.participant(idFromParticipant)
+        message.to.participant = await this.participantService.participant(idToParticipant)
+      }
+
+      return messages
     })
   }
 
   async createMessage(item: Message) {
     console.log('[MessageService.createMessage]', { item })
 
-    // item.participant = await this.participantService.participant({ id: item.participant_id })
     return this.firebaseService.setCollection(this.database, item)
   }
 

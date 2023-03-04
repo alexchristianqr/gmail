@@ -61,11 +61,12 @@ export class ConversationService {
     console.log('[ConversationService.createConversation]', { item })
 
     // Set
-    // const messages: Array<any> = [{ ...item }]
     const conversation: Conversation = {
       ...item,
+      id: item.conversation_id,
       participant_id: item.from.participant_id,
       is_read: false,
+      // conversation_id: undefined, // Eliminar
     }
 
     // API

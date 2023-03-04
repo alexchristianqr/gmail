@@ -120,7 +120,7 @@ export class FirebaseService {
   async purgeCollection(nameCollection?: string) {
     console.log('[FirebaseService.purgeCollection]', { nameCollection })
 
-    const databases = ['conversations', 'messages', 'participants', 'users']
+    const databases = ['conversations', 'messages']
     for (let database of databases) {
       const docRef = collection(this.fs, database)
       const myDocuments = await getDocs(docRef)

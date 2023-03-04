@@ -24,7 +24,6 @@ export class ApiService {
 
     return this.firebaseService.getCollection(database)
     // return this.firebaseService.getCollection('conversations')
-    // console.log({dataList})
     // await this.firebaseService.setCollection('participants', {
     //   // id: '1',
     //   created_at: '2023-01-25 11:50',

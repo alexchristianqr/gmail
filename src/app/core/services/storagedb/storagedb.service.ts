@@ -128,27 +128,27 @@ export class StoragedbService {
         switch (database) {
           case 'conversations':
             valuesDatabase = this.conversations
-            for (const conversation of this.conversations) {
-              await this.firebaseService.setCollection(database, conversation)
-            }
+            // for (const conversation of this.conversations) {
+            //   await this.firebaseService.setCollection(database, conversation)
+            // }
             break
           case 'messages':
             valuesDatabase = this.messages
-            for (const message of this.messages) {
-              await this.firebaseService.setCollection(database, message)
-            }
+            // for (const message of this.messages) {
+            //   await this.firebaseService.setCollection(database, message)
+            // }
             break
           case 'participants':
             valuesDatabase = this.participants
-            for (const participant of this.participants) {
-              await this.firebaseService.setCollection(database, participant)
-            }
+            // for (const participant of this.participants) {
+            //   await this.firebaseService.setCollection(database, participant)
+            // }
             break
           case 'users':
             valuesDatabase = this.users
-            for (const user of this.users) {
-              await this.firebaseService.setCollection(database, user)
-            }
+            // for (const user of this.users) {
+            //   await this.firebaseService.setCollection(database, user)
+            // }
             break
         }
 
