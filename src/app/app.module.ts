@@ -51,7 +51,7 @@ import { ModalSelectUserComponent } from './mail/inbox/create/layouts/modal-sele
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
 import { getFirestore, provideFirestore } from '@angular/fire/firestore'
 import { environment } from '../environments/environment'
-import {AuthModule} from "@angular/fire/auth";
+import { AuthModule } from '@angular/fire/auth'
 const firebaseConfig: object = environment.firebase
 
 @NgModule({

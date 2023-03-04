@@ -31,13 +31,6 @@ export class FirebaseService {
     try {
       return signInWithEmailAndPassword(this.auth, email, password).then((res: any) => {
         return res
-        // this.afAuth.authState.subscribe((user: any) => {
-        //   if (!user) return
-        // this.isUserAuthenticated = true
-        // this.setUserData(result.user) // Guardar en firebase
-        // this.storageService.set('users', user) // Guardar en localstorage
-        // this.router.navigate(['home']) // Redireccionar a la pagina de Home
-        // })
       })
     } catch (err) {
       console.error(err)
@@ -45,10 +38,8 @@ export class FirebaseService {
   }
 
   async signOut() {
-    return signOut(this.auth).then(() => {
-      // this.isUserAuthenticated = false
-      // localStorage.removeItem('user')
-      // this.router.navigate(['login'])
+    return signOut(this.auth).then((res: any) => {
+      return res
     })
   }
 
@@ -80,8 +71,7 @@ export class FirebaseService {
     console.log('[FirebaseService.singleCollection]', { nameCollection, id })
     const docRef = doc(this.fs, nameCollection, id)
     const myDocument = await getDoc(docRef)
-    const data = myDocument.data()
-    return data
+    return myDocument.data()
   }
 
   async setCollection(nameCollection: string, data: any) {
