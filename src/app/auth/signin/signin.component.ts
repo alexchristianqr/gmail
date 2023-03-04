@@ -37,33 +37,36 @@ export class SigninComponent {
 
   async onSubmit() {
     console.log('[SigninComponent.onSubmit]')
+
+    // Set
     this.submitted = true
-
-    // Stop here if form is invalid
-    // if (this.formGroup.invalid) {
-    //   this.submitted = false
-    //   this.loading = false
-    //   return this.utilsService.presentAlert({ header: 'Inicio de sesión', message: 'El usuario o la contraseña no es válido', buttons: [{ handler: () => {} }] })
-    // }
-
     this.loading = true
+    const actionReset = () => {
+      this.submitted = false
+      this.loading = false
+    }
+
+    // Reglas de validación
+    if (this.formGroup.invalid) {
+      actionReset()
+      await this.utilsService.presentAlert({ header: 'Error', subHeader: 'Inicio de sesión', message: 'Al aplicar las reglas de validación', buttons: [{ handler: () => {} }] })
+      return
+    }
+
+    // Request params
     const { email, password } = this.formGroup.value
 
     // API
     return this.authService
       .signIn(email, password)
-      .then(async (res) => {
-        console.log({ res })
+      .then(async () => {
         // Router
         await this.router.navigate(['mail/inbox'])
-
-        this.submitted = false
-        this.loading = false
+        actionReset()
       })
-      .catch(() => {
-        this.submitted = false
-        this.loading = false
-        return this.utilsService.presentAlert({ header: 'Inicio de sesión', message: 'Error al iniciar sesión', buttons: [{ handler: () => {} }] })
+      .catch(async () => {
+        actionReset()
+        await this.utilsService.presentAlert({ header: 'Error', subHeader: 'Inicio de sesión', message: 'El email o la contraseña no es correcto', buttons: [{ handler: () => {} }] })
       })
   }
 }

@@ -39,24 +39,31 @@ export class SignupComponent {
     console.log('[SignupComponent.formGroupInitialize]')
 
     return this.formBuilder.group({
-      fullName: this.formBuilder.control('', [Validators.required]),
-      email: this.formBuilder.control('', [Validators.required, Validators.email]),
-      password: this.formBuilder.control('', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
-      confirm_password: this.formBuilder.control('', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
+      fullName: this.formBuilder.control(null),
+      email: this.formBuilder.control(null, [Validators.required, Validators.email]),
+      password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
+      confirm_password: this.formBuilder.control(null, [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
     })
   }
 
   async onSubmit() {
     console.log('[SignupComponent.onSubmit]')
 
+    // Set
     this.submitted = true
     this.loading = true
-    const { fullName, email, password, confirm_password } = this.formGroup.value
-
-    if (password !== confirm_password) {
+    const actionReset = () => {
       this.submitted = false
       this.loading = false
-      return this.utilsService.presentAlert({ header: 'Registro', message: 'Error las contraseñas no coinciden', buttons: [{ handler: () => {} }] })
+    }
+
+    // Request params
+    const { fullName, email, password, confirm_password } = this.formGroup.value
+
+    // Validar
+    if (password !== confirm_password) {
+      actionReset()
+      return this.utilsService.presentAlert({ header: 'Error', subHeader: 'Crear cuenta', message: 'Ls contraseñas no coinciden', buttons: [{ handler: () => {} }] })
     }
 
     // API
@@ -79,13 +86,11 @@ export class SignupComponent {
         // Router
         await this.router.navigate(['signin'])
 
-        this.submitted = false
-        this.loading = false
+        actionReset()
       })
       .catch(() => {
-        this.submitted = false
-        this.loading = false
-        return this.utilsService.presentAlert({ header: 'Registro', message: 'Error al crear cuenta', buttons: [{ handler: () => {} }] })
+        actionReset()
+        return this.utilsService.presentAlert({ header: 'Error', subHeader: 'Crear cuenta', message: 'No se ha podido crear una cuenta, vuelve a intentarlo', buttons: [{ handler: () => {} }] })
       })
   }
 }
