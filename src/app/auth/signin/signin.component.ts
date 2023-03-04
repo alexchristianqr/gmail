@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms'
 import { MyParams } from '../../core/types/MyParams'
 import { UtilsService } from '../../core/services/utils/utils.service'
+import { FirebaseService } from '../../core/services/api/firebase.service'
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class SigninComponent {
   loading: boolean = false
   data: MyParams | any
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private utilsService: UtilsService) {
+  constructor(private authService: FirebaseService, private router: Router, private formBuilder: FormBuilder, private utilsService: UtilsService) {
     console.log('[SigninComponent.constructor]')
     this.formGroup = this.formGroupInitialize()
   }
@@ -29,7 +30,7 @@ export class SigninComponent {
     console.log('[SigninComponent.formGroupInitialize]')
 
     return this.formBuilder.group({
-      username: this.formBuilder.control('invitado@gmail.com', [Validators.required, Validators.email]),
+      email: this.formBuilder.control('invitado@gmail.com', [Validators.required, Validators.email]),
       password: this.formBuilder.control('invitado@2023', [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)]),
     })
   }
@@ -39,33 +40,30 @@ export class SigninComponent {
     this.submitted = true
 
     // Stop here if form is invalid
-    if (this.formGroup.invalid) {
-      this.submitted = false
-      this.loading = false
-      return this.utilsService.presentAlert({ header: 'Inicio de sesión', subHeader: 'Mensaje de error #1', message: 'El usuario o la contraseña no es válido', buttons: [{ handler: () => {} }] })
-    }
-
-    this.loading = true
-    const { username, password } = this.formGroup.value
-
-    if (username == 'invitado@gmail.com' && password == 'invitado@2023') {
-      setTimeout(async () => {
-        await this.router.navigate(['mail/inbox'])
-        this.submitted = false
-        this.loading = false
-      }, 1500)
-    } else {
-      setTimeout(async () => {
-        this.submitted = false
-        this.loading = false
-        return this.utilsService.presentAlert({ header: 'Inicio de sesión', subHeader: 'Mensaje de error #2', message: 'El usuario o la contraseña no es válido', buttons: [{ handler: () => {} }] })
-      }, 999)
-    }
-
-    // API
-    // return this.authService.signIn(email, password).catch(() => {
+    // if (this.formGroup.invalid) {
     //   this.submitted = false
     //   this.loading = false
-    // })
+    //   return this.utilsService.presentAlert({ header: 'Inicio de sesión', message: 'El usuario o la contraseña no es válido', buttons: [{ handler: () => {} }] })
+    // }
+
+    this.loading = true
+    const { email, password } = this.formGroup.value
+
+    // API
+    return this.authService
+      .signIn(email, password)
+      .then(async (res) => {
+        console.log({ res })
+        // Router
+        await this.router.navigate(['mail/inbox'])
+
+        this.submitted = false
+        this.loading = false
+      })
+      .catch(() => {
+        this.submitted = false
+        this.loading = false
+        return this.utilsService.presentAlert({ header: 'Inicio de sesión', message: 'Error al iniciar sesión', buttons: [{ handler: () => {} }] })
+      })
   }
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 import uuid from 'uuidv4'
 import { Firestore, collection, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc } from '@angular/fire/firestore'
 import { createUserWithEmailAndPassword, Auth, getAuth, signInWithEmailAndPassword, signOut, user, sendPasswordResetEmail } from '@angular/fire/auth'
-import { User } from '../../types/User'
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +13,6 @@ export class FirebaseService {
   constructor(firestore: Firestore) {
     this.fs = firestore
     this.auth = getAuth()
-  }
-
-  async setUserData(user: any) {
-    console.log({ user })
-    return this.setCollection('users', user)
   }
 
   async signUp(email: string, password: string) {
@@ -33,16 +27,21 @@ export class FirebaseService {
   }
 
   async signIn(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password).then((result) => {
-      console.log({ result })
-      // this.afAuth.authState.subscribe((user: any) => {
-      //   if (!user) return
-      // this.isUserAuthenticated = true
-      // this.setUserData(result.user) // Guardar en firebase
-      // this.storageService.set('users', user) // Guardar en localstorage
-      // this.router.navigate(['home']) // Redireccionar a la pagina de Home
-      // })
-    })
+    console.log('[FirebaseService.signIn]', { email, password })
+    try {
+      return signInWithEmailAndPassword(this.auth, email, password).then((res: any) => {
+        return res
+        // this.afAuth.authState.subscribe((user: any) => {
+        //   if (!user) return
+        // this.isUserAuthenticated = true
+        // this.setUserData(result.user) // Guardar en firebase
+        // this.storageService.set('users', user) // Guardar en localstorage
+        // this.router.navigate(['home']) // Redireccionar a la pagina de Home
+        // })
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   async signOut() {

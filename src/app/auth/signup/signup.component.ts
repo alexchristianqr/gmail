@@ -56,13 +56,14 @@ export class SignupComponent {
     if (password !== confirm_password) {
       this.submitted = false
       this.loading = false
-      return this.utilsService.presentAlert({ header: 'Registro', subHeader: 'Mensaje de error', message: 'Las contraseñas no coinciden', buttons: [{ handler: () => {} }] })
+      return this.utilsService.presentAlert({ header: 'Registro', message: 'Error las contraseñas no coinciden', buttons: [{ handler: () => {} }] })
     }
 
     // API
     return this.authService
       .signUp(email, password)
       .then(async (res: any) => {
+        // Crear usuario y participante
         await this.userService.createUser({
           id: res.user.uid,
           fullName: res.user.displayName,
@@ -74,13 +75,17 @@ export class SignupComponent {
           email,
           is_active: true,
         })
+
+        // Router
         await this.router.navigate(['signin'])
+
         this.submitted = false
         this.loading = false
       })
       .catch(() => {
         this.submitted = false
         this.loading = false
+        return this.utilsService.presentAlert({ header: 'Registro', message: 'Error al crear cuenta', buttons: [{ handler: () => {} }] })
       })
   }
 }
