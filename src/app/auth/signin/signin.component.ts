@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { MyParams } from '../../core/types/MyParams'
 import { UtilsService } from '../../core/services/utils/utils.service'
 import { FirebaseService } from '../../core/services/api/firebase.service'

@@ -76,11 +76,14 @@ export class SignupComponent {
     return this.authService
       .signUp(email, password)
       .then(async (res: any) => {
+        await this.authService.updateAuthUser({
+          displayName: fullName,
+        })
         // Crear usuario y participante
         await this.userService.createUser({
           id: res.user.uid,
-          fullName: res.user.displayName,
-          email: res.user.email,
+          fullName,
+          email,
         })
         await this.participantService.createParticipant({
           user_id: res.user.uid,

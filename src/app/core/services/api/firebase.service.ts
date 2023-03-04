@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import uuid from 'uuidv4'
 import { Firestore, collection, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc } from '@angular/fire/firestore'
-import { createUserWithEmailAndPassword, Auth, getAuth, signInWithEmailAndPassword, signOut, user, sendPasswordResetEmail } from '@angular/fire/auth'
+import { createUserWithEmailAndPassword, Auth, getAuth, signInWithEmailAndPassword, updateProfile, signOut, user, sendPasswordResetEmail } from '@angular/fire/auth'
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +11,18 @@ export class FirebaseService {
   auth: Auth
 
   constructor(firestore: Firestore) {
+    console.log('[FirebaseService.constructor]')
+
     this.fs = firestore
     this.auth = getAuth()
+    user(this.auth).subscribe((res) => {
+      console.log('user', res)
+    })
   }
 
   async signUp(email: string, password: string) {
     console.log('[FirebaseService.signUp]', { email, password })
+
     try {
       return createUserWithEmailAndPassword(this.auth, email, password).then((res: any) => {
         return res
@@ -28,6 +34,7 @@ export class FirebaseService {
 
   async signIn(email: string, password: string) {
     console.log('[FirebaseService.signIn]', { email, password })
+
     try {
       return signInWithEmailAndPassword(this.auth, email, password).then((res: any) => {
         return res
@@ -41,6 +48,17 @@ export class FirebaseService {
     return signOut(this.auth).then((res: any) => {
       return res
     })
+  }
+
+  async updateAuthUser(data: any) {
+    if (!this.auth.currentUser) return
+
+    const user = this.auth.currentUser
+    return updateProfile(user, data)
+  }
+
+  getAuthUser() {
+    return user(this.auth)
   }
 
   async sendVerificationMail() {

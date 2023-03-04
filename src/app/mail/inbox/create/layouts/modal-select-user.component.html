@@ -15,7 +15,10 @@
   <ion-list id="modal-list" [inset]="false">
     <ion-radio-group value="participants">
       <ion-item lines="full" *ngFor="let item of filteredItems" (click)="trackItems(item)">
-        <ion-label>{{ item.email }}</ion-label>
+        <ion-avatar style="opacity: 0.8; width: 1.75rem; height: 1.75rem; margin-right: 0.5rem" [ngClass]="item?.email ? 'color-' + item.email.charAt(0).toUpperCase() : null">
+          {{ item?.email ? item.email.charAt(0).toUpperCase() : null }}
+        </ion-avatar>
+        <ion-label>{{ item?.email }}</ion-label>
         <ion-radio slot="end" [value]="item"></ion-radio>
       </ion-item>
     </ion-radio-group>

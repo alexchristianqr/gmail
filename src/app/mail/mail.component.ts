@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { FirebaseService } from '../core/services/api/firebase.service'
 
 type Page = {
   title: string
@@ -16,9 +17,18 @@ export class MailComponent {
   pagesPrimary: Array<Page>
   pagesSecondary: Array<Page>
   pagesTertiary: Array<Page>
+  user: any
 
-  constructor() {
+  constructor(private firebaseService: FirebaseService) {
     console.log('[MailComponent.constructor]')
+
+    this.firebaseService.getAuthUser().subscribe((res: any) => {
+      this.user = {
+        fullName: res?.displayName,
+        email: res?.email,
+      }
+    })
+
     this.pagesPrimary = [
       {
         title: 'Inbox',

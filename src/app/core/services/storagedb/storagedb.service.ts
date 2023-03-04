@@ -85,7 +85,6 @@ export class StoragedbService {
     },
   ]
   private initSharedPreferences: MyPreferences = SHARED_PREFERENCES
-  private initVersion: { updated_at: number; version: string } = { updated_at: Date.now(), version: '2.1.*' }
   public myDatabases: string[] = ['conversations', 'messages', 'participants', 'users']
   public mySharedPreferences: string = 'SHARED_PREFERENCES'
 

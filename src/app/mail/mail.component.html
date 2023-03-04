@@ -27,13 +27,13 @@
         <table>
           <tr>
             <td>
-              <ion-avatar style="width: 4rem; height: 4rem">
-                <img src="assets/imgs/profile.jpg" alt="" />
+              <ion-avatar style="opacity: 0.8; width: 3.5rem; height: 3.5rem" [ngClass]="'color-' + user?.fullName.charAt(0).toUpperCase()">
+                {{ user?.fullName.charAt(0).toUpperCase() }}
               </ion-avatar>
             </td>
             <td style="padding: 0.75rem 0 0.75rem 0.75rem">
-              <div style="font-size: 0.89rem; font-weight: 500; margin: 0; padding: 0">Alex Christian</div>
-              <div style="font-size: 0.725rem">alexchristianqr@gmail.com</div>
+              <div style="font-size: 0.89rem; font-weight: 500; margin: 0; padding: 0">{{ user?.fullName }}</div>
+              <div style="font-size: 0.725rem">{{ user?.email }}</div>
               <div style="font-size: 0.525rem; padding: 0.125rem 0">
                 <a href="#" style="text-decoration: none">Privacy Policy</a>
                 <span>&nbsp;.&nbsp;</span>
