@@ -29,7 +29,9 @@
           <table>
             <tr>
               <td style="padding: 0 0.75rem 0 0" rowspan="3">
-                <ion-avatar style="opacity: 0.8; width: 2.75rem; height: 2.75rem" [ngClass]="'color-' + item.name.charAt(0).toUpperCase()"> {{item.name.charAt(0).toUpperCase()}} </ion-avatar>
+                <ion-avatar style="opacity: 0.8; width: 2.75rem; height: 2.75rem" [ngClass]="'color-' + item?.participant?.fullName.charAt(0).toUpperCase()">
+                  {{item?.participant?.fullName.charAt(0).toUpperCase()}}
+                </ion-avatar>
               </td>
             </tr>
             <tr>
@@ -42,10 +44,10 @@
                           <ion-icon style="margin: 0" size="small" color="warning" slot="icon-only" [name]="item.is_starred ? 'star':''"></ion-icon>
                         </div>
                         <ion-text *ngIf="item.is_read">
-                          <div style="font-size: 1rem; margin-top: 0.085rem">{{item.name}}</div>
+                          <div style="font-size: 1rem; margin-top: 0.085rem">{{item?.participant?.fullName}}</div>
                         </ion-text>
                         <ion-text *ngIf="!item.is_read">
-                          <div style="font-size: 1rem; font-weight: 700; margin-top: 0.085rem">{{item.name}}</div>
+                          <div style="font-size: 1rem; font-weight: 700; margin-top: 0.085rem">{{item?.participant?.fullName}}</div>
                         </ion-text>
                       </div>
                     </td>
